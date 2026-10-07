@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\linespread{1.1}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array,graphicx,hyperref,microtype}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=black}\setlength{\emergencystretch}{3em}
+\renewcommand{\thesection}{S\arabic{section}}\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thefigure}{S\arabic{figure}}\renewcommand{\thetable}{S\arabic{table}}
+\newcommand{\C}{\mathbb C}\newcommand{\Z}{\mathbb Z}\newcommand{\T}{\mathbb T}
+\newcommand{\R}{\mathbb R}\newcommand{\tr}{\operatorname{tr}}\newcommand{\dmin}{d_{\min}}
+\newtheorem{theorem}{Theorem}\newtheorem*{theorem*}{Theorem}\newtheorem{lemma}{Lemma}\newtheorem{proposition}{Proposition}\newtheorem{corollary}{Corollary}
+\renewcommand{\thetheorem}{S\arabic{theorem}}\renewcommand{\thelemma}{S\arabic{lemma}}
+\renewcommand{\theproposition}{S\arabic{proposition}}\renewcommand{\thecorollary}{S\arabic{corollary}}
+\title{Supplemental Material:\\Time-reversal inference with uncertain observation channels}
+\author{Dev D. Goyal\\Independent researcher\\\textnormal{dvgyl@outlook.com}\\ORCID: 0009-0009-9132-744X}\date{}
+\begin{document}\maketitle
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.2em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{3.8em}}
+\makeatother
+\tableofcontents
+
+\subsection*{Reading map}
+The main paper explains when recorded time order can be attributed to the source. This supplement gives the proofs and reproduction details. The proofs separate three requirements: excluding a reversible explanation, controlling estimation error, and collecting enough data for detection. A reader interested in the physical examples can start with Sec.~\ref{phys16:section}; a reader interested in test outcomes can start with Sec.~\ref{study16:section}.
+
+The finite-law construction shows that an asymmetric recording can have exactly the same finite-record probabilities as a reversible source observed through unequal delays. The fixed-skew construction then shows why small delay uncertainty can still be insufficient when source frequencies are unrestricted.
+
+The positive tests restrict this ambiguity in different ways. The calibrated comparator bounds the cross-covariance asymmetry that allowed responses can create. The cycle identity removes detector phase from a spectral product. Neither operation controls estimation error. The finite-record proofs therefore use a full covariance envelope to bound fluctuations, and the cycle proof also bounds the omitted covariance tail.
+
+When persistence is unknown, source confidence must supply the covariance envelope used by the calibrated test. The source proofs first establish that the confidence set contains the true parameter with the stated probability. They then bound the smallest interval containing all accepted values, choose from the fixed common filters, and establish a margin for rejection. A separate completion argument shows that the specified numerical rule reaches this comparison on the covered events.
+
+The recording-cost comparison isolates the cost of dependence with known responses. The physical models show how equations of motion supply the bounds needed to plan a test. The synthetic comparisons examine the distinct outcomes when source information, thresholds, or numerical availability limit the decision. The table below gives the corresponding locations.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.30\textwidth}p{0.60\textwidth}@{}}\toprule
+Main-text result & Supporting material \\\midrule
+Theorem 1: finite-law ambiguity & Section~\ref{sec:universal}, Theorem~\ref{thm:mc-main} and Proposition~\ref{prop:mc-uniform}; real-delay extension in Sec.~\ref{sec:fractional}, Theorem~\ref{thm:fractional}. \\
+Calibrated population tolerance & Section~\ref{sec:filterextension}, including response confidence and supplied covariance information. \\
+Theorems 2--3: finite-record tests & Section~\ref{cc16:section}: Theorem~\ref{cc16:geometric} gives the calibrated rule; Theorem~\ref{cc16:cycle-theorem} gives the cycle rule. \\
+Theorem 5 and the detection example & Section~\ref{src16:proofs}, Complete definitions and statements precede Sec.~S5.1. Proofs of the hull bound and detection example are in Secs.~S5.4 and S5.9--S5.10. \\
+Theorem 4: recording cost & Section~\ref{cost16:section}, Theorems~\ref{cost16:necessary} and~\ref{cost16:sufficient}. \\
+Physical examples & Section~\ref{phys16:section}. \\
+Synthetic performance & Sections~\ref{study16:section}--\ref{study16:tables} give design, results, diagnostics, and fixed comparison tables. Section~\ref{study16:onesided} summarizes earlier comparisons that use different designs. \\\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Notation}
+A covariance envelope bounds the covariance of the complete record in every linear direction. A confidence hull is the smallest closed interval that contains a confidence set. A filter bank is a finite list of common filters declared before observation.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.22\textwidth}p{0.68\textwidth}@{}}\toprule
+Symbol & Meaning \\\midrule
+$C_{ij}(k)$ & Observed covariance $\operatorname{Cov}\{Y_i(t+k),Y_j(t)\}$. Source covariances are identified explicitly. \\
+$F,S,\mu$ & Observed spectral matrix, source spectral matrix, and source spectral measure. \\
+$f_n$ & Frobenius norm of the two-time reflection coefficient matrix. It differs from the spectral matrix $F$. \\
+$K_B$ & Cumulative-sum matrix for centered candidate innovations. \\
+$\omega,\mathcal S$ & Frequency and source spectral ceiling-to-floor ratio. \\
+$q,K_i$ & Standardized full covariance envelope and channel-scaled diagonal envelope entries. \\
+$B_{ij},L$ & Cycle bias allowance and lag cutoff. \\
+$r,\widehat r$ & True phase tolerance and calibrated upper bound. \\
+$V_i,D_i,D_{\rm g}$ & Centered recorded variance, its upper confidence bound, and the geometric mean of the two bounds. \\
+$\phi,\psi,a_j$ & True source persistence, candidate persistence, and fixed filter coefficient. \\
+$[\ell,u],\Lambda(x)$ & Source confidence hull and $\Lambda(x)=(1+x)/(1-x)$. \\
+$d_{\mathrm{mom}}$ & Dimension of the finite retained-covariance space. \\
+$D(\psi),Q(\psi),R_n(\psi)$ & Centered innovation energy, cumulative innovation energy, and their pivot ratio. \\
+$N,n,M$ & Record length, number of innovations or adjacent pairs, and bank size. Each construction gives their exact relation. The delay construction uses $M$ as its integer separation parameter. \\
+$\eta_i,\eta_H$ & Per-sample recording and calibration error bounds. \\
+$\xi,a,w$ & Physical channel correlation, rotational drift decay, and rotational frequency coefficient. The main text writes the last two as $\lambda,\nu$. \\
+$\log,\log_2$ & Natural logarithm and base-two logarithm. \\\bottomrule
+\end{tabular}
+\end{center}
+
+The reflection sign convention is $U_t=Y_1(t)+Y_1(t+1)$ and $W_t=Y_2(t)-Y_2(t+1)$. Its uncentered mean is $C_{12}(1)-C_{12}(-1)$. All tests use its absolute value. Spectral densities on the discrete-time torus use $d\omega/(2\pi)$. Continuous-time densities use Lebesgue measure as stated in their construction.
+
+\input{multichannel_common_delay_proof}
+\input{fractional_skew}
+\input{calibration_support}
+\input{cycle_calibrated_proofs}
+\input{source_persistence_proofs}
+\input{recording_cost_proofs}
+\input{physical_models_proofs}
+\input{consolidated_study_supplement}
+\input{study_empirical_supplement}
+\input{one_sided_comparisons}
+
+\begingroup
+\input{references_si}
+\endgroup
+\end{document}

@@ -1,0 +1,296 @@
+\section{Finite recording-cost bounds for a spectral class}
+\label{cost16:section}
+
+This comparison isolates dependence by making the response known. The necessary bound uses one reversible law and one alternative fixed across recording lengths. Their difference is concentrated in narrow frequency bands. A finite trace-defect bound controls how much of that difference a record can resolve, and relative entropy converts it into a restriction on every test.
+
+The sufficient bound instead covers the full spectral class for the reflection test. These scopes remain distinct when their lengths are compared. Finite-time and frequency concentration is classical~\cite{slepian1978,landauwidom1980}; the inequalities below retain finite-length control rather than replacing the concentration matrix by its asymptotic limit.
+
+\subsection{The class and the fixed pair}
+
+To make a difficult pair with a fixed covariance contrast, we concentrate its imaginary cross spectrum near frequencies where the lag-one sine has large magnitude. The common marginal spectra retain a positive floor. Their ceiling limits the height of the bands, so increasing the allowed ratio narrows the bands while preserving unit variance. The pair remains fixed as the recording length changes.
+
+Use the convention
+\[
+ C_{ij}(k)=\int_{-\pi}^{\pi}e^{ik\omega}f_{ij}(\omega)
+                          \frac{d\omega}{2\pi}.
+\]
+Let $\mathcal G(\mathcal S)$ contain real, zero-mean, stationary two-channel Gaussian processes with unit marginal variances and Hermitian positive-semidefinite densities satisfying
+\begin{equation}
+ f(-\omega)=\overline{f(\omega)},\qquad
+ \frac12\le f_{ii}(\omega)\le\frac{\mathcal S}{2}
+ \quad\text{almost everywhere}.
+ \label{cost16:class}
+\end{equation}
+The response is known to be the identity and observation errors are zero. The null consists of reversible laws. The alternative has
+\begin{equation}
+ |\kappa|\ge\gamma,
+ \qquad
+ \kappa=C_{12}(1)-C_{12}(-1).
+ \label{cost16:gap}
+\end{equation}
+Assume $\mathcal S\ge3$ and $0<\gamma\le1/4$.
+
+Put $\nu=\mathcal S-1$, $w=\pi/(2\nu)$ and
+\begin{align}
+ E={}&[\pi/2-w,\pi/2+w]\cup[-\pi/2-w,-\pi/2+w],\nonumber\\
+ b(\omega)={}&\frac\nu2\mathbf1_E(\omega),\qquad
+ g(\omega)=\frac12+b(\omega),\qquad
+ \theta=\gamma\frac{w}{\sin w}.
+ \label{cost16:pair-parameters}
+\end{align}
+Define the two fixed spectra
+\begin{equation}
+ f^{(0)}=gI_2,
+ \qquad
+ f^{(1)}=
+ \begin{pmatrix}
+ g&i\theta\operatorname{sgn}(\omega)b\\
+ -i\theta\operatorname{sgn}(\omega)b&g
+ \end{pmatrix}.
+ \label{cost16:pair}
+\end{equation}
+The normalized measure of $E$ is $1/\nu$. Hence $\int b\,d\omega/(2\pi)=1/2$ and both marginal variances are one. Their common marginal floor and ceiling are $1/2$ and $\mathcal S/2$.
+
+Since $w\le\pi/4$, monotonicity of $w/\sin w$ gives
+\[
+ 0<\theta\le\frac{\pi\gamma}{2\sqrt2}
+ \le\frac{\pi}{8\sqrt2}<\frac12.
+\]
+The alternative eigenvalues are $1/2+(1\pm\theta)b>0$. Both spectra satisfy real-process symmetry and define stationary Gaussian laws on all integer times. The null spectrum is real and even, so its law is reversible. Direct integration gives
+\[
+ C_{12}^{(1)}(1)=-\frac{\theta\sin w}{2w},\qquad
+ C_{12}^{(1)}(-1)=\frac{\theta\sin w}{2w},
+\]
+and therefore $\kappa=-\gamma$. The pair depends only on $\mathcal S$ and $\gamma$, not on the recording length.
+
+\subsection{Concentration eigenvalues and their finite trace defect}
+
+The finite record sees each frequency band through a Toeplitz matrix. Its eigenvalues describe how strongly finite-record directions overlap the bands. The trace sums these overlaps. The trace defect instead sums each eigenvalue times one minus that eigenvalue, so it measures the contribution from directions that overlap the bands only partly. This extra quantity controls the remainder when the normalized cross-covariance energy is bounded by a multiple of the trace.
+
+For a scalar symbol $u$, let
+\[
+ [T_N(u)]_{jk}=\int e^{i(j-k)\omega}u(\omega)\frac{d\omega}{2\pi},
+ \qquad 0\le j,k<N.
+\]
+Set
+\begin{equation}
+ \begin{gathered}
+ \mathsf C_N=T_N(\mathbf1_E),\quad
+ \mathsf G_N=\tfrac12(I_N+\nu\mathsf C_N),\\
+ \mathsf A_N=T_N(i\operatorname{sgn}(\omega)b),\qquad
+ \mathsf K_N=\nu\mathsf C_N(I_N+\nu\mathsf C_N)^{-1}.
+ \end{gathered}
+ \label{cost16:matrices}
+\end{equation}
+The eigenvalues of $\mathsf C_N$ lie in $[0,1]$, because it is the compression of multiplication by an indicator. Its trace is $N/\nu$.
+
+\begin{lemma}[A finite trace-defect bound]
+\label{cost16:trace-defect}
+For $N\ge2$, define
+\begin{equation}
+ V_N^+=\min\left\{
+ \frac N\nu,\frac N4,
+ \frac{12+4\log\max(1,\lfloor(N-1)/2\rfloor)}{\pi^2}\right\}.
+ \label{cost16:defect-bound}
+\end{equation}
+Then $\tr(\mathsf C_N-\mathsf C_N^2)\le V_N^+$. With
+\begin{equation}
+ c_\nu=\frac{\nu^2}{(1+\nu)^2},\qquad
+ d_\nu=\frac{\nu^4}{4(1+\nu)^3},
+ \label{cost16:majorant-constants}
+\end{equation}
+one also has
+\begin{equation}
+ \tr(\mathsf K_N^2)\le c_\nu N/\nu+d_\nu V_N^+.
+ \label{cost16:transformed-trace}
+\end{equation}
+\end{lemma}
+\begin{proof}
+The Fourier coefficients of $\mathbf1_E$ are
+\[
+ c_0=1/\nu,\qquad
+ c_{2m}=\frac{(-1)^m\sin(2wm)}{\pi m}\quad(m\ne0),
+ \qquad c_{2m+1}=0.
+\]
+The Toeplitz trace identity and Parseval's identity give
+\begin{equation}
+ \tr(\mathsf C_N-\mathsf C_N^2)
+ =N\sum_{|k|\ge N}|c_k|^2+
+                  \sum_{|k|<N}|k|\,|c_k|^2.
+ \label{cost16:defect-identity}
+\end{equation}
+Let $M=\lceil N/2\rceil$ and $H=\lfloor(N-1)/2\rfloor$. Since $x^{-2}$ is convex,
+\[
+ \sum_{m\ge M}\frac1{m^2}
+ \le\int_{M-1/2}^{\infty}\frac{dx}{x^2}
+ =\frac1{M-1/2}.
+\]
+The first term of \eqref{cost16:defect-identity} is therefore at most $2N/[\pi^2(M-1/2)]\le8/\pi^2$. The second is at most $(4/\pi^2)\sum_{m=1}^{H}1/m$. For $H\ge1$, the harmonic sum is at most $1+\log H$; for $H=0$, it is zero. This proves the logarithmic bound in \eqref{cost16:defect-bound}. The other two bounds follow from $x(1-x)\le x$ and $x(1-x)\le1/4$ for eigenvalues $x\in[0,1]$.
+
+For $0<x<1$,
+\[
+ \frac{(\nu x/(1+\nu x))^2-c_\nu x}{x(1-x)}
+ =\frac{\nu^2(\nu^2x-1)}{(1+\nu)^2(1+\nu x)^2}.
+\]
+The derivative has the sign of $\nu+2-\nu^2x$. Its maximum on $[0,1]$ occurs at $x=(\nu+2)/\nu^2$ for $\nu\ge2$ and equals $d_\nu$. The endpoint inequality follows by continuity. Thus
+\[
+ \left(\frac{\nu x}{1+\nu x}\right)^2
+ \le c_\nu x+d_\nu x(1-x).
+\]
+Sum this inequality over the eigenvalues of $\mathsf C_N$ to obtain \eqref{cost16:transformed-trace}.
+\end{proof}
+
+For any $0<\varepsilon<1/2$, the number of concentration eigenvalues in $[\varepsilon,1-\varepsilon]$ is at most $V_N^+/[\varepsilon(1-\varepsilon)]$. Each such eigenvalue contributes at least $\varepsilon(1-\varepsilon)$ to the trace defect. This is a finite bound, not an asymptotic replacement for that defect.
+
+\subsection{A necessary recording length}
+
+The two laws share their marginal covariance. After normalization by that covariance, only the skew cross block distinguishes them. Its singular values determine their Gaussian relative entropy. The preceding trace bound gives an upper bound on this information, while a test with the requested size and power requires a lower bound. The two bounds must be compatible at any admissible recording length.
+
+\begin{theorem}[Finite necessary condition]
+\label{cost16:necessary}
+Let a possibly randomized test have size at most $\alpha$ and power at least $1-\beta$ for the fixed pair \eqref{cost16:pair}, where $0<\alpha,\beta<1$ and $\alpha+\beta<1$. For $N\ge2$, define
+\begin{equation}
+ \mathcal D_N=\frac{-\log(1-\theta^2c_\nu)}{2c_\nu}
+       \{c_\nu N/\nu+d_\nu V_N^+\}.
+ \label{cost16:divergence-bound}
+\end{equation}
+The test must satisfy
+\begin{equation}
+ \mathcal D_N\ge (1-\beta)\log\frac{1-\beta}{\alpha}
+                +\beta\log\frac{\beta}{1-\alpha}.
+ \label{cost16:necessary-inequality}
+\end{equation}
+At $\alpha=\beta=0.05$, the right side is $0.9\log19$.
+\end{theorem}
+\begin{proof}
+The real matrix $\mathsf A_N$ is skew-symmetric. Put
+\[
+ \mathsf L_N=\mathsf G_N^{-1/2}\mathsf A_N\mathsf G_N^{-1/2}.
+\]
+The block matrix with diagonal blocks $T_N(b)$ and off-diagonal blocks $\mathsf A_N,-\mathsf A_N$ is positive semidefinite. Its spectral symbol has eigenvalues zero and $2b$. The matrix $T_N(b)$ is positive definite because a nonzero trigonometric polynomial cannot vanish on both bands almost everywhere. Normalization by this matrix gives a contraction $U_N$ such that
+\[
+ \mathsf L_N=\mathsf K_N^{1/2}U_N\mathsf K_N^{1/2},
+ \qquad \|U_N\|_{\rm op}\le1.
+\]
+It follows that $\|\mathsf L_N\|_{\rm op}^2\le c_\nu$. In an eigenbasis of $\mathsf K_N$, the contraction makes each row and column sum of $|u_{jk}|^2$ at most one. Hence
+\[
+ \|\mathsf L_N\|_F^2
+ =\sum_{j,k}k_jk_k|u_{jk}|^2
+ \le\frac12\sum_{j,k}(k_j^2+k_k^2)|u_{jk}|^2
+ \le\tr(\mathsf K_N^2).
+\]
+
+Normalize the alternative record covariance by the null covariance. The resulting matrix is
+\[
+ \begin{pmatrix}I_N&\theta\mathsf L_N\\-\theta\mathsf L_N&I_N\end{pmatrix},
+\]
+with trace $2N$. The real Gaussian relative entropy is therefore
+\begin{equation}
+ D_{\rm KL}(P_1^{(N)}\|P_0^{(N)})
+ =-\frac12\sum_{j=1}^{N}
+                   \log(1-\theta^2s_j(\mathsf L_N)^2).
+ \label{cost16:exact-divergence}
+\end{equation}
+All $N$ singular values occur with their multiplicities. The factor $1/2$ is the real Gaussian factor and needs no further channel multiplier.
+
+The exact divergence depends nonlinearly on the squared singular values. We need an upper bound that uses only their sum and their common ceiling. The function $x\mapsto-\log(1-\theta^2x)$ is convex and vanishes at zero. Its chord on $[0,c_\nu]$ gives
+\[
+ -\log(1-\theta^2x)
+ \le\frac{-\log(1-\theta^2c_\nu)}{c_\nu}x.
+\]
+Apply this inequality in \eqref{cost16:exact-divergence}, then use Lemma~\ref{cost16:trace-defect}, to obtain the left side of \eqref{cost16:necessary-inequality} as an upper bound for the divergence.
+
+Data processing through the binary test bounds that divergence below by the Bernoulli divergence between its power and size. This is the two-hypothesis testing reduction~\cite{lecam1986}. For power at least $1-\beta$ and size at most $\alpha$, with $\alpha+\beta<1$, the Bernoulli divergence is smallest at those two endpoints. Differentiating with respect to its two probabilities verifies the monotonicities. This gives the right side of \eqref{cost16:necessary-inequality}. Independent randomization has the same law under both hypotheses and adds no input divergence.
+\end{proof}
+
+At $N=1$, the pair has identical laws because its zero-lag cross covariance is zero. It cannot meet the stated size and power requirements. Independent response-calibration data with identical laws under both hypotheses also contribute no divergence. Equal calibration marginals without independence from the test record would not give that conclusion.
+
+\subsection{A class-wide sufficient recording length}
+
+The difficult pair bounds every test from below in recording length. To obtain a sufficient length, we return to the reflection rule and ask whether it rejects every member of the alternative class. This requires an upper bound on its fitted threshold as well as a lower bound on its statistic. The variance upper event, alternative tail radius, and centering bias below provide those three controls.
+
+Positive semidefiniteness and \eqref{cost16:class} give
+$\lambda_{\max}(f)\le\tr f\le\mathcal S$. Since the marginal variances are one, the complete standardized covariance envelope is $q=\mathcal S$. This conclusion uses the specified unit-variance class. It is not a general removal of the channel factor from an unknown marginal spectral-ratio bound.
+
+For $N\ge3$ and $n=N-1$, use the reflection matrix and radius of Section~\ref{cc16:section}. Set
+\begin{align}
+ u&=\log200,\qquad t_0=\log(200/3),\qquad t_1=\log50,
+ \qquad \zeta=q/N,\nonumber\\
+ c_N&=1-\zeta-2\sqrt{\zeta u},\qquad
+ d_N=\frac{1+2\sqrt{\zeta u}+2\zeta u}{c_N}.
+ \label{cost16:scale}
+\end{align}
+When $c_N>0$, define
+\[
+ \widehat D_i=Q_i(y)/c_N,
+ \qquad \widehat D_\times=\sqrt{\widehat D_1\widehat D_2}.
+\]
+The test rejects if $|s_n|>\widehat D_\times\mathfrak r_N(q,t_0)$. Identity responses give phase tolerance zero. The variance lower event fails with probability at most $0.01$, and the null tail fails with probability at most $0.03$. Thus size is at most $0.05$.
+
+A variance upper event of failure at most $0.01$ gives $\widehat D_\times\le d_N$. Lemma~\ref{cc16:gaussian}, applied to each positive-semidefinite centered energy, bounds it above by $1+2\sqrt{\zeta u}+2\zeta u$ on this event. The population reflection contrast and centered expectation differ by
+\begin{equation}
+ |\mathbb E s_n-\kappa|
+ \le\frac{q\sqrt{2(4n-2)}}{n^2}.
+ \label{cost16:bias}
+\end{equation}
+Indeed, the coefficient vectors of $n\bar U$ and $n\bar V$ are $(1,2,\ldots,2,1)$ and $(1,0,\ldots,0,-1)$. Their squared norms are $4n-2$ and two. The full covariance envelope bounds their covariance by their norm product times $q$.
+
+It follows that
+\begin{equation}
+ \gamma>d_N\mathfrak r_N(q,t_0)+\mathfrak r_N(q,t_1)
+                  +\frac{q\sqrt{2(4n-2)}}{n^2}
+ \label{cost16:power-condition}
+\end{equation}
+is sufficient for power at least $0.95$. On the variance upper event and the one-sided alternative tail event, whose failure is at most $0.02$, this strict inequality implies rejection. These events need not be independent. The stated $0.05$ bounds retain unused calibration allowances and are conservative for known identity responses.
+
+\begin{theorem}[Uniform sufficient constant]
+\label{cost16:sufficient}
+For $\mathcal S\ge3$ and $0<\gamma\le1/4$, the preceding test has size at most $0.05$ over the reversible class and power at least $0.95$ over the alternatives in \eqref{cost16:gap} whenever
+\begin{equation}
+ N\ge1024\,\mathcal S/\gamma^2.
+ \label{cost16:uniform-length}
+\end{equation}
+\end{theorem}
+\begin{proof}
+The length condition gives $\zeta\le\gamma^2/1024\le1/16384$. Since $u<6$,
+\[
+ 2c_N-(1+2\sqrt{\zeta u}+2\zeta u)
+ =1-6\sqrt{\zeta u}-2\zeta(u+1)>0.
+\]
+For example, the subtracted terms total less than $15/128+14/16384<1$. Hence $c_N>0$ and $d_N<2$.
+
+Since $n\ge2N/3$, the mixed branch in \eqref{cc16:standardized-radius} gives
+\[
+ \mathfrak r_N(q,t)\le3\sqrt{2\zeta t}+3\zeta t.
+\]
+The two radius terms in \eqref{cost16:power-condition}, divided by $\gamma$, are therefore at most
+\[
+ \frac{3\sqrt2(2\sqrt{t_0}+\sqrt{t_1})}{32}
+ +\frac{(3/4)(2t_0+t_1)}{1024}.
+\]
+The bounds $\sqrt2<3/2$, $\sqrt{t_0}<9/4$, $t_0<5$ and $t_1<4$ make this less than $29.25/32+10.5/1024<0.925$. The bias term divided by $\gamma$ is at most
+\[
+ \frac{3\sqrt6\,\gamma^2}{1024^{3/2}\sqrt{\mathcal S}}
+ \le\frac{3\sqrt2}{16\cdot1024^{3/2}}<0.00001.
+\]
+Their sum is strictly less than one. Thus \eqref{cost16:power-condition} holds throughout the stated parameter range.
+\end{proof}
+
+\subsection{A finite numerical comparison and its scope}
+
+At $\mathcal S=9$ and $\gamma=0.1$, outward interval evaluation gives the following finite comparison.
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Quantity&Recording length&Scope\\
+\midrule
+Necessary lower bound&$5214$&Every test for the fixed pair\\
+Sufficient condition&$129580$&The stated test over the full class\\
+\bottomrule
+\end{tabular}
+\end{center}
+At $N=5213$, the divergence upper bound is below $2.649607$, while $0.9\log19>2.649995$. The upper bound in \eqref{cost16:necessary-inequality} is nondecreasing in $N$, so no $N\le5213$ can meet both error targets for this pair. The conclusion $N\ge5214$ is a necessary condition, not an attainable detection length.
+
+At $N=129580$, the right side of \eqref{cost16:power-condition} is below $0.099999875$. At $N=129579$, it exceeds $0.100000280$. These intervals locate the stated sufficient-condition crossing. They concern the ideal Gaussian recording and the mathematical test. They do not include a uniform finite-arithmetic completion claim.
+
+Direct floating-point evaluation of the exact determinant expression \eqref{cost16:exact-divergence} gives approximately $2.62761$ at $N=5214$. This value is a numerical evaluation without a certified determinant enclosure. It does not strengthen the necessary integer bound. The two lengths compare a fixed-pair information bound with a sufficient condition for one class-wide procedure. Their separation does not establish either constant as optimal.

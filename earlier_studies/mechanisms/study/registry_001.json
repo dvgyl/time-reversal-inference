@@ -1,0 +1,486 @@
+{
+  "version": "FROZEN_001",
+  "purpose": "Implement S17/S18 and assess them on new synthetic observations. No favorable result is required.",
+  "prior_knowledge": "Earlier study results and their reported limitations were known when this theory was developed. This study design and its code were fixed and checked before the new data were generated.",
+  "master_seed": 2026100414,
+  "generator": "NumPy PCG64 with SeedSequence(master_seed, spawn_key=(experiment, cell_index, replicate, stream))",
+  "stream_rules": {
+    "cycle": {
+      "experiment": 0,
+      "streams": {
+        "0": "source normal arrays",
+        "1": "independent recording-error normal arrays, drawn even when variance is zero"
+      }
+    },
+    "source": {
+      "experiment": 1,
+      "streams": {
+        "0": "reference stationary AR normals",
+        "1": "independent stationary AR normals",
+        "2": "calibration errors"
+      }
+    }
+  },
+  "cycle": {
+    "alpha": "1/20",
+    "frequency_quarter_turn": 1,
+    "cells": [
+      {
+        "id": "correlated_reversible_delays",
+        "family": "ring",
+        "dynamics": "reversible",
+        "rho": "1/4",
+        "r": "1/4",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              1,
+              "1"
+            ]
+          ],
+          [
+            [
+              2,
+              "1"
+            ]
+          ]
+        ],
+        "lag": 6,
+        "lengths": [
+          65536,
+          524288
+        ],
+        "replicates": 64,
+        "noise_variance": "0"
+      },
+      {
+        "id": "directed_ring_identity",
+        "family": "ring",
+        "dynamics": "ring",
+        "rho": "1/4",
+        "r": "0",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ]
+        ],
+        "lag": 4,
+        "lengths": [
+          65536,
+          524288
+        ],
+        "replicates": 64,
+        "noise_variance": "0"
+      },
+      {
+        "id": "directed_ring_delays",
+        "family": "ring",
+        "dynamics": "ring",
+        "rho": "1/4",
+        "r": "0",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              1,
+              "1"
+            ]
+          ],
+          [
+            [
+              2,
+              "1"
+            ]
+          ]
+        ],
+        "lag": 6,
+        "lengths": [
+          65536,
+          524288
+        ],
+        "replicates": 64,
+        "noise_variance": "0"
+      },
+      {
+        "id": "directed_ring_attenuated",
+        "family": "ring",
+        "dynamics": "ring",
+        "rho": "1/4",
+        "r": "0",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1/4"
+            ]
+          ]
+        ],
+        "lag": 4,
+        "lengths": [
+          524288
+        ],
+        "replicates": 32,
+        "noise_variance": "0"
+      },
+      {
+        "id": "directed_ring_noisy",
+        "family": "ring",
+        "dynamics": "ring",
+        "rho": "1/4",
+        "r": "0",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ]
+        ],
+        "lag": 4,
+        "lengths": [
+          524288
+        ],
+        "replicates": 32,
+        "noise_variance": "1"
+      },
+      {
+        "id": "directed_ring_response_zero",
+        "family": "ring",
+        "dynamics": "ring",
+        "rho": "1/4",
+        "r": "0",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1/2"
+            ],
+            [
+              2,
+              "1/2"
+            ]
+          ]
+        ],
+        "lag": 6,
+        "lengths": [
+          524288
+        ],
+        "replicates": 32,
+        "noise_variance": "0"
+      },
+      {
+        "id": "finite_ma_nonzero_cycle",
+        "family": "finite_ma",
+        "dynamics": "finite_ma",
+        "rho": "0",
+        "r": "9/20",
+        "filters": [
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ],
+          [
+            [
+              0,
+              "1"
+            ]
+          ]
+        ],
+        "lag": 1,
+        "lengths": [
+          32768,
+          131072
+        ],
+        "replicates": 64,
+        "noise_variance": "0"
+      }
+    ],
+    "numerical_policy": {
+      "precision_bits": [
+        80,
+        160,
+        320
+      ],
+      "max_integer_bits": 16384,
+      "max_lag_products": 100000000,
+      "max_rational_bits": 8192,
+      "max_record_values": 2000000,
+      "max_phase_operations": 500000000,
+      "max_log_terms": 4096,
+      "max_sqrt_shift_bits": 2048
+    },
+    "bounds": "Exact rational observed-process K and B from models_001.cycle_population. Bounds are supplied by the declared population and are not fitted."
+  },
+  "source": {
+    "cells": [
+      {
+        "id": "p0_reversible",
+        "phi": "4/5",
+        "delay": 0,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p0_weak_delay",
+        "phi": "4/5",
+        "delay": 1,
+        "coupling": "2/5",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p0_strong_delay",
+        "phi": "4/5",
+        "delay": 1,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p1_reversible",
+        "phi": "97/100",
+        "delay": 0,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p1_weak_delay",
+        "phi": "97/100",
+        "delay": 1,
+        "coupling": "2/5",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p1_strong_delay",
+        "phi": "97/100",
+        "delay": 1,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p2_reversible",
+        "phi": "199/200",
+        "delay": 0,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p2_weak_delay",
+        "phi": "199/200",
+        "delay": 1,
+        "coupling": "2/5",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      },
+      {
+        "id": "p2_strong_delay",
+        "phi": "199/200",
+        "delay": 1,
+        "coupling": "9/10",
+        "response": [
+          "1",
+          "0"
+        ],
+        "lengths": [
+          16385,
+          65537
+        ],
+        "replicates": 32
+      }
+    ],
+    "calibration_rows": 256,
+    "calibration_noise_sd": "1/100",
+    "calibration_positions": [
+      0,
+      1
+    ],
+    "bank": [
+      "0",
+      "1/2",
+      "4/5",
+      "9/10",
+      "97/100",
+      "199/200"
+    ],
+    "methods": [
+      "lag",
+      "bridge",
+      "intersection",
+      "supplied"
+    ],
+    "source_budgets": {
+      "lag": "1/200",
+      "bridge": "1/200",
+      "intersection": [
+        "1/400",
+        "1/400"
+      ],
+      "supplied": "0"
+    },
+    "cutoff": "s18_cn",
+    "limits": {
+      "max_observations": 1000000,
+      "max_input_bits": 4096,
+      "max_rational_bits": 262144,
+      "max_operations": 20000000,
+      "max_regression_columns": 32,
+      "max_bank_size": 64,
+      "log_terms": 48,
+      "sqrt_bits": 80,
+      "max_cells": 16383,
+      "max_depth": 20
+    }
+  },
+  "execution": {
+    "max_worker_processes": 4,
+    "lengths": "Nested prefixes within one new maximum-length recording and one calibration per cell and replicate.",
+    "retries": "No replacement seeds. Preserve every failed attempt. A stopped unfinished job remains unexecuted. A software correction requires a new attempt with old outputs retained and an explicit report.",
+    "storage": "Save the exact generated binary64 arrays, initial generator states, parameters, all inference results, failures, input hashes and output hashes."
+  },
+  "analysis": {
+    "primary_cycle": "Rejection, nonrejection, abstention and execution-error counts in each cell and length. Display the exact population witness, K, B and threshold margins. Do not pool heterogeneous cells into one size or power estimate.",
+    "primary_source": "Paired comparison of finite upper endpoint, usable bank decision and rejection in each cell and length. Report source coverage, hull width, source envelope, variance-denominator availability and failure reasons separately.",
+    "uncertainty": "Two-sided pointwise 95% Clopper-Pearson intervals for each binomial proportion. No multiplicity or uniform-coverage interpretation. For paired method differences, report both discordant counts and conservative difference intervals formed from marginal 97.5% Clopper-Pearson intervals by the union bound.",
+    "missing": "All planned observations enter denominators. Treat execution errors separately. For a missing binary event report bounds with missing values set to zero and then one. Never use defined-only denominators without the count.",
+    "quartiles": "NumPy linear quantiles of defined values only, with the defined count. These are descriptive.",
+    "stopping": "Fixed sample counts. No early stop based on results, extra replications, outcome-based cell changes or method selection.",
+    "power_scope": "Empirical rejection frequencies are not a proof of uniform implemented size or power. Any sufficient population-power calculation is labeled separately and must use certified intervals."
+  },
+  "scope_limits": [
+    "No old saved outcome or raw array is input to either new method.",
+    "No measurement-rounding transfer theorem.",
+    "No claim of PRE acceptance or novel physical cause.",
+    "No public deposit or external access claim."
+  ]
+}

@@ -1,0 +1,253 @@
+\section{Physical Gaussian models and sampling}
+\label{phys16:section}
+
+The tests require covariance and tail bounds that cover the complete observed process. A specified physical model can supply them through relaxation, stationary covariance, and detector responses. We first derive this connection for a linear diffusion and then apply it to the Brownian and rotational families. The rotational model also separates two questions. Its sampled cycle can reveal asymmetry, but its continuous-time circulation can change without changing the sampled law.
+
+\subsection{Bounds from an Ornstein--Uhlenbeck model}
+
+The drift must control the norm of the time-evolution matrix, not only its eigenvalues. The symmetric-part condition below gives exponential contraction in every direction. Integrating the contracted noise input bounds the stationary covariance, and summing the sampled covariance decay bounds the full spectral density. The same decay then supplies the cycle tail allowance after filtering.
+
+Consider the stationary diffusion
+\begin{equation}
+ dX(t)=-M X(t)\,dt+\sqrt{2\mathsf D}\,dW(t),
+ \qquad \frac{M+M^{\mathsf T}}2\succeq a_dI,
+ \quad 0\preceq\mathsf D\preceq d_*I,
+ \label{phys16:ou}
+\end{equation}
+where $a_d>0$. The coordinates have even time-reversal parity. At sampling interval $\Delta>0$, define $\rho=e^{-a_d\Delta}<1$ and $s_*=d_*/a_d$.
+
+\begin{proposition}[Sampled covariance and filter bounds]
+\label{phys16:envelopes}
+The stationary covariance and lag matrices satisfy
+\begin{equation}
+ \Sigma\preceq s_*I,
+ \qquad \|C_X(k)\|_{\rm op}\le s_*\rho^{|k|}.
+ \label{phys16:lag-decay}
+\end{equation}
+The sampled spectral density and every complete-record covariance have scalar ceiling
+\begin{equation}
+ K_X=s_*\frac{1+\rho}{1-\rho}.
+ \label{phys16:source-ceiling}
+\end{equation}
+Apply real channel filters after sampling. If their absolute coefficient sums satisfy $\|h_i\|_1\le g_i$, and mutually orthogonal white detector errors have variances at most $\nu_i$, then
+\begin{equation}
+ \Gamma_N\preceq\operatorname{diag}(K_iI_N),
+ \qquad K_i=K_Xg_i^2+\nu_i.
+ \label{phys16:observed-ceiling}
+\end{equation}
+Assume the errors are also source-orthogonal. If $d_H$ bounds every difference between tap positions on a tested edge and $L\ge d_H$, a valid tail allowance is
+\begin{equation}
+ B_{ij}=s_*g_ig_j\left\{
+ \frac{2\rho^{L+1-d_H}}{1-\rho}
+ +\frac1N\sum_{|k|\le L}|k|\rho^{\max(|k|-d_H,0)}\right\}.
+ \label{phys16:tail}
+\end{equation}
+\end{proposition}
+\begin{proof}
+For $u(t)=e^{-Mt}u(0)$, the drift assumption gives
+\[
+ \frac{d}{dt}\|u(t)\|^2
+ =-u(t)^{\mathsf T}(M+M^{\mathsf T})u(t)
+ \le-2a_d\|u(t)\|^2.
+\]
+Thus $\|e^{-Mt}\|_{\rm op}\le e^{-a_dt}$. The stationary integral
+\[
+ \Sigma=2\int_0^\infty e^{-Mt}\mathsf D e^{-M^{\mathsf T}t}\,dt
+\]
+is at most $s_*I$. For $k\ge0$, $C_X(k)=e^{-Mk\Delta}\Sigma$; negative lags give its transpose. Summing the absolute covariance series proves \eqref{phys16:source-ceiling}. Fourier integration then gives the same ceiling for every finite recording.
+
+Let $D_H(\omega)=\operatorname{diag}(H_i(\omega))$. Spectral congruence and $|H_i|\le g_i$ give
+$D_HF_XD_H^*\preceq K_X\operatorname{diag}(g_i^2)$. The white errors add at most $\operatorname{diag}(\nu_i)$. This proves the full observed envelope.
+
+Filtering gives
+\[
+ |C_{ij}(k)|
+ \le s_*\sum_{u,v}|h_i(u)h_j(v)|\rho^{|k-u+v|}
+ \le s_*g_ig_j\rho^{\max(|k|-d_H,0)}.
+\]
+The two omitted tails sum to the first term of \eqref{phys16:tail}. The finite-window weights give its second term.
+\end{proof}
+
+Uniform family bounds can replace $s_*$ and $\rho$. Signed filter coefficients are covered by their absolute sums. Colored detector errors need their own spectral ceilings. Cross-correlated detector errors also change the cycle null and need a separate argument. A deterministic zero channel can use any positive conservative ceiling when an interface requires $K_i>0$.
+
+Stable drift eigenvalues alone do not give \eqref{phys16:lag-decay}. For
+\[
+ M=\begin{pmatrix}1&-4\\0&1\end{pmatrix},\qquad
+ \mathsf D=I_2,
+\]
+the covariance $\Sigma=\left(\begin{smallmatrix}9&2\\2&1\end{smallmatrix}\right)$ solves $M\Sigma+\Sigma M^{\mathsf T}=2I_2$. It exceeds $I_2$, and $\|e^{-M}\|_{\rm op}>e^{-1}$. A nonnormal drift therefore needs a semigroup bound, such as the symmetric-part condition in \eqref{phys16:ou}.
+
+\subsection{Brownian gyrator and a shared observed-process bound}
+
+For calibrated inference, the absolute covariance ceiling must be compared with each observed variance to give a standardized envelope. The Brownian family provides both an upper and a lower stationary covariance bound. The small delayed detector term affects this comparison as well as the null phase tolerance, so the bound must include the filtered observations.
+
+Take
+\begin{equation}
+ M_g=\begin{pmatrix}1&1/2\\1/2&1\end{pmatrix},\qquad
+ \mathsf D_g=\operatorname{diag}(T_1,T_2),\qquad 1\le T_i\le4.
+ \label{phys16:gyrator}
+\end{equation}
+Solving $M_g\Sigma+\Sigma M_g=2\mathsf D_g$ gives
+\begin{equation}
+ \Sigma_{11}=T_1+\frac{T_1+T_2}{6},\quad
+ \Sigma_{22}=T_2+\frac{T_1+T_2}{6},\quad
+ \Sigma_{12}=-\frac{T_1+T_2}{3}.
+ \label{phys16:gyrator-covariance}
+\end{equation}
+Substitution verifies both diagonal equations and the zero off-diagonal equation. Equal temperatures give $M_g\Sigma=\mathsf D_g$ and a reversible source. Unequal temperatures give nonzero stationary current.
+
+The drift eigenvalues are $1/2$ and $3/2$. Since $I\preceq\mathsf D_g\preceq4I$, the stationary integral yields
+\[
+ M_g^{-1}\preceq\Sigma\preceq4M_g^{-1},
+ \qquad \frac23 I\preceq\Sigma\preceq8I.
+\]
+For $\Delta=1$, the rational bound $e^{-1/2}<61/100$ gives $K_X=1288/39$. Apply the digital responses
+\[
+ H_1(\omega)=1,\qquad H_2(\omega)=1+\frac3{100}e^{-i\omega}.
+\]
+Their full observed covariance is bounded by $K_X(103/100)^2I$. The reverse triangle inequality in $L^2$ gives each observed variance a lower bound $(2/3)(97/100)^2$. Consequently
+\begin{equation}
+ \Gamma_N\preceq56\operatorname{diag}(v_1I_N,v_2I_N),
+ \label{phys16:gyrator-q}
+\end{equation}
+because
+\[
+ \frac{(1288/39)(103/100)^2}{(2/3)(97/100)^2}<56.
+\]
+The same $q=56$ covers the full stated temperature family. It includes the detector responses and is not inferred from response calibration.
+
+The exact sampled transition is $T_\Delta=e^{-M_g\Delta}$, with diagonal entries $(e^{-\Delta/2}+e^{-3\Delta/2})/2$ and off-diagonal entries $(e^{-3\Delta/2}-e^{-\Delta/2})/2$. Its independent innovation covariance is $\Sigma-T_\Delta\Sigma T_\Delta^{\mathsf T}$. These equations specify the stationary sampled Gaussian law without an Euler approximation. The response filters act after this sampling operation.
+
+\paragraph{Cost of the common family bound.}
+A known temperature pair permits a smaller sufficient envelope without changing the saved study. Since $\|C_X(k)\|\le\lambda_{\max}(\Sigma)e^{-|k|/2}$, the same spectral argument gives
+\[
+ q_{\rm cell}=\lambda_{\max}(\Sigma)
+ \frac{1+e^{-1/2}}{1-e^{-1/2}}
+ \max\left\{\frac1{v_1},\frac{1.03^2}{v_2}\right\},
+\]
+where $v_1=\Sigma_{11}$ and
+$v_2=(1+0.03^2)\Sigma_{22}+0.06[e^{-M_g}\Sigma]_{22}$ are the observed variances. Spectral congruence by the responses, followed by division by these variances, proves that $q_{\rm cell}$ is sufficient for every record length in that known model. Rounded-up values for temperature ratios one, two, and four are $6.30$, $8.49$, and $12.42$. They are sufficient bounds, not minimum covariance eigenvalues. All empirical decisions in the study still use the common family bound $56$; no performance curve is recomputed with these smaller values.
+
+For $H_1=1$, $H_2=1+e e^{-i\omega}$, $e=0.03$, the exact-response phase integrand is
+\[
+ \frac{e\sin^2\omega}{\sqrt{1+2e\cos\omega+e^2}}.
+\]
+Its supremum is approximately $0.02999325$. At $N=524289$ and $q=56$, the main-text radius divided by its variance scale is approximately $0.06080226$, and $c_N(q)\simeq0.95231503$. Thus the population-scale threshold reference is approximately $0.12683698$, before calibration and rounding increments. The corresponding observed normalized contrasts are approximately $0.00698679$, $0.09151650$, and $0.18492382$ at the three temperature ratios. These are analytic model comparisons, not empirical rejection fractions or a new power guarantee.
+
+\subsection{A rotational model with a sampled cycle}
+
+The rotational family gives a sampled-law alternative with an explicit transition. Its stationary covariance and contraction factor also give the same envelope and tail bounds for the zero-rotation control. This common information prevents the comparison from changing its supplied bounds with the source regime. We then compute a nonzero cycle in the isotropic special case to show that the sampled witness need not vanish.
+
+Let
+\begin{equation}
+ \begin{gathered}
+ R_0=\begin{pmatrix}0&-1&1\\1&0&-1\\-1&1&0\end{pmatrix},
+ \qquad \Sigma_\xi=(1-\xi)I_3+\xi\mathbf1\mathbf1^{\mathsf T},\\
+ M_r=a_dI_3+\chi R_0,\qquad\mathsf D_r=a_d\Sigma_\xi.
+ \end{gathered}
+ \label{phys16:ring}
+\end{equation}
+Here $0\le\xi\le1/4$ and $a_d>0$. The row and column sums of $R_0$ vanish, so it commutes with $\Sigma_\xi$. Its skew symmetry then gives
+$M_r\Sigma_\xi+\Sigma_\xi M_r^{\mathsf T}=2\mathsf D_r$.
+
+Choose $\chi=2\pi/(3\sqrt3\Delta)$. Rotation through one sample gives
+\begin{equation}
+ e^{-M_r\Delta}=\rho\Pi,
+ \qquad \rho=e^{-a_d\Delta},
+ \qquad
+ \Pi=\begin{pmatrix}0&1&0\\0&0&1\\1&0&0\end{pmatrix}.
+ \label{phys16:permutation}
+\end{equation}
+The innovations have covariance $(1-\rho^2)\Sigma_\xi$. Since $\|\Sigma_\xi\|_{\rm op}=1+2\xi\le3/2$, the family $a_d\Delta\ge\log4$ has $\rho\le1/4$ and
+\begin{equation}
+ K_X=\frac32\frac{1+1/4}{1-1/4}=\frac52.
+ \label{phys16:ring-ceiling}
+\end{equation}
+Equations~\eqref{phys16:observed-ceiling} and \eqref{phys16:tail}, with $s_*=3/2$ and $\rho=1/4$, give common filtered bounds for this family and its zero-rotation reversible controls.
+
+The sampled spectrum is
+\begin{equation}
+ F_X(\omega)=(1-\rho^2)
+ (I-\rho\Pi e^{-i\omega})^{-1}\Sigma_\xi
+ (I-\rho\Pi^{\mathsf T}e^{i\omega})^{-1}.
+ \label{phys16:ring-spectrum}
+\end{equation}
+It follows by summing the moving-average representation of the stationary vector autoregression. In the isotropic case $\Sigma=sI_3$, put $A_0=1+\rho^2$ and $D_0=1-\rho^2+\rho^4$. At $\omega=\pi/2$, all three directed entries equal
+\begin{equation}
+ F_{12}=F_{23}=F_{31}
+ =-\frac{s(1-\rho^2)\rho^2}{A_0D_0}
+  -i\frac{s(1-\rho^2)\rho}{D_0}.
+ \label{phys16:ring-entries}
+\end{equation}
+To obtain this expression, use $\Pi^3=I$ to write
+$(I-z\Pi)^{-1}=(I+z\Pi+z^2\Pi^2)/(1-z^3)$, then multiply the two factors in \eqref{phys16:ring-spectrum}. Cubing \eqref{phys16:ring-entries} gives
+\begin{equation}
+ J(\pi/2)=\frac{s^3(1-\rho^2)^3\rho^3}{A_0^2D_0^2}>0.
+ \label{phys16:ring-witness}
+\end{equation}
+For $s=1$ and $\rho=1/4$, the entry is $-240/4097-i60/241$ and the witness is $216000/16785409$. These identities provide a physical Gaussian model with a nonzero sampled cycle and supplied finite-record bounds. For a general $\xi$, the witness is computed from \eqref{phys16:ring-spectrum}. A stationary current alone does not guarantee a nonzero cycle at the chosen frequency.
+
+\subsection{Sampling aliases and entropy production}
+
+The witness above concerns the sampled law. To relate it to physical irreversibility, we compute entropy production from the continuous-time probability current under the stated diffusion model. We then compare rotations with the same sampled transition. Equality of their stationary covariance and innovation covariance makes their entire sampled Gaussian laws equal, even though their entropy-production rates differ.
+
+For positive-definite $\mathsf D$ and $\Sigma$, let $p$ denote the stationary Gaussian density. Its probability-current velocity is
+\[
+ \frac{j(x)}{p(x)}=-(M-\mathsf D\Sigma^{-1})x.
+\]
+In units with Boltzmann's constant equal to one, the entropy-production rate is the current integral~\cite{seifert2012}
+\begin{equation}
+ \sigma=\int\frac{j(x)^{\mathsf T}\mathsf D^{-1}j(x)}{p(x)}\,dx
+ =\tr\{(M-\mathsf D\Sigma^{-1})^{\mathsf T}
+ \mathsf D^{-1}(M-\mathsf D\Sigma^{-1})\Sigma\}.
+ \label{phys16:entropy}
+\end{equation}
+The Gaussian second moment gives the trace expression. It is a squared matrix norm. Thus $\sigma\ge0$, with equality exactly when $M\Sigma=\mathsf D$. The rate is per unit of continuous time and uses the stated even reversal parity.
+
+For the Brownian gyrator,
+\[
+ M_g\Sigma-\mathsf D_g=\frac{T_2-T_1}{4}
+ \begin{pmatrix}0&1\\-1&0\end{pmatrix},
+ \qquad
+ \det\Sigma=T_1T_2+\frac{(T_1+T_2)^2}{12}.
+\]
+Substitution in \eqref{phys16:entropy} gives
+\begin{equation}
+ \sigma_g=\frac{(T_2-T_1)^2}{8T_1T_2}.
+ \label{phys16:gyrator-entropy}
+\end{equation}
+Indeed, the remaining trace equals
+$(\Sigma_{22}/T_2+\Sigma_{11}/T_1)/\det\Sigma=2/(T_1T_2)$. The temperature pairs $(1,1)$, $(1,2)$ and $(1,4)$ have rates $0$, $1/16$ and $9/32$.
+
+For \eqref{phys16:ring}, $M_r-\mathsf D_r\Sigma_\xi^{-1}=\chi R_0$. Commutation with $\Sigma_\xi$ gives
+\begin{equation}
+ \sigma_r=\frac{\chi^2\tr(R_0^{\mathsf T}R_0)}{a_d}
+          =\frac{6\chi^2}{a_d}.
+ \label{phys16:ring-entropy}
+\end{equation}
+At $\Delta=1$, $a_d=\log4$ and the rotation in \eqref{phys16:permutation}, this rate is $8\pi^2/(9\log4)$. If instead $\chi=2\pi/\sqrt3$, the sampled transition is $(1/4)I_3$. Its stationary Gaussian law is reversible, while its continuous-time rate is $8\pi^2/\log4$.
+
+More generally, the rates
+\begin{equation}
+ \chi_k=\frac{2\pi/3+2\pi k}{\sqrt3\Delta},
+ \qquad
+ \sigma_k=\frac{2(2\pi/3+2\pi k)^2}{a_d\Delta^2},
+ \quad k\in\mathbb Z,
+ \label{phys16:aliases}
+\end{equation}
+give the same transition $\rho\Pi$ and the same stationary covariance. The rotation acts on the plane perpendicular to $\mathbf1$, where adding $2\pi k$ leaves its exponential unchanged. The innovation covariance is also unchanged. All these processes therefore have the same complete sampled Gaussian law, but $\sigma_k$ is unbounded. A sampled cycle can exclude the stated reversible-source model. It cannot determine an unrestricted hidden continuous-time entropy-production rate without information that resolves this frequency ambiguity.
+
+\subsection{Reversible controls near the phase tolerance}
+
+Let a stationary unit-variance scalar source obey
+\[
+ X_t=-bX_{t-2}+\sqrt{1-b^2}\,Z_t,\qquad 0\le b<1,
+\]
+with standard Gaussian white innovations. Its covariance is zero at odd lags and $(-b)^{|k|/2}$ at even lags. This follows from the two independent stationary autoregressions on the even and odd times. The scalar Gaussian law is reversible.
+
+Observe $Y_1(t)=X_t$ and $Y_2(t)=X_{t-1}$. The unit delay gives phase tolerance $r=1$. The reflection contrast has magnitude $1+b$, and its ratio to $2r\sqrt{v_1v_2}$ is $(1+b)/2$. The scalar density is
+\[
+ f_X(\omega)=\frac{1-b^2}{|1+be^{-2i\omega}|^2},
+ \qquad \sup_\omega f_X(\omega)=\frac{1+b}{1-b}.
+\]
+The delayed two-channel density has largest eigenvalue $2f_X$. Thus a full standardized envelope is $q=2(1+b)/(1-b)$. For $b=0,4/5,49/50$, the tolerance ratios are $1/2,9/10,99/100$ and the corresponding factors are $2,18,198$. These are reversible-source controls. Their finite test still uses common centering and the supplied phase allowance.

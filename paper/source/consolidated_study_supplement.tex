@@ -1,0 +1,88 @@
+\section{Synthetic study design and analysis}\label{study16:section}
+The comparisons test where the theoretical requirements become informative in the stated models. The source comparison changes how persistence is supplied while keeping the downstream calibrated rule shared. The rotational comparison changes frequency coverage, channel scaling, and supplied allowances. The Brownian controls compare source inference with recorded-signal asymmetry. Numerical and assumption-boundary comparisons address availability and the limits of the formal model. These comparisons have separate generating conditions and inference targets.
+
+The study has $69$ conditions and $20800$ independent records. A condition fixes the generating law, recording length, and number of independent repetitions. All paired methods use the same record and, where required, the same independent calibration. Records at different lengths are independent. No comparison uses a prefix of a longer record as an additional independent repetition.
+
+\subsection{Source-confidence comparison}
+This comparison follows the source proof through the complete decision. Coverage asks whether the set retains the true persistence. A finite endpoint asks whether it excludes one. The propagated hull and bank then determine whether a test is available and whether its threshold can be exceeded. Supplying the true coefficient gives a reference for the cost of source fitting while retaining the other uncertainties.
+Let $X$ and $Z$ be independent stationary Gaussian autoregressions with unit marginal variance and common coefficient $\phi$. The two source coordinates are
+\[
+ X_1(t)=X(t),\qquad X_2(t)=cX(t-d)+\sqrt{1-c^2}Z(t).
+\]
+Both detector responses are identities. Recording means are $2$ and $-1$. The reference response is supplied, and the second response is estimated as a two-coefficient finite response. Thus the true zero coefficient is still fitted. The calibration uses $256$ rows with two orthogonal sign columns and independent mean-zero Gaussian errors of standard deviation $0.01$.
+
+The core comparison crosses $\phi\in\{0.8,0.97,0.995\}$ with $N\in\{16385,65537\}$. The reversible condition has $(d,c)=(0,0.9)$. Weak and strong delays have $(d,c)=(1,0.4)$ and $(1,0.9)$. Each null condition has $400$ records, except that $\phi=0.97,N=65537$ has $1000$. Each alternative condition has $200$ records. The strong-delay curve at $\phi=0.995$ uses $N=2^j+1$, $j=11,\ldots,19$, with $200$ records per length. Its two core lengths are counted once.
+
+Seven source-information methods share the downstream test. They use the lag set, the length-dependent analytic lower cutoff, the constant analytic lower cutoff, the lag/lower-tail intersection, the two-sided set, the lag/two-sided intersection, and the supplied true coefficient. The source coverage budget is $0.005$. Each intersection assigns $0.0025$ to each component. Two-sided cutoffs divide their component budget between the two tails. Section~\ref{src16:si-pivot} gives the source sets and Section~\ref{src16:si-bank-size} gives the test allocation.
+
+The primary bank is $(0,0.5,0.8,0.9,0.97,0.995)$. The standalone two-sided rule also uses a paired bank with $1-2^{-j}$, for $j=0,\ldots,\lceil\log_2(N-1)\rceil$. The error allocation includes every member of each bank. For the standalone two-sided rule and its lag intersection, paired threshold comparisons replace the geometric variance scale by the maximum scale, or replace the reflection operator bound $1/n$ by $2/n$. The supplied-coefficient comparison retains the same calibration, bank, recorder correction, and downstream error allocation. A supplied coefficient does not remove calibration or sampling uncertainty. The standalone two-sided rule also has source-shape multipliers $2/3$ and $1/2$. These are deliberate underestimation comparisons.
+
+\subsection{Rotational source and cycle comparisons}
+The cycle comparison retains a common physical family bound under both source regimes. The single-frequency comparison isolates the effect of separate channel ceilings because the estimates are shared. The two-frequency comparison changes the covered frequency set and pays its larger error allowance. Gain transport tests preservation under a change of units, whereas allowance inflation tests the loss from conservative information.
+The sampled rotational model has $\rho=1/4$ and $\xi=1/4$. The reversible transition is $\rho I$; the rotating transition is $\rho P$, with the permutation orientation in Section~\ref{phys16:section}. Both laws use the same family bounds $\rho\le1/4$ and $\xi\le1/4$. The detector responses are
+\[
+ H_1(z)=1,\quad H_2(z)=0.99z^{-1}+0.01z^{-2},\quad
+ H_3(z)=0.98z^{-2}+0.02z^{-3}.
+\]
+The means are $2,-1,1/2$. The test uses $L=8$ and primary frequency $\pi/2$. The diagonal and common-envelope tests use the same estimates. The combined-frequency test uses $\{\pi/4,\pi/2\}$ and the corresponding two-frequency error allocation.
+
+The recording lengths are $N=2^j$, $j=13,\ldots,21$. Each length has $400$ reversible and $200$ rotating records. The reversible condition at $N=131072$ has $1000$ records. Identity-detector conditions at $N=2097152$ have $400$ reversible and $200$ rotating records.
+
+The identity-detector records also supply the paired gain and bound comparisons. The third-channel gain takes the six values $1/16,1/4,1,4,16,-1$. Each change transports the covariance, bias, and recording-error bounds. The comparison includes the diagonal rule, the common scalar rule, and inverse transport back to the original units. All $16$ pairs of covariance and bias multipliers in $\{1,1.5,2,4\}^2$ are retained. The baseline bias allowance is positive. Separate comparisons reduce covariance or bias bounds by $2/3$ or $1/2$. These reduced bounds have no coverage guarantee.
+
+Three additional reversible sampled-source conditions at $N=131072$ have $400$ records each. They use $\xi=0.01$, four times the valid bias allowance, or the aliased continuous-time rotation with $\sqrt3w=2\pi$. The aliased model has the same reversible sampled transition $\rho I$. A $200$-record rotating condition uses $H_1=1$, $H_2=z^{-1}$, and $H_3=(z^{-2}+z^{-4})/2$. Its third response vanishes at $\pi/2$.
+
+\subsection{Brownian and phase-boundary conditions}
+The Brownian equilibrium source gives a control in which detector phase alone creates recorded asymmetry. The driven temperatures then ask whether the calibrated rule can detect source asymmetry beyond that allowance. The phase-boundary controls use a different reversible process to bring the detector-induced contrast close to the population tolerance. They test that restriction at large recorded contrasts, rather than adding evidence about the Brownian alternative.
+The Brownian model in Section~\ref{phys16:section} uses $(T_1,T_2)=(1,1),(1,2),(1,4)$. The record lengths are $N=32769$, $131073$, and $524289$. Each equilibrium condition has $400$ records. Each nonequilibrium condition has $200$ records. The responses are $H_1=1$ and $H_2=1+0.03z^{-1}$. Every temperature uses the same supplied bound $q=56$. Calibration has the same design and error scale as the source-confidence comparison. The first-order autoregressive (AR(1)) source-confidence method is not applied to this model.
+
+The Brownian comparisons include the calibrated test, maximum-scale and operator-bound variants, and procedures with missing covariance or response information. The latter procedures abstain. A separate procedure sets the phase allowance to zero but retains the dependence bound. It tests an incorrect source-null restriction when detector phase is nonzero. It is not a substitute for the missing-response procedure. Brownian and phase-boundary comparisons also multiply the supplied covariance envelope by $2/3$ or $1/2$, with a lower floor of one. These reduced envelopes have no coverage guarantee.
+
+The boundary nulls use a unit-variance reversible scalar process
+\[
+ X_t=-bX_{t-2}+\sqrt{1-b^2}\,\varepsilon_t,
+ \qquad Y_1(t)=X_t+2,\quad Y_2(t)=X_{t-1}-1.
+\]
+The innovations are independent standard Gaussian values. The even and odd stationary subsequences start independently. The ratio of the absolute population contrast to its phase tolerance is $(1+b)/2$. Thus $b=0,0.8,0.98$ gives $50\%$, $90\%$, and $99\%$. The supplied standardized envelopes are $q=2,18,198$, and the supplied phase bound is $r=1$. Each condition has $N=65537$ and $400$ records. These are reversible-source controls despite their large recorded asymmetry.
+
+\subsection{Assumption violations and recorder resolution}
+The Gaussian reference and error-orthogonality conditions support different steps of the proofs. Reference noise changes the residual law used by the innovation pivot, non-Gaussian innovations change its exact law, and cross-channel detector errors can contribute a cycle that the source null does not constrain. These conditions therefore test behavior outside the corresponding guarantees. The recorder comparisons address a different question, because bounded rounding can be covered by a deterministic correction within the ideal model.
+At $\phi=0.97,N=65537$, the reference-noise conditions add independent white Gaussian noise with signal-to-noise ratio $10$ or $100$. The ratio is the reference source variance divided by the added noise variance. The Student-$t$ conditions replace the standardized Gaussian innovations by variance-one Student-$t$ innovations with five degrees of freedom. They use $8192$ initial values before the retained recording. Each of these three conditions has $400$ null and $200$ strong-delay records. The inference rule keeps its Gaussian, noiseless-reference assumptions. These comparisons therefore measure model violations.
+
+Correlated-error conditions add an independent rotating three-channel error process to the filtered observations. The error has marginal variance $1/4$, persistence $1/4$, and channel correlation $1/4$. Its transition uses the same permutation orientation as the rotating source. It is independent of the source but violates the cross-channel error restriction. These conditions have $N=131072$, with $400$ reversible-source and $200$ rotating-source records.
+
+The primary recorder rounds to $20$ fractional bits, with allowance $2^{-21}$. Paired grids with $8$ or $12$ fractional bits isolate rounding without saturation. Separate finite $8$-bit and $12$-bit recorders divide $[-16,16)$ into equal bins. They record bin centers and clip to the outer centers. A value outside the range counts as saturated. If any value saturates, the associated bound-based method abstains because no finite perturbation certificate is supplied. Calibration stays at $20$ fractional bits. Recorder comparisons use the Gaussian source conditions at $\phi=0.97,N=65537$, the primary cycle conditions at $N=131072$, Brownian conditions at $N=131073$, and the $99\%$ phase-boundary null.
+
+The finite random generator and its floating-point recursion approximate the ideal Gaussian models. The saved pre-rounded arrays define the numerical experiment. A rounding allowance bounds the change from these arrays to the recorded grid. It does not prove that the pre-rounded arrays have exactly the ideal Gaussian law.
+
+\subsection{Baseline definitions}\label{study16:baselines}
+The raw lag and bootstrap comparators target asymmetry of the observed signals. Unequal responses can make that null different from source reversibility. Phase-adjusted variants use the same supplied or calibrated phase upper bound as the corresponding calibrated test. Cycle conditions lack that certificate, so these variants abstain there.
+
+Retain rows $1,\ldots,N-1$ and form the adjacent sum and difference with $n=N-2$ pairs. Let $\widehat v_U,\widehat v_W$ be their centered empirical variances. The independent-window comparator uses radius
+\[
+ \frac{\sqrt{\widehat v_U\widehat v_W}}{n}
+ \left\{\sqrt{2(n-1)\log(2/\alpha)}+\log(2/\alpha)\right\}.
+\]
+This radius deliberately ignores dependence between overlapping windows. Its phase-adjusted variant adds $2\widehat r\sqrt{\widehat v_1\widehat v_2}$, using empirical marginal variances. These plug-in rules have no finite-record source-null guarantee here.
+
+The moving-block comparator uses the centered product sequence. It resamples $\lceil n/b_n\rceil$ noncircular blocks with replacement, where $b_n=\max\{2,\lceil n^{1/3}\rceil\}$, and averages all $b_n\lceil n/b_n\rceil$ sampled values. This is a specified approximate bootstrap procedure, based on the block-bootstrap principle~\cite{kunsch1989}. For $499$ resamples, its probability estimate is $(1+E)/500$, where $E$ counts absolute resampled means at least as large as the comparison value. That value is the absolute observed contrast for the raw comparator. For the phase-adjusted comparator it is the positive part of the contrast minus the plug-in phase tolerance.
+
+Imaginary coherency measures the imaginary part of a normalized cross spectrum~\cite{noltecoherency2004}. The comparator uses nonoverlapping $256$-sample segments, centered separately, at frequency $\pi/2$. It divides the mean imaginary cross product by the geometric mean spectral scale. The declared moving-block procedure acts on segment contributions. An incomplete final segment is omitted for this comparator only. Fewer than four complete segments or a zero spectral scale cause abstention.
+
+Each record has a separate bootstrap stream. The raw lag bootstrap, the phase-adjusted bootstrap when available, and imaginary coherency consume successive parts of that stream in this order. No block length or frequency is selected from the results.
+
+\subsection{Numerical limits and saved quantities}
+The primary source inversion encloses quadratic roots at $48$ bits. Paired subdivision depths are $20$, $28$, and $36$. Separate arithmetic comparisons use $80$, $160$, and $320$ square-root bits with the same $48$-bit root enclosure. They recompute calibration and the whole bank. Exact compiled moments can be reused because their values do not depend on these settings. The numerical comparisons use all Gaussian core source conditions at the two core lengths.
+
+The source implementation permits at most $600000$ observations, $64$ bank members, $262144$ rational bits, and $500000000$ operations per phase. The normal configuration uses $80$ square-root bits and $48$ logarithm terms. The cycle implementation permits at most $8000000$ record values, $300000000$ lag products, $16384$ integer bits, $8192$ rational bits, and $1000000000$ phase operations. Input, work, or precision failures cannot produce certified rejection. Arithmetic operation counts do not imply fixed wall time because integer operand sizes vary.
+
+The saved outputs include all source-set components, hull endpoints, coverage indicators, bank members, covariance envelopes, scale-denominator endpoints, phase allowances, sampling and rounding radii, thresholds, and decisions. They also include all cycle edges, their radii, the product threshold, saturation counts, and the numerical failure reason. Coverage and finite-endpoint status use exact rational comparisons before plotting.
+
+\subsection{Analysis and interpretation}
+Each method returns rejection, nonrejection, or abstention. Its unconditional rejection fraction uses every independent record in its condition. The descriptive rejection fraction among available tests divides the number of rejections by the number of rejections plus nonrejections. An all-abstention condition gives no empirical evidence about the behavior of an available test. Execution failures are separate and cannot silently become nonrejections.
+
+Pointwise two-sided $95\%$ Clopper--Pearson intervals quantify uncertainty in rejection fractions~\cite{clopper}. For paired methods, let $n_{10}$ and $n_{01}$ count records rejected by only the first or only the second method. The difference is $(n_{10}-n_{01})/m$ for $m$ independent records. Subtracting simultaneous $97.5\%$ binomial intervals for the two discordant probabilities gives a conservative $95\%$ interval. An exact sign-test probability conditions on $n_{10}+n_{01}$. These comparisons have no familywise guarantee across all method pairs.
+
+Threshold summaries retain their available counts and report the minimum, quartiles, median, and maximum. A missing quantity is not assigned zero. The displayed bank member maximizes the exact statistic-minus-threshold margin over available members. This choice describes the fixed union decision; it does not change it. Source summaries distinguish empty sets, full fallback sets, hulls reaching one, finite envelopes, and available downstream tests. They also report persistence span and the loss from the finite bank.
+
+The code, configurations, pre-rounded and recorded arrays, calibration data, random-stream states, per-record outputs, and numerical certificates are retained in the local reproducibility package. Exact saved input arrays, rather than seeds alone, define the arithmetic comparison. Floating-point generator outputs need not match across numerical library versions or platforms. The scientific timing disclosure is in the article's Methods appendix.

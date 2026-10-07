@@ -1,0 +1,24 @@
+The main comparisons are summarized in Secs.~S9--S10. The complete per-condition tables remain in the accompanying package under \texttt{results/current/tables/}. Table~\ref{tab:retained-csv} identifies the exact files. They retain full denominators, rejection/nonrejection/abstention counts, uncertainty intervals, and available-value counts. Paired differences use their separate companion files. No condition or adverse result is removed from those data.
+
+\begin{table}[ht]\centering
+\caption{Complete empirical tables in the reproducibility package. File names are relative to \texttt{results/current/tables/}.}\label{tab:retained-csv}
+\begin{tabular}{p{.32\textwidth}p{.58\textwidth}}\toprule
+Comparison & Files \\\midrule
+Covariance and bias inflation & \texttt{inflation\_counts.csv}, \texttt{inflation\_pairs.csv}\\
+Transported gains & \texttt{gain\_counts.csv}, \texttt{gain\_pairs.csv}\\
+Numerical settings and recorders & \texttt{settings\_counts.csv}, \texttt{settings\_pairs.csv}\\
+Assumption violations & \texttt{violations\_counts.csv}\\
+Phase-boundary controls & \texttt{near\_boundary\_counts.csv}\\
+All cycle-radius components & \texttt{cycle\_components.csv}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Decision patterns retained by the complete tables}
+The gain and inflation tables support different conclusions. Transporting a gain preserves the diagonal rule's mathematical decision, while assigning one common scalar ceiling to every channel can inflate the smaller-channel edges. All six diagonal gain variants retain $200/200$ rotating-source rejections; the common rule loses all rejections at four gains. Inflation of a valid bound remains conservative, but increasing its covariance factor from one to $1.5$ removes all rotating-source detections throughout the tested bias grid. Zero detections under an underestimated bound, by contrast, cannot validate that bound.
+
+The settings table retains recorder failures alongside successful numerical refinements. At $\phi=0.97,N=65537$, all tested subdivision depths and arithmetic precisions give two-sided counts $0/1000/0$ under the null and $199/1/0$ under strong delay. Fractional eight-bit recording changes the strong-delay counts to $0/65/135$. Both finite-range recorders give $0/0/200$, because a valid perturbation certificate is unavailable. These triplets mean rejection/nonrejection/abstention and retain every record.
+
+The assumption-violation table concerns procedures used outside their corresponding guarantees. Reference noise and Student-$t$ innovations produce no null rejections in these cells, but this observation does not extend Gaussian reference coverage. Correlated detector errors remove the source interpretation of the cycle. The phase-boundary table instead stays within a reversible-source model: calibrated and phase-adjusted procedures return $0/400/0$, while raw procedures return $400/0/0$ at each tested fraction of the phase tolerance. The raw procedures concern recorded asymmetry.
+
+\subsection{Cycle component summaries}
+The complete component table contains 216 rows with full finite-value counts and zero missing values in the selected conditions. The largest median non-total term in every cell-method-edge group is the square-root sampling term. Table~\ref{tab:src16:cycle-examples} retains representative diagonal-rule values in Sec.~S10.5. These are descriptive Decimal50 calculations from the formulas, not saved component enclosures. Their medians do not establish the cause of every decision, and a median total need not equal the sum of component medians.

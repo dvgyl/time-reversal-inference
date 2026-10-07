@@ -1,0 +1,87 @@
+\subsection*{Definitions and complete statements}
+Observe $Y_0,\ldots,Y_n$, where $N=n+1$ and $n\ge2$. Assume
+\[
+ \operatorname{Cov}(Y_s,Y_t)=v\phi^{|s-t|},\qquad
+ 0\le\phi<1,\quad v>0.
+\]
+At the true persistence, subtracting the candidate prediction leaves independent innovations before centering. For a wrong candidate, their cumulative sums can have a different amount of variation. We compare that cumulative variation with the innovation energy. For a candidate $\psi\in[0,1]$, let $e_\psi=(Y_t-\psi Y_{t-1})_{t=1}^n$, $P=I_n-\mathbf1\mathbf1^{\mathsf T}/n$, and let $K_B$ form the first $n-1$ partial sums. Define
+\begin{equation}\label{src16:pivot}
+ \begin{gathered}
+ D(\psi)=\|Pe_\psi\|^2,\quad Q(\psi)=\|K_BPe_\psi\|^2,\\
+ R_n(\psi)=Q(\psi)/\{nD(\psi)\}.
+ \end{gathered}
+\end{equation}
+At the true parameter, the centered residuals are projected independent Gaussian innovations. Hence
+\begin{equation}\label{src16:law}
+ R_n(\phi)\ \overset{d}{=}\
+ \frac{\sum_{k=1}^{n-1}\lambda_{k,n}Z_k^2}
+ {n\sum_{k=1}^{n-1}Z_k^2},
+\end{equation}
+where $\lambda_{k,n}=[4\sin^2(\pi k/(2n))]^{-1}$ and the $Z_k$ are independent standard normal variables. The eigenvalues weight the independent Gaussian coordinates in the cumulative energy. Dividing by the innovation energy removes the common scale. The resulting law does not depend on the unknown mean, scale, or persistence, so the same reference distribution applies at every candidate. Such a statistic is called a pivot. The ratio has the constant-mean KPSS form~\cite{kpss1992}, but we invert its finite Gaussian law at every candidate persistence.
+
+Choose deterministic cutoffs with lower and upper tail probabilities at most $\alpha_B/2$. The confidence set is
+\begin{equation}\label{src16:set}
+ \mathcal C_B=\left\{\psi\in[0,1]:
+ \begin{aligned}
+ n c_{\rm lo}D(\psi)-Q(\psi)&\le0,\\
+ Q(\psi)-n c_{\rm hi}D(\psi)&\le0
+ \end{aligned}\right\}.
+\end{equation}
+The set retains candidates whose normalized cumulative residual energy is neither too small nor too large under the innovation law. Both bounds matter because the test will use the whole accepted set. Writing the conditions as quadratics in $\psi$ avoids division and retains zero-energy candidates. It gives $\Pr_\phi(\phi\in\mathcal C_B)\ge1-\alpha_B$. We use $\alpha_B=0.005$ for the standalone set. Its intersection with a lag confidence set uses $\alpha_B=\alpha_L=0.0025$, so the combined source error remains $0.005$. A union bound suffices; independence is unnecessary. The split allocation widens both component sets. Thus the intersection need not be smaller than either standalone set computed at error $0.005$ on the same record.
+
+The cutoffs are computed by enclosing the distribution of the signed quadratic form
+\[
+ \sum_{k=1}^{n-1}\left(\frac{\lambda_{k,n}}{n^2}
+              -\frac{c}{n}\right)Z_k^2.
+\]
+Characteristic-function inversion follows the methods of Imhof and Davies~\cite{imhof1961,davies1980}. We bound numerical integration, omitted tails, and bisection error. The lower cutoff is rounded down and the upper cutoff up. These are certified finite-$n$ quantile enclosures. At $n=2$, the pivot is the constant $1/4$, which is handled separately.
+
+
+Put $\delta=1-\phi$. For positive deterministic constants, suppose a common event of probability at least $1-\beta$ gives
+\begin{align}\label{src16:event}
+ Q(\phi)&\ge v\delta(2-\delta)n^2c_Q,\notag\\
+ Q(1)&\le vnb,\notag\\
+ v\delta(2-\delta)nd_-&\le D(\phi)\le v\delta(2-\delta)nd_+,\notag\\
+ \|P(Y_0,\ldots,Y_{n-1})^{\mathsf T}\|^2&\le vnd_0.
+\end{align}
+These inequalities bound the quantities needed to compare a candidate with the true persistence and with the endpoint one. The lower bound on $Q(\phi)$ keeps the cumulative innovation energy from being too small. The upper bound on $Q(1)$ limits the endpoint-detrended path. The two bounds on $D(\phi)$ control the random variance scale, while the last bound limits how much the residuals change when the candidate changes. Section~\ref{src16:si-envelope} gives explicit finite-$n$ constants for a common event on which all these bounds hold.
+
+\begin{theorem*}[Full source-envelope statement]\label{src16:envelope-thm}
+Define
+\begin{align*}
+ A_-&=\sqrt{(2-\delta)c_Q},& b_e&=\sqrt{b/(n\delta)},\\
+ E_0&=\sqrt{\delta d_0},& F_\pm&=\sqrt{(2-\delta)d_\pm},\\
+ J_{\rm lo}&=b_e+\sqrt{c_{\rm lo}}E_0,&
+ J_{\rm hi}&=b_e+\sqrt{c_{\rm hi}}E_0,\\
+ C_e&=\sqrt{c_{\rm lo}}(F_--E_0)-b_e,&
+ H_e&=\sqrt{c_{\rm hi}}(F_+-E_0)-b_e.
+\end{align*}
+Assume $C_e>0$, $F_->E_0$, and $A_->J_{\rm hi}$. On the event in Eq.~\eqref{src16:event} and source coverage, put $A=\sqrt{Q(\phi)/(v\delta n^2)}$. Every accepted candidate satisfies
+\begin{equation}\label{src16:gap}
+ \frac{C_e}{A-J_{\rm lo}}
+ \le \frac{1-\psi}{\delta}
+ \le \frac{H_e}{A-J_{\rm hi}}.
+\end{equation}
+The hull $[\ell,u]$ is nonempty, $u<1$, and, for $\Lambda(x)=(1+x)/(1-x)$,
+\begin{equation}\label{src16:span}
+ \frac{\Lambda(u)}{\Lambda(\ell)}\le 2C_{\rm gap},\qquad
+ C_{\rm gap}=\frac{H_e}{C_e}
+             \frac{A_--J_{\rm lo}}{A_--J_{\rm hi}}.
+\end{equation}
+If $\delta X_+<1$, with $X_+=H_e/(A_--J_{\rm hi})$, the factor $2$ can be replaced by $2/(2-\delta X_+)$. The probability is at least $1-\alpha_B-\beta$. For the lag intersection, subtract $\alpha_L$ as well.
+\end{theorem*}
+
+
+\begin{theorem*}[Complete specification of the implemented-power example]\label{src16:power-thm}
+Let $X_t,Z_t$ be independent stationary Gaussian AR(1) processes with mean zero, variance one, and persistence $199/200$. The ideal channels are
+\[
+ Y_1(t)=2+X_t,\qquad
+ Y_2(t)=-1+\tfrac9{10}X_{t-1}+\tfrac{\sqrt{19}}{10}Z_t.
+\]
+Use $N=524289$ observations, identity detector responses, and an independent calibration of the second response $(1,0)$. Its $256$ design rows have entries in $\{-1,1\}$ and Gram matrix $256I_2$. Its errors are independent mean-zero Gaussian values with standard deviation $0.01$. Suppose source and calibration recordings are multiples of $2^{-20}$, each within $2^{-21}$ of its ideal value. Use the standalone two-sided set, bank $(0,0.5,0.8,0.9,0.97,0.995)$, and the calibrated geometric-mean threshold with the recording corrections, outward cutoffs, precisions, and numerical limits specified in Secs.~\ref{src16:si-power}--\ref{src16:si-completion}. Then
+\begin{equation}\label{src16:implemented-power}
+ \Pr(\mathrm{reject})\ge0.91-(4N+512)e^{-128}>0.90.
+\end{equation}
+\end{theorem*}
+
+

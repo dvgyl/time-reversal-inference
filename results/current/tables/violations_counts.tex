@@ -1,0 +1,24 @@
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\subsection*{violations counts}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.180\textwidth}>{\raggedright\arraybackslash}p{0.210\textwidth}>{\raggedright\arraybackslash}p{0.040\textwidth}>{\raggedright\arraybackslash}p{0.080\textwidth}>{\raggedright\arraybackslash}p{0.140\textwidth}>{\raggedright\arraybackslash}p{0.140\textwidth}>{\raggedright\arraybackslash}p{0.080\textwidth}@{}}
+\toprule
+Condition & Method & n & R/NR/A & 95\% rejection interval & Threshold median [finite/full] & Nominal test target \\\midrule\endhead
+phi 97/100, reversible, reference snr 10, N=65537 & Two-sided set & 400 & 0/400/0 & [0.000, 0.010] & 0.0226 [400/400] & T0 \\
+phi 97/100, strong delay, reference snr 10, N=65537 & Two-sided set & 200 & 199/1/0 & [0.972, 1.000] & 0.0230 [200/200] & T0 \\
+phi 97/100, reversible, reference snr 100, N=65537 & Two-sided set & 400 & 0/400/0 & [0.000, 0.010] & 0.0130 [400/400] & T0 \\
+phi 97/100, strong delay, reference snr 100, N=65537 & Two-sided set & 200 & 200/0/0 & [0.981, 1.000] & 0.0127 [200/200] & T0 \\
+phi 97/100, reversible, student t 5, N=65537 & Two-sided set & 400 & 0/400/0 & [0.000, 0.010] & 0.0110 [400/400] & T0 \\
+phi 97/100, strong delay, student t 5, N=65537 & Two-sided set & 200 & 200/0/0 & [0.981, 1.000] & 0.0107 [200/200] & T0 \\
+correlated error null, N=131072 & Diagonal envelope & 400 & 0/400/0 & [0.000, 0.010] & 0.0367 [400/400] & T0 \\
+correlated error rotating, N=131072 & Diagonal envelope & 200 & 0/200/0 & [0.000, 0.019] & 0.0546 [200/200] & T0 \\
+Identity, reversible, N=2097152 & Diagonal envelope, covariance factor 2/3 & 400 & 0/400/0 & [0.000, 0.010] & 0.00360 [400/400] & T0 \\
+Identity, reversible, N=2097152 & Diagonal envelope, covariance factor 1/2 & 400 & 0/400/0 & [0.000, 0.010] & 0.00264 [400/400] & T0 \\
+Identity, reversible, N=2097152 & Diagonal envelope, bias factor 2/3 & 400 & 0/400/0 & [0.000, 0.010] & 0.00567 [400/400] & T0 \\
+Identity, reversible, N=2097152 & Diagonal envelope, bias factor 1/2 & 400 & 0/400/0 & [0.000, 0.010] & 0.00567 [400/400] & T0 \\
+Identity, rotation, N=2097152 & Diagonal envelope, covariance factor 2/3 & 200 & 200/0/0 & [0.981, 1.000] & 0.00484 [200/200] & T0 \\
+Identity, rotation, N=2097152 & Diagonal envelope, covariance factor 1/2 & 200 & 200/0/0 & [0.981, 1.000] & 0.00356 [200/200] & T0 \\
+Identity, rotation, N=2097152 & Diagonal envelope, bias factor 2/3 & 200 & 200/0/0 & [0.981, 1.000] & 0.00756 [200/200] & T0 \\
+Identity, rotation, N=2097152 & Diagonal envelope, bias factor 1/2 & 200 & 200/0/0 & [0.981, 1.000] & 0.00756 [200/200] & T0 \\
+\bottomrule\end{longtable}
+R, NR, and A mean rejection, nonrejection, and abstention. The full denominator includes all independent records. The nominal target does not give a size guarantee. A violated source, covariance, response, or error assumption removes that guarantee. The baseline rules have no finite-record source-null guarantee here. Interval endpoints are rounded outward to 0.001. Descriptive medians have three significant digits. A missing value is shown by a dash. Exact values and all finite and missing counts remain in the associated CSV files. Nominal targets: T0, source reversibility under the stated assumptions; T1, zero observed lag contrast; T2, observed lag contrast within plug-in phase tolerance; T3, zero observed imaginary coherency; T4, zero observed two-channel contrast.
+\endgroup

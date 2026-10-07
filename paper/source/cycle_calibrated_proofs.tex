@@ -1,0 +1,379 @@
+\section{Finite-record bounds for calibrated and cycle tests}
+\label{cc16:section}
+
+The calibrated tolerance and the cycle cancellation are population results. A finite test must compare its estimated contrast or spectral product with those results. This requires a bound on fluctuations about the expectation and a bound on the difference between that expectation and the population quantity. Gaussian quadratic-form concentration handles fluctuations, including overlapping samples. The cycle also needs a covariance-tail allowance because its estimator retains only finitely many lags.
+
+We first apply the concentration bound to each spectral edge, then propagate the three edge errors through the cycle product. For the calibrated contrast, the adjacent sum and difference operators give a sharper matrix bound, and separate variance ceilings give a geometric variance scale. Deterministic recording corrections enlarge both constructions on their original Gaussian events. The final arithmetic argument addresses the remaining question of whether the specified calculation completes.
+
+\subsection{Gaussian concentration for a centered quadratic form}
+
+The calibrated contrast and the real and imaginary parts of each estimated spectral edge are quadratic forms with no unknown mean term after centering. Their fluctuations depend on the coefficient matrix weighted by the full record covariance. The Frobenius norm controls the square-root tail term, and the signed extreme eigenvalues control the linear term. A trace bound can improve the Frobenius estimate when the covariance ceiling is conservative.
+
+\begin{lemma}[Signed Gaussian tails and a variance-sensitive radius]
+\label{cc16:gaussian}
+Let $y$ be Gaussian with covariance $\Gamma$, and let a symmetric matrix $A$ annihilate its mean. Put $T=\Gamma^{1/2}A\Gamma^{1/2}$ and $a_+=\max(\lambda_{\max}(T),0)$, $a_-=\max(-\lambda_{\min}(T),0)$. For $t>0$,
+\begin{align}
+ \Pr\{y^{\mathsf T}Ay-\mathbb E(y^{\mathsf T}Ay)
+          >2\|T\|_F\sqrt t+2a_+t\}&\le e^{-t},\nonumber\\
+ \Pr\{\mathbb E(y^{\mathsf T}Ay)-y^{\mathsf T}Ay
+          >2\|T\|_F\sqrt t+2a_-t\}&\le e^{-t}.
+ \label{cc16:quadratic-tails}
+\end{align}
+If $\Gamma\preceq KI$ and $\tr\Gamma\le NT_*$, then
+\begin{equation}
+ \|T\|_F\le\min\{K\|A\|_F,
+              \|A\|_{\rm op}\sqrt{KNT_*}\},
+ \qquad \|T\|_{\rm op}\le K\|A\|_{\rm op}.
+ \label{cc16:mixed-norm}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Diagonalization gives
+$y^{\mathsf T}Ay-\mathbb E(y^{\mathsf T}Ay)
+\stackrel{\rm law}=\sum_j\lambda_j(T)(Z_j^2-1)$
+for independent standard normal $Z_j$. For $u>0$ and $2ua_+<1$, its log moment generating function is at most
+\[
+ \sum_j\{-u\lambda_j-\tfrac12\log(1-2u\lambda_j)\}
+ \le\frac{u^2\|T\|_F^2}{1-2ua_+}.
+\]
+Positive and negative eigenvalues have different roles in this upper tail. Only positive eigenvalues restrict the allowed value of $u$. For them, expand the logarithm and bound its higher terms by a geometric series. For negative eigenvalues, use $-\log(1+x)+x\le x^2/2$. Exponential Markov with $u=\sqrt t/(\|T\|_F+2a_+\sqrt t)$ gives the first tail. Replacing $A$ by $-A$ gives the second. This is the signed quadratic-form form of Gaussian chi-square concentration~\cite{laurentmassart}. Singular cases follow on the covariance range.
+
+The first Frobenius bound and the operator bound follow by multiplication by $\Gamma^{1/2}$. For the other branch,
+\[
+ \|T\|_F^2=\tr(A\Gamma A\Gamma)
+ \le K\tr(A^2\Gamma)
+ \le K\|A\|_{\rm op}^2\tr\Gamma.
+\]
+The first inequality uses $A\Gamma A\succeq0$ and $\Gamma\preceq KI$.
+\end{proof}
+
+\subsection{Cycle confidence with a diagonal covariance envelope}
+
+The source and observation errors are jointly stationary Gaussian processes. The channel identities and even reversal parities are fixed. The responses are real, diagonal and time invariant. Observation errors are source-orthogonal and mutually orthogonal at every lag. The channel means are unknown constants. The observed spectrum has the form $F=D_HS D_H^*+D_E$, with diagonal $D_H$ and $D_E$. Under a reversible source, $S$ is real symmetric. Therefore
+\begin{equation}
+ F_{12}F_{23}F_{31}=|H_1H_2H_3|^2S_{12}S_{23}S_{31}
+ \quad\text{is real}.
+ \label{cc16:cancellation}
+\end{equation}
+The identity permits negative real products. To use its realness in a test, we must enclose all three population edges simultaneously. Phase cancellation does not bound fluctuations in their estimates or the contribution of covariances beyond the retained lag window.
+
+Let $N\ge1$, $0\le L<N$ and a set $\mathcal W$ of $G\ge1$ frequencies be fixed before observation. Write $P_N=I_N-\mathbf1\mathbf1^{\mathsf T}/N$ and
+\begin{equation}
+ (W_\omega)_{st}=\mathbf1\{|s-t|\le L\}e^{-i\omega(s-t)},
+ \qquad
+ \widehat F_{ij}(\omega)=N^{-1}(P_Ny_i)^{\mathsf T}W_\omega(P_Ny_j).
+ \label{cc16:estimator}
+\end{equation}
+The directed edges are $12$, $23$ and $31$. Assume their cross covariances are absolutely summable. Supply positive $K_i$ such that the complete channel-stacked covariance satisfies
+\begin{equation}
+ \Gamma_N\preceq\operatorname{diag}(K_1I_N,K_2I_N,K_3I_N).
+ \label{cc16:full-envelope}
+\end{equation}
+For each edge, supply $B_{ij}\ge0$ with
+\begin{equation}
+ \sum_{|k|>L}|C_{ij}(k)|+
+ \frac1N\sum_{|k|\le L}|k|\,|C_{ij}(k)|\le B_{ij}.
+ \label{cc16:tail}
+\end{equation}
+These bounds apply to the complete observed process, including its responses and errors. The covariance envelope controls the quadratic-form fluctuation. The tail allowance bounds the bias from omitted lags and from the smaller number of pairs at nonzero lags. Sample centering adds a separate bias term.
+
+\begin{theorem}[Unequal cycle radii]
+\label{cc16:cycle-theorem}
+For $0<\delta<1$, put $h=2L+1$, $t_\delta=\log(12G/\delta)$ and
+\begin{equation}
+ e_{ij,\delta}=B_{ij}+\sqrt{K_iK_j}
+ \left\{\frac{3h}{N}+2\sqrt{\frac{ht_\delta}{N}}
+                  +\frac{\sqrt2\,ht_\delta}{N}\right\}.
+ \label{cc16:edge-radius}
+\end{equation}
+With probability at least $1-\delta$, every declared frequency and edge satisfies
+$|\widehat F_{ij}(\omega)-F_{ij}(\omega)|\le e_{ij,\delta}$.
+For nonnegative triples $x$ and $e$, define
+\begin{align}
+ \mathcal R_\times(x,e)
+ ={}&e_1x_2x_3+e_2x_1x_3+e_3x_1x_2\nonumber\\
+ &+e_1e_2x_3+e_1e_3x_2+e_2e_3x_1+e_1e_2e_3.
+ \label{cc16:product-radius}
+\end{align}
+At level $\alpha$, reject if any $\omega\in\mathcal W$ satisfies
+\begin{equation}
+ \left|\operatorname{Im}\{
+ \widehat F_{12}\widehat F_{23}\widehat F_{31}\}\right|
+ >\mathcal R_\times\bigl(
+ (|\widehat F_{12}|,|\widehat F_{23}|,|\widehat F_{31}|),
+ (e_{12,\alpha},e_{23,\alpha},e_{31,\alpha})\bigr).
+ \label{cc16:cycle-rule}
+\end{equation}
+Its rejection probability is at most $\alpha$ under the reversible-source null. Equality does not reject. Missing required bounds cause abstention.
+\end{theorem}
+\begin{proof}
+We first bound the bias of each edge estimate, then its random error. Divide channel $i$ by $\sqrt{K_i}$. The full normalized covariance is at most the identity. Before sample centering, the expected normalized entry is
+\[
+ \sum_{|k|\le L}(1-|k|/N)e^{-ik\omega}
+                         C_{ij}(k)/\sqrt{K_iK_j}.
+\]
+Its bias is at most $B_{ij}/\sqrt{K_iK_j}$. Set $J_N=\mathbf1\mathbf1^{\mathsf T}/N$. Sample centering replaces $W_\omega$ by $P_NW_\omega P_N$, whose difference from $W_\omega$ is
+$-J_NW_\omega-W_\omega J_N+J_NW_\omega J_N$.
+Each term has rank at most one and nuclear norm at most $h$. The normalized cross-covariance block has operator norm at most one. Trace duality thus bounds the additional complex bias by $3h/N$.
+
+The remaining error is a fluctuation about this centered expectation. For $A_\omega=\operatorname{Re}W_\omega$ or $\operatorname{Im}W_\omega$, the real statistic has symmetric cross blocks $P_NA_\omega P_N/(2N)$ and its transpose. Its quadratic-form matrix has squared Frobenius norm at most $h/(2N)$ and operator norm at most $h/(2N)$. These bounds follow from at most $h$ unit-magnitude entries in each row and at most $Nh$ such entries in total. Lemma~\ref{cc16:gaussian} gives the real-component radius $\sqrt{2ht/N}+ht/N$. There are six real components at each frequency. Their two-sided union failure is at most $12Ge^{-t}$. Combining the real and imaginary errors gives $2\sqrt{ht/N}+\sqrt2ht/N$. Adding the two biases and rescaling proves \eqref{cc16:edge-radius}.
+
+On that event, write each population entry as its estimate plus an error of modulus at most the corresponding $e_i$. Expanding the product gives seven nonempty error products. Their total modulus is bounded by \eqref{cc16:product-radius}. The reversible-source population product is real. Absolute summability makes the cross spectra continuous, so this identity holds at every declared frequency. Rejection therefore requires failure of simultaneous coverage.
+\end{proof}
+
+The full covariance bound in \eqref{cc16:full-envelope} is essential. Two unit marginal covariance blocks with cross block $0.9I_N$ have a full covariance eigenvalue of $1.9$. Their separate marginal bounds do not imply a full bound by the identity. From marginal block bounds alone, a valid conservative construction for $m$ channels is
+\begin{equation}
+ \Gamma\preceq m\operatorname{diag}(\Gamma_{11},\ldots,\Gamma_{mm}).
+ \label{cc16:marginal-factor}
+\end{equation}
+Indeed, positive semidefiniteness bounds each block quadratic term by the geometric mean of its diagonal terms. Their sum is at most $(\sum_i\sqrt{a_i})^2\le m\sum_i a_i$.
+
+For the fixed two-frequency set $\mathcal W=\{\pi/4,\pi/2\}$, the logarithm is $\log(24/\delta)$. No independence between frequencies is required. Both frequencies remain in this count if one numerical calculation is unavailable. This union permits selection between these two covered frequencies. It does not permit a new frequency or a new lag cutoff chosen from the recording.
+
+A nonzero population cycle alone does not ensure rejection. The next condition requires its imaginary part to exceed both the alternative estimation error and the largest null threshold on the coverage event. It concerns the mathematical rule. Recording errors and numerical completion require the separate conditions below.
+
+\begin{theorem}[A sufficient cycle power condition]
+\label{cc16:cycle-power}
+Assume jointly stationary Gaussian source and observation errors. Retain the response, error-orthogonality, parity, covariance-envelope, and tail-bound assumptions of Theorem~\ref{cc16:cycle-theorem}, without requiring source reversibility. Let $0<\alpha,\beta<1$. At one frequency $\omega\in\mathcal W$, put
+\[
+ m=(|F_{12}(\omega)|,|F_{23}(\omega)|,|F_{31}(\omega)|),
+ \qquad J=\operatorname{Im}(F_{12}F_{23}F_{31}).
+\]
+Write $e_\delta=(e_{12,\delta},e_{23,\delta},e_{31,\delta})$. If
+\begin{equation}
+ |J|>\mathcal R_\times(m,e_\beta)
+       +\mathcal R_\times(m+e_\beta,e_\alpha),
+ \label{cc16:cycle-power-condition}
+\end{equation}
+then the mathematical rule in \eqref{cc16:cycle-rule} has power at least $1-\beta$. Vector addition is componentwise. The radii retain the full declared frequency count $G$.
+\end{theorem}
+
+The first term in \eqref{cc16:cycle-power-condition} bounds the error in the estimated product. The second bounds the rejection threshold using the edge magnitudes allowed by simultaneous $\beta$ coverage. The strict inequality ensures that the estimated imaginary product exceeds that threshold throughout the coverage event.
+
+\begin{proof}
+On simultaneous $\beta$ coverage, expand the estimated product around the population entries. Its error has modulus at most $\mathcal R_\times(m,e_\beta)$. Thus the absolute imaginary estimated product is at least $|J|-\mathcal R_\times(m,e_\beta)$. Each estimated entry has magnitude at most $m_i+e_{i,\beta}$. Every term in the product radius is nonnegative and increases with these magnitudes. The rejection threshold is therefore at most $\mathcal R_\times(m+e_\beta,e_\alpha)$. The strict condition implies rejection on this event, whose failure probability is at most $\beta$.
+\end{proof}
+
+\subsection{Changes of channel units and recording errors}
+
+\begin{proposition}[Gain equivariance]
+\label{cc16:gain}
+For fixed nonzero real gains $a_i$ and constant offsets $b_i$, let $y'_i=a_iy_i+b_i\mathbf1$. Transport the supplied bounds as
+\[
+ K'_i=a_i^2K_i,\qquad B'_{ij}=|a_ia_j|B_{ij}.
+\]
+The mathematical decision in \eqref{cc16:cycle-rule} is unchanged.
+\end{proposition}
+\begin{proof}
+Centering removes $b_i$. Bilinearity gives $\widehat F'_{ij}=a_ia_j\widehat F_{ij}$, while covariance congruence gives the transported full envelope. Equation~\eqref{cc16:edge-radius} gives $e'_{ij}=|a_ia_j|e_{ij}$. The statistic and every term in its product radius acquire the same positive factor $(a_1a_2a_3)^2$. The strict comparison is unchanged, including for negative gains.
+\end{proof}
+
+A change of units scales the channel errors as well as the signal. Changing only the signal gain defines a different observation law. A zero gain can remove the witness and is excluded from this equivalence. Finite arithmetic limits can change whether a calculation completes.
+
+Now suppose the ideal Gaussian recording $y$ and the recorded values $z$ obey
+\begin{equation}
+ |y_i(t)-z_i(t)|\le\eta_i
+ \quad\text{at every retained sample},\qquad \eta_i\ge0.
+ \label{cc16:recorder}
+\end{equation}
+The bound is deterministic and can cover errors that depend on $y$. Define the recorded centered energies
+$Q_i(z)=N^{-1}\|P_Nz_i\|^2$.
+
+\begin{proposition}[Cycle transfer through bounded recording errors]
+\label{cc16:cycle-rounding}
+Use the estimates from $z$ and replace each $e_{ij,\delta}$ by
+\begin{equation}
+ e_{ij,\delta}+\tau_{ij}(z),\qquad
+ \tau_{ij}(z)=h\{
+ \eta_i\sqrt{Q_j(z)}+\eta_j\sqrt{Q_i(z)}+\eta_i\eta_j\}.
+ \label{cc16:cycle-perturbation}
+\end{equation}
+The resulting cycle rule has the same level bound for the ideal model. Gain equivariance also holds if $\eta'_i=|a_i|\eta_i$.
+\end{proposition}
+\begin{proof}
+Let $d_i=y_i-z_i$. Orthogonal projection gives $\|P_Nd_i\|\le\sqrt N\eta_i$. The lag matrix satisfies $\|P_NW_\omega P_N\|_{\rm op}\le h$. Expanding its bilinear form around $z$ bounds the change of each estimate by \eqref{cc16:cycle-perturbation}. On the original Gaussian coverage event, the population entry is therefore within the enlarged radius around the estimate from $z$. The product argument remains unchanged. The stated transport makes $\tau'_{ij}=|a_ia_j|\tau_{ij}$.
+\end{proof}
+
+This result requires a valid uniform error allowance. Saturation without such an allowance causes abstention. At $\pi/4$, outward intervals for $\sqrt2/2$ enclose the phase coefficients. A numerical rejection requires a lower bound for the absolute imaginary product to exceed an upper bound for the threshold. An unresolved comparison cannot reject. The same arithmetic rule covers exact quarter-turn coefficients.
+
+A pointwise spectral value cannot replace the full covariance information without an additional leakage bound. For example, take independent channels $Y_i(t)=Z_i(t)+Z_i(t-2)$ with standard Gaussian white innovations. Their marginal densities $2+2\cos(2\omega)$ vanish at $\pi/2$. Every finite-record covariance is positive definite because the finite convolution matrix has full row rank. At $N=3$ and $L=1$, $P_NW_{\pi/2}P_N$ has a nonzero imaginary part. The corresponding bilinear form between independent channels has positive variance. A radius proportional only to $\sqrt{F_{ii}(\pi/2)F_{jj}(\pi/2)}$ would be zero and cannot cover this finite-record error.
+
+\begin{proposition}[Cycle power with a bounded recorder]
+\label{cc16:rounded-cycle-power}
+Retain the alternative assumptions of Theorem~\ref{cc16:cycle-power} and the recorder contract \eqref{cc16:recorder}. Suppose a recording event $E_Q$ has failure probability at most $\delta_Q$ and gives deterministic bounds $\tau_{ij}(z)\le\bar\tau_{ij}$. Put $d_\delta=e_\delta+\bar\tau$. If
+\begin{equation}
+ |J|>\mathcal R_\times(m,d_\beta)
+       +\mathcal R_\times(m+d_\beta,d_\alpha),
+ \label{cc16:rounded-cycle-power-condition}
+\end{equation}
+then the mathematical rounded rule has power at least $1-\beta-\delta_Q$. A uniform deterministic bound has $\delta_Q=0$.
+\end{proposition}
+\begin{proof}
+On $E_Q$ and the ideal $\beta$-coverage event, the recorded estimates differ from the population entries by at most $d_\beta$. Their threshold radii are at most $d_\alpha$. Apply the two product bounds in the proof of Theorem~\ref{cc16:cycle-power}. The union bound requires no independence between the events.
+\end{proof}
+
+For example, bounds $Q_i(z)\le\bar Q_i$ on $E_Q$ give
+\[
+ \bar\tau_{ij}=h\{\eta_i\sqrt{\bar Q_j}
+                    +\eta_j\sqrt{\bar Q_i}+\eta_i\eta_j\}.
+\]
+For the rotational family with marginal source variances one, a Gaussian union bound gives $|Y_i(t)-\mathbb EY_i(t)|\le16\|h_i\|_1$ outside an event of probability at most $6Ne^{-128}$. Under the recorder contract, projection then gives $\bar Q_i=(16\|h_i\|_1+\eta_i)^2$. This bound applies to the post-sampling filters without added detector noise. It does not require independent time samples.
+
+A bounded numerical implementation needs a further contract. Suppose an event $E_C$, with failure probability at most $\delta_C$, ensures that the selected frequency calculation completes. Let deterministic vectors $\widetilde d_\delta\ge d_\delta$ cover its computed upper edge radii on $E_Q\cap E_C$. Suppose its upper magnitude enclosures exceed the exact recorded magnitudes by at most $\varepsilon_i$, and its lower absolute-product bound falls below the exact absolute imaginary product by at most $\varepsilon_J$. Then
+\begin{equation}
+ |J|>\mathcal R_\times(m,\widetilde d_\beta)
+ +\mathcal R_\times(m+\widetilde d_\beta+\varepsilon,
+                    \widetilde d_\alpha)+\varepsilon_J
+ \label{cc16:implemented-cycle-power-condition}
+\end{equation}
+implies implemented power at least $1-\beta-\delta_Q-\delta_C$. The proof uses the same product expansion and the stated enclosure errors. At $\pi/2$, exact rational phase arithmetic gives $\varepsilon_J=0$, and an $80$-bit fixed-grid square root permits $\varepsilon_i=2^{-80}$. At $\pi/4$, both magnitude and product errors must also cover the phase enclosures. These requirements do not prove numerical completion. A population check which fails any sufficient inequality above supplies no lower or upper bound on actual power. The retained negative population conditions therefore remain negative sufficient-condition results.
+
+\subsection{A sharper bound for the two-time reflection matrix}
+
+The reflection statistic uses overlapping adjacent pairs, so its operator norm must retain their joint structure. The sum and difference operators are complementary. Bounding them together avoids the loss from bounding each operator separately. This improvement affects the sampling radius, while the calibrated population tolerance remains a separate part of the threshold.
+
+For $N=n+1$ with $n\ge2$, let $E_0$ and $E_1$ select samples $0,\ldots,n-1$ and $1,\ldots,n$. Put $S_+=E_0+E_1$, $S_-=E_0-E_1$ and $H_n=I_n-\mathbf1\mathbf1^{\mathsf T}/n$. The centered contrast is
+\begin{align}
+ s_n(y)&=n^{-1}(S_+y_1)^{\mathsf T}H_n(S_-y_2)
+       =y^{\mathsf T}\mathsf A_n y,\nonumber\\
+ \mathsf A_n&=\frac1{2n}
+ \begin{pmatrix}0&S_+^{\mathsf T}H_nS_-\\
+ S_-^{\mathsf T}H_nS_+&0\end{pmatrix}.
+ \label{cc16:reflection-matrix}
+\end{align}
+
+\begin{lemma}[Reflection matrix norms]
+\label{cc16:matrix-norm}
+The matrix in \eqref{cc16:reflection-matrix} satisfies
+\begin{equation}
+ \|\mathsf A_n\|_{\rm op}\le\frac1n,
+ \qquad
+ f_n^2:=\|\mathsf A_n\|_F^2
+ =\frac{2n+2-4/n-4/n^2}{2n^2}.
+ \label{cc16:norms}
+\end{equation}
+The operator bound holds with any symmetric $0\preceq H_n\preceq I_n$. Its constant is attained by the centered contrast when $n=3$.
+\end{lemma}
+\begin{proof}
+Let $J_n$ have ones on its adjacent diagonals. Direct row products give $S_+S_+^{\mathsf T}=2I_n+J_n$ and $S_-S_-^{\mathsf T}=2I_n-J_n$. Hence $R=[S_+,S_-]$ satisfies $RR^{\mathsf T}=4I_n$. The matrix $R^{\mathsf T}H_nR$ lies between zero and $4I$. Subtracting $2I$ gives an operator of norm at most two. Selecting the rows of the first channel and the columns of the second gives the block $S_+^{\mathsf T}H_nS_-$. This restriction cannot increase the operator norm, so that block has norm at most two. The eigenvalues of the symmetric off-diagonal block matrix are its positive and negative singular values. Division by $2n$ proves the operator bound.
+
+For the Frobenius norm, set $H_n=I_n-\mathbf1\mathbf1^{\mathsf T}/n$. Cyclicity of trace gives
+\[
+ \|S_+^{\mathsf T}H_nS_-\|_F^2
+ =\tr\{H_n(2I_n+J_n)H_n(2I_n-J_n)\}
+ =2n+2-4/n-4/n^2.
+\]
+Here $\tr J_n^2=2(n-1)$, $\|J_n\mathbf1\|^2=4n-6$, and $\mathbf1^{\mathsf T}J_n\mathbf1=2(n-1)$. The two blocks contribute the factor $1/(2n^2)$. For sharpness at $n=3$, take $v=(1,0,-1)^{\mathsf T}$. Then $H_nv=v$ and $J_nv=0$. The block maps $S_-^{\mathsf T}v$ to $2S_+^{\mathsf T}v$, and both vectors have the same norm. Its norm is therefore two.
+\end{proof}
+
+This bound concerns the specified two-time statistic. A general pair of window projections still requires its own matrix norm bound.
+
+\subsection{Separate variance ceilings in the calibrated test}
+
+Centering changes the expectation as well as the matrix norm. We must therefore check that the phase tolerance still applies before using the concentration result. Common centering introduces an even nonnegative spectral multiplier, which preserves the reversible-source structure needed for the phase bound. Normalizing each channel by its own variance then gives a geometric scale when the original units are restored.
+
+Suppose the positive observed variances are $v_1,v_2$ and a supplied standardized covariance factor $q$ satisfies
+\begin{equation}
+ \Gamma_N\preceq q\operatorname{diag}(v_1I_N,v_2I_N).
+ \label{cc16:standardized-envelope}
+\end{equation}
+Let $r$ bound $|\sin\omega\,\operatorname{Im}(H_1\overline H_2)/|H_1H_2||$ over the source spectral support and every allowed response. The ratio is zero at a transfer-product zero. The common-centering expectation uses
+\[
+ g_n(\omega)=1-\left|n^{-1}\sum_{t=0}^{n-1}e^{it\omega}\right|^2,
+ \qquad 0\le g_n\le1.
+\]
+Indeed, the uncentered cross moment contributes one in this multiplier and the covariance of the two sample means contributes the squared modulus. The multiplier is real and even. Let $\mu$ be the source spectral measure. Multiplication by $g_n$ preserves its real symmetric structure under reversibility. The filtered cross moment is the integral of $2i\sin\omega\,H_1\overline H_2$ against that measure. The phase bound and the positive-semidefinite cross-measure inequality give
+\begin{equation}
+ |\mathbb E s_n|\le2r
+ \sqrt{\int g_n|H_1|^2\,d\mu_{11}
+       \int g_n|H_2|^2\,d\mu_{22}}
+ \le2r\sqrt{v_1v_2}.
+ \label{cc16:centered-tolerance}
+\end{equation}
+Orthogonal errors contribute no cross term, and their variances can only increase $v_i$. Define
+\begin{equation}
+ \mathfrak r_N(q,t)=
+ 2\min\left\{qf_n,\frac{\sqrt{2qN}}n\right\}\sqrt t
+ +\frac{2qt}{n}.
+ \label{cc16:standardized-radius}
+\end{equation}
+
+\begin{theorem}[Geometric variance scale]
+\label{cc16:geometric}
+Suppose simultaneous upper bounds $D_i\ge v_i$ hold outside an event of probability $\delta_v$. Suppose valid upper bounds on $q$ and $r$ hold outside an event of probability $\delta_c$. With the covered upper values inserted, the rule
+\begin{equation}
+ |s_n|>\sqrt{D_1D_2}\{2r+\mathfrak r_N(q,t)\}
+ \label{cc16:geometric-rule}
+\end{equation}
+has size at most $\delta_c+\delta_v+2e^{-t}$. For common positive denominator $c_N$, one can take
+\begin{equation}
+ c_N=1-q/N-2\sqrt{qu/N},\qquad
+ D_i=Q_i(y)/c_N,
+ \label{cc16:variance-ceilings}
+\end{equation}
+with variance-coverage failure at most $2e^{-u}$. If $c_N\le0$, the rule abstains. At the same $q$, $r$ and $c_N$, its threshold is no larger than the threshold that uses $\max(D_1,D_2)$.
+\end{theorem}
+\begin{proof}
+Divide channel $i$ by $\sqrt{v_i}$. The normalized complete covariance is at most $qI$ and has trace $2N$. Lemmas~\ref{cc16:gaussian} and \ref{cc16:matrix-norm} give the two-sided radius \eqref{cc16:standardized-radius}. Multiplication by $\sqrt{v_1v_2}$ restores the original statistic and tolerance.
+
+For channel $i$, centering removes at most $qv_i/N$ from the expected energy. The energy's positive-semidefinite Gaussian quadratic form has trace at most $v_i$ and operator norm at most $qv_i/N$. Its squared Frobenius norm is therefore at most $qv_i^2/N$. The lower tail in Lemma~\ref{cc16:gaussian} has $a_-=0$ and gives
+\[
+ \Pr\{Q_i(y)<v_i(1-q/N-2\sqrt{qu/N})\}\le e^{-u}.
+\]
+A union over the two channels proves the variance event. On that event, $\sqrt{D_1D_2}\ge\sqrt{v_1v_2}$. All radius terms increase with their nonnegative arguments. On the coverage events, the fitted threshold is therefore at least the threshold formed from the fixed true values. Rejection by the fitted rule then requires a tail event for that fixed rule or a coverage failure. The argument never conditions the Gaussian law on the fitted bounds. Finally, $\sqrt{D_1D_2}\le\max(D_1,D_2)$.
+\end{proof}
+
+A zero true-variance channel is constant and gives zero ideal centered contrast. A zero recorded variance with a positive recording-error allowance does not establish zero true variance. For a fixed bank of contrasts, the probability allocations and logarithms retain the complete declared bank size.
+
+\begin{proposition}[Calibrated transfer through bounded recording errors]
+\label{cc16:calibrated-rounding}
+Under \eqref{cc16:recorder}, put $U=S_+z_1$, $V=S_-z_2$ and
+\begin{align}
+ Q_i^+(z)&=(\sqrt{Q_i(z)}+\eta_i)^2,\label{cc16:rounded-energy}\\
+ \tau_s(z)&=\frac{2\eta_1\|H_nV\|+2\eta_2\|H_nU\|}{\sqrt n}
+                 +4\eta_1\eta_2.\label{cc16:contrast-error}
+\end{align}
+Use $D_i=Q_i^+(z)/c_N$ and add $\tau_s(z)$ to the right side of \eqref{cc16:geometric-rule}. The level bound is unchanged for a supplied valid covariance envelope and covered phase tolerance.
+\end{proposition}
+\begin{proof}
+Projection and the triangle inequality give $Q_i(y)\le Q_i^+(z)$. The perturbations of $U$ and $V$ have norms at most $2\sqrt n\eta_1$ and $2\sqrt n\eta_2$. Expansion of their centered bilinear product gives $|s_n(y)-s_n(z)|\le\tau_s(z)$. On the original variance and nuisance events, the enlarged threshold bounds the ideal tolerance and radius. A rejection from $z$ therefore implies an ideal Gaussian tail event or a coverage failure.
+\end{proof}
+
+Numerical evaluation uses upper square-root and threshold endpoints and a positive lower endpoint for $c_N$. This transfer concerns the supplied-envelope testing step. A source-confidence pivot and a fitted calibration require their own recording-error arguments. A finite Gaussian generator does not itself supply the deterministic contract \eqref{cc16:recorder} relative to an ideal Gaussian path.
+
+\subsection{Finite arithmetic in the calibrated step}
+
+The probability events above give covered bounds and a mathematical comparison. They do not bound the size of intermediate rational values or the work needed to evaluate that comparison. For the specified power example, bounded input magnitudes and a bounded source-endpoint height supply these missing controls. Source inversion is handled separately in Section~\ref{src16:si-completion}.
+
+\begin{proposition}[Conditional arithmetic completion]
+\label{cc16:completion}
+Use the population, calibration regression, offsets and bank of Section~\ref{src16:si-power}. The raw recording length is $524289$, the bank has six members with selected coefficient $199/200$, and the recorder retains $20$ fractional bits. Let the uniform raw recording and calibration allowances be $2^{-21}$. Suppose source inversion completes with hull endpoints of rational height below $12000$ bits, where height is the larger numerator or denominator bit length. Suppose the selected source-shape bound is below $335.920$ and the covered calibration outputs satisfy
+\[
+ r\le33/5000,\qquad P_2\le129/125.
+\]
+Use $256$ calibration rows with two orthogonal columns of signs. On the event that every demeaned ideal recording coordinate and every standardized calibration noise value has magnitude at most $16$, the calibration and member calculations complete within a $262144$-bit rational limit and $500000000$ arithmetic operations per phase. This statement uses outward square roots at $80$ bits and logarithm series with $48$ terms. It assumes the positive calibration residual event and the population variance event used in the power calculation.
+\end{proposition}
+\begin{proof}
+The recording offsets are $2$ and $-1$, so the raw magnitudes are below $32$. Rounded recording integers have fewer than $26$ bits. Calibration responses have magnitude below two. The Gram matrix is $256I_2$ and its inverse is $I_2/256$. A fitted coefficient has denominator dividing $2^{28}$ and numerator height at most $30$ bits. The residual sum of squares has denominator dividing $2^{48}$ and numerator height at most $60$ bits.
+
+The logarithm series uses reduced parameters with numerator and denominator height at most eight bits. A common denominator for its $48$ terms divides the $95$th power of the parameter denominator times the product of the odd integers from $1$ through $95$. The remainder adds the factors $97$ and $1-z^2$. Including the multiple of $\log2$ keeps these intermediates below $2048$ bits. The residual event makes the lower residual norm exceed its recording perturbation. The resulting calibration intervals use fewer than $10000$ bits, and the final phase and shape bounds use fewer than $512$ bits each. The fit and recording correction each use fewer than $10000$ arithmetic operations.
+
+For a source endpoint of height below $12000$, $(1+x)/(1-x)$ has height below $12002$. Squared source ratios have height below $24040$. The resulting standardized envelope has height below $25000$. For the selected member, $q<694$. At retained length $524288$, put $u=\log1200$. Since $q/524288<3/2000$ and the outward upper bound for $u$ is below $71/10$, the computed lower endpoint of $c_N$ exceeds $4/5$. Thus this member has a positive scale denominator.
+
+The exact innovation-energy polynomials have coefficient height below $256$ bits on the stated event. Evaluation followed by division by the retained length gives observed-variance height below $1024$ bits and value at most $1025$. The corrected variance has height below $256$ bits. For a member with a positive computed denominator, its reciprocal is bounded by that denominator's rational height. A member with a nonpositive denominator returns unavailable. The successive upper height bounds for available members are
+\[
+\begin{array}{c|r}
+\text{quantity}&\text{height in bits}\\\hline
+\text{scale denominator}&25200\\
+\text{variance scale}&25400\\
+\text{covariance factor}&50400\\
+\text{Frobenius branch}&51000\\
+\text{mixed square-root argument}&76000\\
+\text{sampling radius}&104000\\
+\text{complete corrected threshold}&140000
+\end{array}
+\]
+Multiplication and division add operand heights. Addition adds those heights and one bit. A fixed-grid square root has denominator at most $2^{80}$, and its integer shift adds $160$ bits. These rules give the displayed bounds. Each member evaluates three quadratic polynomials and two fixed logarithms, using fewer than $4000$ operations. No member calculation repeats a loop over recording values. The limits therefore permit every available branch and the selected member in particular.
+\end{proof}
+
+Section~\ref{src16:si-power} defines the population event and the positive implemented margin for this model. Section~\ref{src16:si-completion} combines source completion with Proposition~\ref{cc16:completion} and the magnitude-event probabilities. The threshold upper endpoints increase with $q$, $r$ and the variance ceilings, while the scale-denominator lower endpoint decreases with $q$. These monotonicities hold for the outward square-root operations and for the minimum of the two radius branches. Thus the population upper threshold also bounds the implemented member threshold on the stated events.

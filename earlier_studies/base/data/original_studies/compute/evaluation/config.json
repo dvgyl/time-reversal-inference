@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "design_status": "approved_before_new_evaluation_draws",
+  "alpha": "1/20",
+  "base_seed": 202609240701,
+  "replicates": 100,
+  "solver": "CLARABEL",
+  "coefficient_rounding_scale": 100000000,
+  "groups": [
+    {
+      "family": "positive_parity",
+      "a": [
+        "0",
+        "2/5",
+        "1/2",
+        "11/20",
+        "3/5",
+        "17/25"
+      ],
+      "n": [
+        64,
+        128,
+        256,
+        512,
+        1024,
+        4096,
+        8192
+      ]
+    },
+    {
+      "family": "negative_parity",
+      "a": [
+        "1/2",
+        "3/5"
+      ],
+      "n": [
+        128,
+        512
+      ]
+    },
+    {
+      "family": "scaled_channel",
+      "a": [
+        "1/2",
+        "3/5"
+      ],
+      "n": [
+        128,
+        512
+      ]
+    },
+    {
+      "family": "colored_null",
+      "a": [
+        "2/5"
+      ],
+      "n": [
+        128,
+        512
+      ]
+    }
+  ],
+  "colored_null_source": {
+    "delays": [
+      1,
+      0
+    ],
+    "R_k": "(1/3)^abs(k) times [[1,2/5],[2/5,1]]",
+    "observed_autos_lag0_lag1": [
+      "1",
+      "1/3"
+    ],
+    "observed_cross_lags_minus1_0_plus1": [
+      "2/45",
+      "2/15",
+      "2/5"
+    ],
+    "validity": "Reversible Gaussian AR(1) scalar covariance times SPD channel matrix; source spectrum positive at every frequency; zero errors."
+  },
+  "expected_record_sets": 5200,
+  "methods": [
+    "reflection",
+    "quadratic_region",
+    "fixed_analytic",
+    "learned_analytic",
+    "general_sdp"
+  ],
+  "holdout_split": "first floor(n/2) training; remaining records testing",
+  "notes": "Fresh evaluation distinct from development. All methods use same full record set and global alpha. Learned analytic uses its holdout subset only for tests. No method superiority hypothesis test is prespecified."
+}

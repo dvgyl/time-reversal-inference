@@ -1,0 +1,68 @@
+\section{Reversibility and detector-induced time order}\label{sec:observation}
+The inference target is the source before the sensors act, because the sensors can change relative timing. We compare how two source values vary together when their observation times are separated by a given lag. Write this covariance as $C^X_{ij}(k)$. A centered process has its mean subtracted. Common time-reversal parity means that all measured coordinates obey the same sign rule when time is reversed. For a centered stationary Gaussian process whose coordinates have a common time-reversal parity,
+\[
+ \text{reversibility}\quad\Longleftrightarrow\quad
+ C^X_{ij}(k)=C^X_{ij}(-k).
+\]
+The equality holds for every channel pair and lag. In words, swapping the time order leaves every source covariance unchanged. The mean and covariance then determine the same Gaussian law. Equivalently, the source cross-spectral measure is real. Positions are even under reversal, so their signs stay unchanged. Velocities are odd, so their signs reverse. If both types are measured together, the covariance criterion includes their parity signs; that case is outside the present common-parity convention.
+
+A spectrum separates slow fluctuations from fast ones by frequency. A transfer function $H_i(\omega)$ describes how sensor $i$ changes amplitude and phase at frequency $\omega$. A delay gives $e^{-id_i\omega}$; a two-sample average gives $(1+e^{-i\omega})/2$; and a small delayed echo gives $1+0.03e^{-i\omega}$. Their phases describe timing changes. Phase is undefined at a response zero, where the sensor removes that frequency. Let $\mu$ be the source matrix spectral measure. This collects the spectra of all channels and channel pairs, including contributions concentrated at individual frequencies. For the recorded process $Y$, the observation model is
+\begin{equation}
+ F=D_H\mu D_H^*+F_E,\qquad D_H=\operatorname{diag}(H_i).
+ \label{eq:main-model}
+\end{equation}
+Here $F$ is the recorded spectral measure, the star denotes conjugate transpose, and $F_E$ is the error spectral measure. The source and errors are jointly Gaussian and stationary. Errors are uncorrelated with the source and between channels at every lag, so $F_E$ is diagonal. Correlated channel errors could otherwise add their own cross-spectral phase. Unknown constant means are allowed.
+
+We use $C_{ij}(k)=\operatorname{Cov}\{Y_i(t+k),Y_j(t)\}=\int e^{ik\omega}F_{ij}(d\omega)$. Discrete-time spectral densities use $d\omega/(2\pi)$ on $[-\pi,\pi]$. Equation~\eqref{eq:main-model} means that each filter acts on its own sampled source sequence. Continuous-time filtering before sampling requires further justification: different continuous frequencies can become the same sampled frequency while retaining different detector phases. This aliasing can prevent the factorization in Eq.~\eqref{eq:main-model}.
+
+\subsection{A physical example used throughout}
+Our running example is a randomly moving particle held near the center of a two-dimensional trap. The restoring force is linear, and a displacement along one coordinate also changes the force along the other. Each coordinate receives random forcing from a heat bath at a specified temperature~\cite{filliger2007,cerasolispectra2022,argun2017}. The model is overdamped, meaning that inertia is neglected. This coupled harmonic trap defines the Brownian gyrator. In dimensionless units, its dynamics are
+\begin{equation}
+ \begin{gathered}
+ dX=-AX\,dt+\sqrt{2D}\,dW_t,\\
+ A=\begin{pmatrix}1&1/2\\1/2&1\end{pmatrix},\quad
+ D=\operatorname{diag}(T_1,T_2).
+ \end{gathered}
+ \label{eq:ou-model}
+\end{equation}
+The first term describes the restoring force, and the term containing $dW_t$ describes random forcing. The stationary covariance satisfies $A\Sigma+\Sigma A^{\mathsf T}=2D$. Equal bath temperatures give equilibrium. Unequal temperatures produce a circulating stationary probability current: paths favor one direction around the trap even though the position distribution stays constant. We sample at interval one and apply $H_1=1$, $H_2=1+0.03e^{-i\omega}$ afterward. Thus Fig.~\ref{fig:sensor-example} isolates an instrumental source of time asymmetry within the sampled observation model. Section~\ref{sec:calibrated} asks how much asymmetry this response can explain and then tests the driven temperatures.
+
+\begin{table}[t]
+\caption{The null hypothesis is a reversible source observed through the allowed channels. Three outcomes retain different amounts of information.}\label{tab:outcomes}
+\begin{ruledtabular}\begin{tabular}{p{0.22\columnwidth}p{0.70\columnwidth}}
+Outcome & Meaning \\
+Rejection & The statistic exceeds the valid source-null threshold. \\
+Nonrejection & A valid test is available, but its threshold is not exceeded. \\
+Abstention & A required bound or numerical comparison is unavailable. \\
+\end{tabular}\end{ruledtabular}
+\end{table}
+The null hypothesis is the explanation being tested: a reversible source observed through the allowed sensors. Rejection means that the data exceed the threshold for this explanation. A false rejection occurs when the explanation is true. Its probability, also called size, is bounded over all models in the null class. An alternative lies outside that class; its rejection probability is called detection probability or power. Table~\ref{tab:outcomes} distinguishes a weak measured signal from an unavailable test. Neither nonrejection nor abstention proves reversibility. In the numerical study, all records remain in the denominator of each rejection fraction. Table~\ref{tab:notation} collects the main symbols for reference.
+
+\begin{table}[t]
+\caption{Main notation. Source and recorded covariances are distinguished by the superscript $X$.}\label{tab:notation}
+\begin{ruledtabular}\begin{tabular}{p{0.24\columnwidth}p{0.68\columnwidth}}
+Symbol & Meaning \\
+$N,n=N-1$ & Samples and adjacent pairs. \\
+$F_{ij},S_{ij}$ & Recorded and source spectral densities. \\
+$\kappa,r$ & Lag contrast and relative-phase bound. \\
+$q,K_i$ & Full-record covariance bounds, standardized or channel scaled. \\
+$L,B_{ij}$ & Retained lag cutoff and omitted-lag bias allowance. \\
+$\phi,\psi,a_j$ & True persistence, candidate persistence, common-filter coefficient. \\
+$\mathcal S_a,\Lambda(x)$ & Residual spectral ratio and $(1+x)/(1-x)$. \\
+\end{tabular}\end{ruledtabular}
+\end{table}
+
+\section{What a finite recording cannot decide}\label{sec:ambiguity}
+Even the exact probabilities of all values in a finite record cannot always distinguish source asymmetry from detector asymmetry. The answer is negative when delays and source spectra are unrestricted. Only finitely many covariance lags occur in a finite record, so a detector can move the distinguishing covariance outside it. This limit concerns what can be identified, even before sampling error is considered.
+
+\input{finite_law_example}
+
+The next result extends this example to every nonsingular finite stationary Gaussian law. Nonsingular means that the record covariance is positive definite, with no exactly redundant linear combination of samples.
+\begin{theorem}[Finite-law ambiguity]\label{thm:main-finite-law}
+Fix a positive record length and a nonempty finite collection of stationary Gaussian record laws with positive-definite covariance matrices and the same number of channels. One vector of nonnegative integer channel delays gives a reversible Gaussian source representation for every law in the collection. Each source has a strictly positive matrix trigonometric polynomial spectral density and finite dependence. The sources preserve the channel means and variances. No observation error is needed.
+\end{theorem}
+Thus even the exact finite joint distribution cannot exclude a reversible source in this unrestricted class. A test with false-rejection probability at most $\alpha$ throughout that class has detection probability at most $\alpha$ against every nonsingular finite stationary Gaussian alternative. The proof constructs a positive reversible spectrum, then corrects the retained moments exactly (Supplemental Material, abbreviated SM, Sec.~S1, Theorem~S1 and Proposition~S1). An approximate covariance match would not suffice.
+
+For two channels and $N\ge2$, generic retained covariances require integer relative delay at least $N-1$. The exceptional records satisfy $C_{12}(\Delta-1)=C_{12}(\Delta+1)$ for an integer $|\Delta|\le N-2$. The minimum scale is attainable under an additional covariance condition (SM Sec.~S1.2). The source and delays can depend on record length; the result concerns a fixed finite law, not one representation valid at all lengths.
+
+Large delays are not the only source of ambiguity. Suitable prescribed real delays, whose nonreference relative delays are rationally independent with the sampling interval, can be arbitrarily small when continuous frequencies are unrestricted. This means that no nonzero integer combination of those delays and the interval is zero. Aliased frequencies then supply the required channel phases (SM Sec.~S2, Theorem~S3 and Corollary~S2). A spectral envelope instead bounds the effect of small skew (Proposition~S3). Bandwidth control therefore matters as well as timing accuracy~\cite{hansenSargent1983,parratobar,rutten}. The next two sections restrict the ambiguity through response calibration or phase cancellation, together with quantitative covariance bounds.

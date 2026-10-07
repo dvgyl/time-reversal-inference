@@ -1,0 +1,69 @@
+{
+  "scope": "One fixed paired example. No empirical size or power estimate.",
+  "calibration_seed": 20261003,
+  "testing_seed": 20261004,
+  "generator": "NumPy PCG64",
+  "common_coefficients": [
+    1.0,
+    1.0,
+    0.25,
+    0.0
+  ],
+  "coefficient_normalization": "Unit coefficient norm.",
+  "interpolation_delta": 0.0,
+  "impulse_blocks_per_channel": 16384,
+  "calibration_noise_standard_deviation": 0.02,
+  "certificate_grid_points": 16384,
+  "source_AR_coefficient": 0.5,
+  "retained_record_length": 262144,
+  "channel_means": [
+    2.0,
+    -3.0
+  ],
+  "source_correlation": 0.4,
+  "observation_error_variances": [
+    0.0,
+    0.0
+  ],
+  "source_floor": 0.3333333333333333,
+  "source_ceiling": 3.0,
+  "error_peak_ratios": [
+    1.0,
+    1.0
+  ],
+  "anchors": [
+    0,
+    0
+  ],
+  "reflection_spacing": 1,
+  "calibration_positions": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "calibration_offset": 0.0,
+  "budgets": {
+    "calibration": [
+      0.005,
+      0.005
+    ],
+    "variance": 0.01,
+    "tail": 0.03,
+    "target_size": 0.05
+  },
+  "reversible_source": "X2(t)=0.4 X1(t)+sqrt(0.84) Z(t)",
+  "alternative_source": "X2(t)=0.4 X1(t-1)+sqrt(0.84) Z(t)",
+  "orientation": "The alternative has C12(k)=0.4 gamma(k+1) and cross spectrum 0.4 exp(+i lambda) g_phi in the paper convention.",
+  "statistic": "U(t)=Y1(t)+Y1(t+1); W(t)=Y2(t)-Y2(t+1); s=(U-mean(U)) dot (W-mean(W))/(N-1).",
+  "pairing": "Both cases use the same X1 and Z paths, the same calibration readouts, and the same channel 1 recording.",
+  "random_draw_order": "Calibration: all channel 1 errors, then all channel 2 errors. Testing: X1 initial value, X1 innovations, Z initial value, Z innovations.",
+  "initial_and_padding": "X1 and Z start at time -4 from independent N(0,1) values. Innovations give the exact stationary AR recurrence. Filtering uses times -3 through N-1.",
+  "source_files": {
+    "PLAN.md": "c1f3b127234c38a8c5dece5f36f4bad299d3691e954c92a229ebda70400fc078",
+    "PROOF_DRAFT.md": "a8abcf209a192d491faf0d552618c055e77671f9529a4b66b3c405b0e5a4b4f9",
+    "reference.py": "840d0ce35d3c6a1601e1217a1b26199f1c83a348d257bfc41703af39d3404dae",
+    "run_example.py": "b31c1d94b5edf4be6574e71d72424b792b073a7609f4e68daa88704149bae7b2"
+  },
+  "declared_before_execution_utc": "2026-10-03T05:37:40.297244+00:00"
+}

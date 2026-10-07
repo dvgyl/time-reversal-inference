@@ -1,0 +1,276 @@
+\section{Fixed real skew and finite-law nonidentifiability}\label{sec:fractional}
+Large adjustable integer delays are not the only source of finite-law ambiguity. With unrestricted continuous-time frequencies, prescribed real delays can also give exact representations under the independence condition below. Frequencies that alias to the same sampled frequency supply different channel phases. The delay vector stays fixed; the source spectrum changes with the target law. Sample spacing is one. For a real stationary $m$-channel Gaussian record
+at times $0,\ldots,N-1$, write
+\[
+ C_{ij}(k)=\operatorname{Cov}(Y_i(t+k),Y_j(t)),\qquad
+ \Gamma_N(C)=(C_{ij}(t-u))_{(t,i),(u,j)}.
+\]
+The independent real coordinates are $C_{ii}(k)$ for $0\le k<N$ and
+$C_{ij}(k)$ for $i<j$, $|k|<N$; their number is
+$d_{\mathrm{mom}}=mN+\binom m2(2N-1)$. Source spectra below are integrated against
+ordinary Lebesgue measure $d\omega$ on $\R$, with covariance convention
+$R(t)=\int_\R e^{it\omega}S(\omega)\,d\omega$.
+A real symmetric even matrix spectrum gives a reversible real Gaussian
+source, with the same reversal parity for all channels.
+
+\begin{theorem}[Fixed incommensurate skew]\label{thm:fractional}
+Let $m\ge2$, $N\ge1$, and fix $d=(d_1,\ldots,d_{m-1},0)\in\R^m$
+such that $1,d_1,\ldots,d_{m-1}$ are linearly independent over $\mathbb Q$.
+For every nonempty finite collection $C^{(1)},\ldots,C^{(s)}$ with
+$\Gamma_N(C^{(c)})\succ0$, there are stationary continuous-time reversible
+Gaussian sources $X^{(c)}$ such that
+\[
+ Y_i^{(c)}(k)=X_i^{(c)}(k-d_i),\qquad 0\le k<N,
+\]
+has exactly the prescribed retained law in each condition, with zero
+added errors. Each source has an integrable real symmetric even matrix
+spectral density $S_c(\omega)\succ0$ at every $\omega\in\R$,
+continuous covariance, and a common finite dependence range.
+Each coordinate variance is exactly $C^{(c)}_{ii}(0)$.
+No positive uniform spectral floor on $\R$ and no bounded frequency
+support is asserted. The prescribed delay vector is the same for every
+condition and is not selected anew for each target.
+\end{theorem}
+
+\begin{lemma}[Dense alias phases]
+Under the theorem's independence hypothesis, for every $\vartheta\in\R$
+the sequence
+\[
+ \left(e^{-i(\vartheta+2\pi n)d_1},\ldots,
+ e^{-i(\vartheta+2\pi n)d_{m-1}}\right),\qquad n=1,2,\ldots,
+\]
+is dense in the product of $m-1$ unit circles.
+\end{lemma}
+\begin{proof}
+For each nonzero $h\in\Z^{m-1}$, rational independence implies
+$h\cdot d\notin\Z$. The geometric-series formula gives
+\[
+ \frac1Q\sum_{n=1}^Q e^{-2\pi i n h\cdot d}\longrightarrow0.
+\]
+The same averages for any trigonometric polynomial therefore converge
+to its torus integral. Uniform approximation of continuous functions
+by trigonometric polynomials gives the statement for continuous
+functions. A nonnegative continuous function supported in an arbitrary
+nonempty open set, with positive integral, must be positive at some
+orbit point. The orbit is dense, and multiplying its coordinates by
+$e^{-i\vartheta d_j}$ preserves density. This is the classical
+Kronecker--Weyl argument~\cite{taoequidistribution}.
+\end{proof}
+
+\begin{proof}[Proof of the theorem]
+The integer-time moments cannot distinguish frequencies separated by a sampling alias. The fixed real delays can distinguish their channel phases. We use this freedom to approximate each spectral mass, then use the same convex-containment argument as for integer delays to obtain an exact law. The continuous-time source also needs an integrable density with finite covariance range, which requires a different smoothing kernel.
+\emph{Finite atomic representation.}
+Every real PSD stationary retained array has a finite spectral
+representation
+\begin{equation}\label{eq:fractional-rankatoms}
+ C_{ij}(k)=\sum_\ell\operatorname{Re}
+ (e^{ik\vartheta_\ell}v_{\ell,i}\overline{v_{\ell,j}}),
+ \qquad 0\le\vartheta_\ell\le\pi.
+\end{equation}
+Here the masses at $0,\pi$ may be split with real vectors.
+To recall a construction, represent the retained Toeplitz matrix by real
+Gram vectors $g_{t,i}$. The shift $g_{t,i}\mapsto g_{t+1,i}$ on the
+span of the first $N-1$ blocks is well-defined and isometric by the
+Toeplitz identities. Extend it to a real orthogonal operator on the
+whole finite Gram space. Its complex spectral decomposition yields
+conjugate PSD masses at opposite frequencies, with real endpoint
+masses. Combining each conjugate pair and splitting each PSD mass
+into rank-one terms gives \eqref{eq:fractional-rankatoms}. For $N=1$ the identity
+operator suffices. In particular,
+\begin{equation}\label{eq:fractional-massbound}
+ \sum_\ell |v_{\ell,i}|^2=C_{ii}(0),\qquad
+ \sum_\ell |v_{\ell,i}||v_{\ell,j}|
+ \le\sqrt{C_{ii}(0)C_{jj}(0)}.
+\end{equation}
+
+\emph{Approximation with the fixed skew.}
+For each vector $v$ in \eqref{eq:fractional-rankatoms}, choose its global
+phase so that $v_m$ is real nonnegative when nonzero. Write
+$v_i=a_ip_i$, $a_i=|v_i|$, $|p_i|=1$, and take $p_m=1$; zero coordinates
+may be assigned any phase. For any $\delta>0$, the lemma supplies an
+integer $n\ge1$ such that, with $\omega=\vartheta+2\pi n$,
+$q_i=e^{-i\omega d_i}$ satisfies $|q_i-p_i|<\delta$ for $i<m$;
+$q_m=p_m=1$. Use the source measure
+\[
+ \tfrac12 aa^{\mathsf T}\delta_\omega+
+ \tfrac12 aa^{\mathsf T}\delta_{-\omega}.
+\]
+Its delayed integer-lag contribution is
+\[
+ a_i a_j\cos((k-d_i+d_j)\omega)
+ =a_i a_j\operatorname{Re}(e^{ik\vartheta}q_i\overline q_j),
+\]
+because $e^{2\pi i kn}=1$ for every integer $k$.
+The difference from the desired term is at most $2\delta a_i a_j$.
+Summing and using \eqref{eq:fractional-massbound} gives coordinate error at most
+$2\delta\max_i C_{ii}(0)$. Diagonal source masses, and hence all
+coordinate variances, are unchanged. This is valid also for discrete
+endpoint frequencies $0,\pi$: their positive aliases are ordinary real
+frequencies, whose reflected partners are distinct because $n\ge1$.
+Thus every retained positive-semidefinite covariance array can be approximated arbitrarily closely by a finite real-even source measure under this one fixed $d$. The approximation preserves all coordinate variances. The next step turns this approximation property into exact matching for positive-definite targets.
+
+\emph{An interior simplex and its stability.}
+Density of the approximate outputs does not by itself give exact equality. Positive definiteness supplies nearby valid arrays around the target. Approximating these arrays preserves a convex representation of the target with positive weights.
+Fix a positive-definite target $C$. Let $E_1,\ldots,E_{d_{\mathrm{mom}}}$ be the
+independent coordinate basis, and choose $a>0$ sufficiently small that
+\[
+ V_0=C-a\sum_{j=1}^{d_{\mathrm{mom}}} E_j,\qquad V_j=C+aE_j\quad(1\le j\le d_{\mathrm{mom}})
+\]
+all have positive-definite retained matrices. This is possible since
+positive definiteness is open. They are affinely independent, and their
+barycenter is $C$ with all weights $1/(d_{\mathrm{mom}}+1)$. Barycentric coordinates
+are continuous functions of the vertices while the associated affine
+matrix is invertible. Consequently a positive number $\tau$ exists
+such that moving every vertex by less than $\tau$ in coordinate norm
+preserves both affine independence and strictly positive barycentric
+coordinates of $C$. For finitely many conditions, choose such a simplex
+and tolerance for each condition. Then use the smallest tolerance. Approximate
+all their vertices as above, within one third of that tolerance.
+There are finitely many resulting atomic source measures $\mu_{c,j}$.
+
+\emph{Integrable spectra, strict positivity, and finite dependence.}
+We now replace the atomic spectra without losing that convex representation. The smoothing kernel below has a compactly supported covariance. A second kernel with different zero locations supplies strict spectral positivity without a constant floor, which would not be integrable on the real line.
+For $L>0$ define
+\[
+ \kappa_L(\omega)=\frac{L}{2\pi}
+ \left(\frac{\sin(L\omega/2)}{L\omega/2}\right)^2,
+ \qquad h_L(t)=(1-|t|/L)_+.
+\]
+The value at zero is defined by continuity. The triangular function is
+$L^{-1}$ times the convolution of the indicators of
+$[-L/2,L/2]$ with itself. The Fourier convolution identity therefore
+shows that $\kappa_L\ge0$, $\int\kappa_L=1$, and
+$\int e^{it\omega}\kappa_L(\omega)\,d\omega=h_L(t)$ under the
+stated convention. Put
+\[
+ g_L=\tfrac12(\kappa_L+\kappa_{\sqrt2L}),\qquad
+ S_{c,j}^{L,\varepsilon}(\omega)
+ =\int\kappa_L(\omega-u)\,\mu_{c,j}(du)
+       +\varepsilon g_L(\omega)I_m.
+\]
+The nonzero zeros of the two kernels are $2\pi n/L$ and
+$2\pi n/(\sqrt2 L)$ for nonzero integers $n$; these sets are disjoint.
+Both kernels are positive at zero, so $g_L(\omega)>0$ everywhere.
+Thus each displayed density is integrable, real symmetric, even,
+and strictly positive definite at every frequency.
+
+Its covariance is
+\[
+ R_{c,j}^{L,\varepsilon}(t)
+ =h_L(t)R_{c,j}(t)
+ +\frac\varepsilon2\{h_L(t)+h_{\sqrt2L}(t)\}I_m.
+\]
+This is continuous and zero for $|t|\ge\sqrt2 L$.
+Only the finitely many real arguments $k-d_i+d_j$, $|k|<N$, enter
+the retained outputs. At each such argument $h_L(t)\to1$ as
+$L\to\infty$, and the added diagonal covariance has magnitude at most
+$\varepsilon$. There are only finitely many source measures. Thus a common sufficiently large
+$L$ and sufficiently small $\varepsilon>0$ make every regularized output
+differ from its atomic output by less than one third of the chosen tolerance.
+This bound is on moments, not on the locations of the carrier frequencies.
+
+\emph{Exact matching and the Gaussian realization.}
+Each target remains strictly inside the simplex of its regularized
+output vertices. Let $\beta_{c,j}>0$ be its barycentric weights, summing
+to one, and set
+$S_c=\sum_j\beta_{c,j}S_{c,j}^{L,\varepsilon}$.
+Linearity gives exactly the target retained moments. Each $S_c$ is
+integrable, real symmetric and even, and satisfies
+$S_c(\omega)\succeq\varepsilon g_L(\omega)I_m\succ0$.
+The covariance kernel defines a real stationary Gaussian process
+(by its PSD finite-dimensional covariance matrices and consistency).
+Its even symmetric cross covariances imply reversibility. Its covariance
+vanishes at distances at least $\sqrt2 L$, so Gaussian finite-dimensional
+vectors on time sets separated by more than this range are independent.
+The same holds for their generated sigma fields, by the monotone-class
+extension from finite cylinder events. Thus the sources share a finite
+dependence range and have continuous covariance.
+Pure delays preserve source coordinate variances. Exact matching at
+zero lag gives the asserted variances, and Gaussianity gives equality
+of retained laws. Constant channel means can be copied to the sources.
+\end{proof}
+
+\begin{corollary}[Open calibration sets and independent replication]
+Every nonempty open subset of $\R^{m-1}$ contains a fixed relative-delay
+vector for which the preceding theorem holds. Therefore the union model
+over that set contains every nonsingular finite stationary Gaussian
+record-law tuple, even with continuous source covariance, finite source
+dependence and everywhere positive integrable spectra. Every test with
+size at most $\alpha$ uniformly over this model has power at most
+$\alpha$ at every such tuple under arbitrary finite independent
+replication of the retained records.
+\end{corollary}
+\begin{proof}
+Vectors violating rational independence belong to the countable union
+of proper affine hyperplanes
+$h_0+\sum_{i=1}^{m-1}h_i d_i=0$, with integer coefficients and
+$(h_1,\ldots,h_{m-1})\ne0$. This union has Lebesgue measure zero,
+so it cannot cover a nonempty open set. Choose an admissible fixed
+vector and apply the theorem. Independent products of equal retained
+Gaussian laws remain equal, which gives the testing consequence.
+\end{proof}
+For nonnegative delays with a fixed zero reference, apply this corollary
+to a nonempty open set contained in the positive orthant. If arbitrary
+signed relative delays are allowed, a common shift makes all absolute
+delays nonnegative without changing any stationary law, but the designated
+reference need no longer have absolute delay zero. No claim is made for
+calibration sets confined to lower-dimensional rational-relation sets.
+Even an exactly known skew vector satisfying the theorem is universal:
+uncertainty is not essential to its aliasing mechanism.
+
+\begin{proposition}[A rational-delay obstruction]
+Not every fractional skew is universal. At relative delay $1/2$,
+reversibility requires $C_{12}(0)=C_{12}(1)$. A stationary output with
+white unit auto covariances and $C_{12}(k)=r\mathbf1_{k=0}$,
+$0<r<1$, violates this equality and has positive-definite records at
+every finite horizon. Thus its two-time law cannot be explained at the
+exact half-sample delay, even with orthogonal scalar errors.
+\end{proposition}
+\begin{proof}
+The two cross covariances would be $R_{12}(-1/2)$ and $R_{12}(1/2)$,
+which coincide. The specified output is an independent sequence of bivariate Gaussian vectors with covariance
+$\left(\begin{smallmatrix}1&r\\r&1\end{smallmatrix}\right)\succ0$.
+Orthogonal scalar errors contribute no cross covariance.
+\end{proof}
+
+\begin{proposition}[A supplied spectral envelope controls skew error]
+Let $\mu$ be a finite real-even PSD source spectral measure, and let
+$v_i=\mu_{ii}(\R)$. Suppose the true relative delay is
+$\Delta=\Delta_0+e$. For any real lag $k$, put
+$F=C_{ij}(k)-C_{ij}(2\Delta_0-k)$. If
+$b_i(\Omega)=\mu_{ii}(\{|\omega|>\Omega\})$, then
+\[
+ |F|\le 2\min(1,\Omega|e|)\sqrt{v_i v_j}
+              +2\sqrt{b_i(\Omega)b_j(\Omega)}.
+\]
+In particular, a source supported in $[-\Omega,\Omega]$ obeys
+$|F|\le2\Omega|e|\sqrt{v_i v_j}$.
+\end{proposition}
+\begin{proof}
+Evenness and the cosine difference identity give
+\[
+ F=2\int\sin((k-\Delta_0)\omega)\sin(e\omega)\,\mu_{ij}(d\omega).
+\]
+On $|\omega|\le\Omega$ the absolute integrand multiplier is at most
+$2\min(1,\Omega|e|)$; on its complement it is at most two.
+PSD matrix-measure Cauchy--Schwarz bounds the cross total variation on
+each set by the geometric mean of the diagonal masses on that set.
+Bounding the low-frequency masses by $v_i,v_j$ proves the inequality.
+\end{proof}
+The envelope is independent information about the continuous-time
+source, not an estimate supplied by its aliased finite record. Finite dependence
+without a quantitative spectral envelope does not provide this control.
+
+\paragraph{Interpretation and scope.}
+The theorem concerns a finite sampled law, with the unobserved extension
+and source allowed to depend on that law and its horizon. It does not
+match an arbitrary preassigned full infinite sampled process with one
+source, establish resource bounds, or cover non-Gaussian laws. The finite
+range and spectral shape can change as the targets or delays change.
+A constant positive floor on all of $\R$ is impossible for any integrable
+nonzero spectral density. The irrationality condition is sufficient, not
+a characterization of every universally realizing delay vector. An
+exact rational restriction and a nonzero-width real interval are
+different model classes. Integer-grid calibration results remain valid
+in their original model; without a spectral restriction they do not
+extend to open real-valued skew sets.

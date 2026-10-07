@@ -1,0 +1,54 @@
+\subsection{Diagnostic question and definitions}\label{sec:src16:diagnostic-definitions}
+
+A covered source hull enters the covariance envelope through its transformed span. A fixed bank adds a placement cost when none of its filters is close to the hull center in that transform. These costs determine the dependence bound used by the threshold, but an available threshold can still exceed the statistic. The diagnostics separate the remaining source uncertainty, the additional bank cost, and the final statistic-to-threshold comparison.
+
+The hull-span ratio is $\Lambda(u)/\Lambda(\ell)$, with $\Lambda(x)=(1+x)/(1-x)$. It measures the source uncertainty that remains even if a common filter could be placed at the transformed hull center. The bank-placement factor divides the smallest source spectral-ratio bound in the fixed bank by this hull-span ratio. It measures the additional cost of the available filter positions. The final statistic-to-threshold ratio compares the selected absolute statistic with the upper threshold endpoint. The selected member has the largest saved statistic-minus-threshold margin among available members. A ratio above one supports rejection; a zero ratio is valid.
+
+The diagnostics use all nine strong-delay lengths at persistence 0.995. Each condition has 200 independent records. The four source constructions are lag, lower-tail finite-cutoff, two-sided, and two-sided intersection. Each numerical summary uses only its saved finite values. Thus the records can differ between quantities and methods. Availability is part of the result, and every median must be read with its finite, missing, and full counts.
+
+\paragraph{Display conventions.}
+Figure~\ref{fig:src16:hull-bank-threshold} shows medians and ranges from the 25th to the 75th percentile in its upper panels. Its lower panels show the fraction of records with a finite saved value. Figure~\ref{fig:src16:threshold-components} shows finite-value medians and the same percentile ranges for the four threshold quantities. These ranges are descriptive summaries, not confidence intervals. A missing quantity has no plotted summary point and is not replaced by zero. A legend entry does not imply that a method has finite points at every length. The captions specify the axes, reference line, and method styles.
+
+\subsection{Geometry and selected threshold quantities}\label{sec:src16:diagnostic-geometry}
+
+The two-sided geometry summaries use 7 of 200 records at $N=2049$, 190 of 200 at $N=16385$, and all 200 at $N=524289$. The statistic-to-threshold ratio uses fewer records at the first two lengths. Table~\ref{tab:src16:geometry-examples} keeps each median beside its own counts. These different subsets show why finite geometry and an available threshold must be reported separately. The changing finite groups are not trajectories of the same records.
+
+\input{tables/diagnostic_geometry_examples}
+
+The same summaries are much less available for lag and lower-tail inference. Both constructions have no finite plotted summaries at the first six lengths. At N=524289, the lag construction has only five finite values for each plotted quantity and 195 missing values. Its statistic-to-threshold median is 16.3. This median does not describe the other 195 records. The lower-tail construction has 194 finite geometry values and six missing values. Its hull-span median is 7.90e3. Its selected statistic-to-threshold median is 0.0929, based on 54 finite values and 146 missing values. These finite counts limit comparisons between the curves.
+
+Among the finite selected two-sided members, the sampling-radius median decreases from 0.0378 to 0.000503 across these example lengths. The recorder-allowance median stays between 7.55e-7 and 7.60e-7. Table~\ref{tab:src16:threshold-examples} gives the intermediate values, phase allowances, and scale denominators with their counts. These summaries describe the saved selected members. They do not identify a cause for every decision.
+
+\input{tables/diagnostic_threshold_examples}
+
+\subsection{Weak-delay source confidence}\label{sec:src16:weak-confidence}
+
+Figure ~\ref{fig:src16:source-confidence-weak} separates returned-set coverage from finite-endpoint availability. At persistence 0.995, lag and lower-tail sets cover the source value in 200/200 records at both fixed lengths. Neither has a finite endpoint in any record. The two-sided and intersection finite-endpoint counts are 185/200 and 180/200 at N=16385. Both are 200/200 at N=65537. At this longer length, their coverage counts are 198/200 and 199/200. The pointwise 95\% coverage intervals, rounded outward, are [0.964, 0.999] and [0.972, 1.000]. Thus full finite-endpoint availability does not mean observed coverage is 200/200.
+
+At persistence 0.97 and $N=16385$, lag has 4/200 finite endpoints and lower-tail has 0/200. The two-sided and intersection constructions each have 200/200 finite endpoints. Their coverage counts are 199/200 for two-sided and 200/200 for intersection. At $N=65537$, the finite-endpoint counts are 107/200 for lag and 172/200 for lower-tail. Both two-sided constructions still have 200/200 finite endpoints. Coverage is 198/200 for two-sided and 199/200 for intersection.
+
+At persistence 0.8, all constructions have coverage 200/200 at both lengths. All finite-endpoint counts are 200/200 except the lower-tail count of 199/200 at N=16385. The source-set error allowance is 0.005. It is distinct from the 95\% binomial display intervals. These empirical counts do not establish familywise coverage.
+
+\subsection{First failed condition and available decisions}\label{sec:src16:first-failure}
+
+The finite-value medians omit records where an earlier requirement prevented a saved value. The stacked bars in Figure~\ref{fig:src16:first-failure} restore those records to the comparison. A finite hull must still give a finite covariance bound and a positive scale denominator before the rule can compare its statistic with a threshold. The bars separate failures of these requirements from available nonrejections and rejections. The four panels compare lag, lower-tail finite-cutoff, two-sided, and two-sided intersection procedures across all nine strong-delay lengths at persistence 0.995. Every bar uses all 200 records in its condition.
+
+Seven mutually exclusive categories cover the full sample: input or arithmetic failure, empty source set, a hull endpoint that reaches one, no finite covariance bound, no positive scale denominator, available nonrejection with insufficient margin, and rejection. For an unavailable decision, the category reports the first failed condition under the declared classification rule. It does not show that every other condition passed. Available nonrejection is distinct from abstention. Counts and full denominators remain in the complete tables. Category fractions are descriptive; the bars do not show confidence intervals. The caption specifies the visual styles.
+
+Figure ~\ref{fig:src16:first-failure} retains all seven categories in all 36 method-condition groups. At N=2049, lag and lower-tail procedures both have 200 reported hull-endpoint first failures. The two-sided procedure has 193 such failures, six reported nonpositive scale-denominator first failures, and one available nonrejection. The intersection procedure has 198 hull-endpoint first failures, one nonpositive scale-denominator first failure, and one available nonrejection. None rejects in this condition.
+
+At N=16385, the two-sided procedure has 153 rejections, 29 available nonrejections, and 18 abstentions. The abstentions comprise ten hull-endpoint first failures and eight nonpositive scale-denominator first failures. The intersection has 152 rejections, 22 available nonrejections, and 26 abstentions. Its abstentions comprise 16 hull-endpoint first failures and ten nonpositive scale-denominator first failures. Both procedures reject in all 200 records at each of the four longest lengths. At N=524289, lag has five rejections and 195 hull-endpoint first failures. Lower-tail has 54 available nonrejections and 146 abstentions. Those abstentions comprise six hull-endpoint first failures and 140 nonpositive scale-denominator first failures.
+
+Input or arithmetic failure, empty source sets, and no finite covariance bound have zero reported first-failure counts in these 36 selected groups. The figure retains these categories. A reported nonpositive scale denominator does not establish saturation or a recording defect.
+
+\subsection{Cycle radius terms}\label{sec:src16:cycle-terms}
+
+The cycle threshold propagates complete edge radii through a product. Equal rejection counts under bias inflation therefore do not show that bias is absent or determine which term limits each record. The component summaries compare the terms entering those radii on the selected conditions, with all their finite-value counts retained.
+
+The complete cycle-component CSV identified in Sec.~S11 retains the primary reversible and rotating conditions at N=131072. The file also retains both identity-detector conditions at N=2097152. It shows all three methods and all three edges. All 216 component-summary rows have finite values for the full condition sample. Their missing counts are zero. The full counts are 1000 for the primary reversible condition, 400 for the identity reversible condition, and 200 for each rotating condition.
+
+Across all 36 selected cell-method-edge groups, the square-root sampling term has a larger median than each other non-total term. Table~\ref{tab:src16:cycle-examples} shows this comparison for the diagonal method and edge 1--2. It retains all six component medians in each of the four conditions, with each condition's counts.
+
+\input{tables/diagnostic_cycle_examples}
+
+The tail-bias medians remain positive even in the identity-detector conditions. The sampling-term comparison concerns descriptive medians. It does not establish a cause for each rejection or nonrejection. The component values were calculated from the declared formulas with Decimal50 arithmetic. They are not saved component enclosures. A median total need not equal the sum of component medians. These tables do not replace the separate cycle power result or turn its negative proof margins into a positive guarantee.

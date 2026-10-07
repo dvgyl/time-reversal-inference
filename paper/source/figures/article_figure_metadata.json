@@ -1,0 +1,43 @@
+{
+  "source": "results/current/operating/complete_counts_with_design.csv",
+  "source_sha256": "24edd5c7523da8a14a175e7a6fcaa65c055adf558834a0741ea0779eeff58382",
+  "selected_count_rows": 135,
+  "numpy": "2.0.2",
+  "matplotlib": "3.9.4",
+  "analytical_model": {
+    "drift": [
+      [
+        1,
+        0.5
+      ],
+      [
+        0.5,
+        1
+      ]
+    ],
+    "diffusion": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "sampling_interval": 1,
+    "echo": 0.03,
+    "lag_convention": "Cij(k)=Cov(Yi(t+k),Yj(t))",
+    "matched_responses": [
+      1,
+      1
+    ],
+    "echo_response": "H1=1; H2=1+0.03 exp(-i omega)"
+  },
+  "correlation_time_conventions": {
+    "source": "tau approximation = 1/(1-phi); x=(N-1)(1-phi), phi=.995",
+    "brownian": "tau = 1/min eigenvalue(A) = 2 samples; x=N/2",
+    "cycle": "tau = 1/log(4) samples; x=N log(4)"
+  },
+  "uncertainty": "Saved pointwise 95 percent rejection intervals. All three outcomes use full denominators."
+}

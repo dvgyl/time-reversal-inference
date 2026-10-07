@@ -1,0 +1,400 @@
+\section{Source confidence and its propagation into detection}\label{src16:proofs}
+Unknown persistence leaves the calibrated test without a supplied dependence bound. A reference confidence set can supply one, but only after its full range has been propagated through a common filter. A set that excludes persistence one can still contain a range too wide for detection. Under the common energy conditions below, the two-sided inequalities bound both ends of this range in the persistence transform used by the covariance envelope.
+
+The proof therefore has two probability tasks. Pivot inversion covers the true persistence. Bounds on the same realized innovation energies then control every accepted candidate together, so the entire hull gives a covered spectral ratio. Filter placement adds its own cost to that ratio. The power argument finally bounds the fitted threshold from above and the alternative statistic from below. Recording and arithmetic bounds retain these comparisons for the specified implementation.
+
+The construction uses $n+1$ scalar reference observations, $n$ candidate innovations, and the operators $P$ and $K_B$ defined below. The matrix $P$ centers the candidate innovations, and $K_B$ forms their cumulative sums. The marginal variance is $v$, the persistence is $\phi$, and $\delta=1-\phi$. A confidence hull means the smallest closed interval containing the accepted set.
+
+\input{source_persistence_full_statements}
+\subsection{Pivot law and two-sided coverage}\label{src16:si-pivot}
+At the true persistence, candidate residuals are innovations apart from a constant mean. This gives a known residual law even though persistence and variance are unknown. The cumulative operator weights slow residual variation through the eigenvalues below. Dividing its energy by innovation energy removes the unknown scale and produces a law that can be inverted over candidate persistence values.
+At $\psi=\phi$, centering removes the constant residual mean. The projected residual is $\sigma PZ$, where $\sigma^2=v(1-\phi^2)$ and $Z\sim N(0,I_n)$. The nonzero eigenvalues of $PK_B^{\mathsf T}K_BP$ are
+\begin{equation}\label{src16:si-eigenvalues}
+ \lambda_{k,n}=[4\sin^2(\pi k/(2n))]^{-1},\qquad 1\le k<n.
+\end{equation}
+One way to obtain them is to diagonalize $K_BPK_B^{\mathsf T}$. Its $(i,j)$ entry is $\min(i,j)-ij/n$. Its inverse is the tridiagonal matrix with diagonal $2$ and adjacent entries $-1$. The sine vectors give Eq.~\eqref{src16:si-eigenvalues}. Orthogonal Gaussian coordinates therefore give the pivot law in Eq.~\eqref{src16:law}. The scale cancels from numerator and denominator.
+
+Choose $0<c_{\rm lo}\le c_{\rm hi}$ with both excluded tails at most $\alpha_B/2$. The two polynomial inequalities retain the true parameter except on their two tail events. They also retain every candidate with $D=Q=0$. Since $D(\phi)>0$ almost surely, this convention preserves coverage. Intersecting with any lag set of error $\alpha_L$ loses at most $\alpha_L$ more by a union bound. This argument uses no conditional Gaussian assumption after a confidence set is fitted.
+
+For $n=2$, the projected space has dimension one and $R_n=1/4$. For $n=3$, the ratio is an affine transform of a $\operatorname{Beta}(1/2,1/2)$ variable, with support $[1/9,1/3]$. These cases provide exact probability checks. For increasing $n$, $\lambda_{k,n}/n^2\to1/(\pi k)^2$ and the normalized innovation norm tends to one. The summable bound $\lambda_{k,n}/n^2\le1/(4k^2)$ controls the remaining coordinates. Thus the limiting ratio is $\sum_{k\ge1}Z_k^2/(\pi k)^2$, the Cram\'er--von Mises law. The confidence calculations below use the finite-$n$ law.
+
+
+\subsection{Lag confidence and one-sided comparators}\label{src16:si-lag}
+The lag comparator uses adjacent residual covariance instead of cumulative energy. Sample centering makes its expected normalized lag slightly negative even for independent innovations. The correction below removes this shift before the Gaussian tail bound is applied. Only the true candidate is needed for coverage, so inversion does not require an error allocation over candidate values.
+Let $A_L$ be the $n\times n$ symmetric matrix with adjacent entries $1/2$ and all other entries zero. Put
+\[
+ L(\psi)=e_\psi^{\mathsf T}PA_LPe_\psi,\quad
+ \mu_L=-1/n,\quad H_L=PA_LP-\mu_LP.
+\]
+Direct multiplication gives
+\[
+ \operatorname{tr}H_L=0,\quad
+ \|H_L\|_F^2=(n-3)/2+2/n^2,\quad
+ \|H_L\|_{\rm op}\le1+1/n.
+\]
+For lag error $\alpha_L$, define $d=n-1$, $t_0=\log(2/\alpha_L)$, and $t_1=\log(4/\alpha_L)$. If $d-2\sqrt{dt_0}>0$, use the outward upper radius
+\begin{equation}\label{src16:si-lag-radius}
+ w_n=\frac{2\sqrt{\{(n-3)/2+2/n^2\}t_1}
+                +2(1+1/n)t_1}{d-2\sqrt{dt_0}}.
+\end{equation}
+The acceptance set is defined by
+\begin{align}\label{src16:si-lag-set}
+ L(\psi)-(\mu_L+w_n)D(\psi)&\le0,\notag\\
+ -L(\psi)+(\mu_L-w_n)D(\psi)&\le0.
+\end{align}
+At the true persistence, $L-\mu_LD=\sigma^2Z^{\mathsf T}H_LZ$. The absolute quadratic form exceeds the numerator of Eq.~\eqref{src16:si-lag-radius}, times $\sigma^2$, with probability at most $2e^{-t_1}$ by the Gaussian quadratic bound~\cite{laurentmassart}. Also $D/\sigma^2$ is chi-square with $d$ degrees of freedom. Its lower bound $d-2\sqrt{dt_0}$ fails with probability at most $e^{-t_0}$. The sum is $\alpha_L$. This proves lag coverage without independence of the two events. If the denominator is not positive, use the full parameter range. Zero-energy candidates are retained. No further probability allocation over candidate values is needed.
+
+The analytic cumulative comparators use one lower-tail inequality. For error $\alpha_B$, put $t_B=\log(2/\alpha_B)$, $j_B=\lceil9t_B\rceil$, and
+\[
+ V_n=n-1+2\sqrt{(n-1)t_B}+2t_B.
+\]
+When $n\ge j_B+1$, valid cutoffs are
+\begin{equation}\label{src16:si-analytic-cutoffs}
+ c_n=\frac{n\{j_B-2\sqrt{j_Bt_B}\}}{\pi^2j_B^2V_n},
+ \qquad c_* =\frac{3}{17\pi^2j_B}\le c_n.
+\end{equation}
+Indeed, the first $j_B$ bridge eigenvalues are at least $n^2/(\pi^2j_B^2)$. Their Gaussian-square sum is at least $j_B-2\sqrt{j_Bt_B}$ except on probability $e^{-t_B}$. The denominator sum is at most $V_n$ except on the same probability. Their ratio proves $\Pr\{R_n(\phi)<c_n\}\le\alpha_B$. The inequalities $j_B\ge9t_B$ and $V_n/n\le17/9$ give $c_*$. Either comparator retains $ncD(\psi)-Q(\psi)\le0$, with $c$ rounded down. A failed length condition gives the full range. Standalone comparators use error $0.005$; intersections use $0.0025$ for each component. The recording correction below applies to all these polynomials with their original allocations.
+
+\subsection{Certified finite-dimensional probabilities}\label{src16:si-cdf}
+The pivot law is known, but its two cutoffs still need numerical probability bounds. A cutoff error in the wrong direction could remove true parameters more often than the allocated tails permit. We therefore enclose the signed quadratic-form probability and retain outer quantile endpoints. The same probability calculation later evaluates endpoint exclusion and its converse.
+For real coefficients $a_k$ and shift $s$, put $W=\sum_k a_kZ_k^2-s$. Its characteristic function is
+\begin{equation}\label{src16:si-cf}
+ \chi(t)=e^{-its}\prod_k(1-2it a_k)^{-1/2}.
+\end{equation}
+For a nondegenerate law, numerical inversion gives
+\begin{equation}\label{src16:si-inversion}
+ \Pr(W\le0)=\frac12-\frac1\pi\int_0^\infty
+                    \frac{\operatorname{Im}\chi(t)}{t}\,dt.
+\end{equation}
+The pivot calculation uses $a_k=\lambda_{k,n}/n^2-c/n$ and $s=0$. This is the quadratic-form inversion used in exact Gaussian inference~\cite{imhof1961,davies1980,dufourking1991}.
+
+We enclose the near-zero interval, a finite integration interval, and the infinite tail separately. Since $|e^{ix}-1|\le|x|$, the absolute integrand on $(0,\epsilon)$ is at most $|s|+\sum_k|a_k|$. The omitted integral is therefore at most $\epsilon(|s|+\sum_k|a_k|)$. For a truncation point $T>0$, choose $0\le b_k\le|a_k|$ and define
+\begin{equation}\label{src16:si-tail}
+ M_T=\prod_k(1+4T^2b_k^2)^{-1/4},\qquad
+ \kappa_T=\sum_k\frac{2T^2b_k^2}{1+4T^2b_k^2}.
+\end{equation}
+The negative logarithmic slope of $|\chi(t)|$ is nondecreasing. If $\kappa_T>0$, it follows that
+\[
+ |\chi(t)|\le M_T(t/T)^{-\kappa_T},\qquad
+ \int_T^\infty\frac{|\chi(t)|}{t}\,dt\le M_T/\kappa_T.
+\]
+Coefficient enclosures are included when selecting the $b_k$.
+
+Complex interval arithmetic encloses the finite integral. Small factors can be grouped through
+\[
+ -\tfrac12\log(1-z)=\tfrac12\sum_{j=1}^{p}\frac{z^j}{j}+E_p,
+ \qquad |E_p|\le\frac{|z|^{p+1}}{2(p+1)(1-|z|)},\quad |z|<1.
+\]
+The remainder disks are added before exponentiation. Factors with a large disk are evaluated directly. Certified bisection moves an endpoint only when the entire probability enclosure is on the required side of the target probability. The lower confidence cutoff uses the lower endpoint of its quantile bracket; the upper cutoff uses the upper endpoint. Degenerate laws are evaluated directly. Failure to enclose a probability produces no cutoff certificate.
+
+\subsection{Proof of the simultaneous source envelope}\label{src16:si-envelope}
+This subsection proves the full source-envelope statement above. Work on source coverage, $\phi\in\mathcal C_B$, and its common energy event, Eq.~\eqref{src16:event}. With $\delta=1-\phi$, that event is
+\[
+\begin{aligned}
+ Q(\phi)&\ge v\delta(2-\delta)n^2c_Q, & Q(1)&\le vnb,\\
+ v\delta(2-\delta)nd_-&\le D(\phi)\le v\delta(2-\delta)nd_+,\\
+ \|P(Y_0,\ldots,Y_{n-1})^{\mathsf T}\|^2&\le vnd_0.
+\end{aligned}
+\]
+The deterministic constants are positive, and the event has probability at least $1-\beta$.
+
+We bound the candidate gap $1-\psi$ on both sides of the true gap $\delta$. For candidates closer to one, lower-tail acceptance keeps the gap away from zero. For candidates farther from one, upper-tail acceptance bounds the gap from above. Both bounds retain the same realized numerator $Q(\phi)$. Taking their ratio before replacing this numerator by its lower bound controls the hull width.
+
+Write $x=(1-\psi)/\delta$ and
+\[
+ A=\sqrt{Q(\phi)/(v\delta n^2)},\quad
+ A_-=\sqrt{(2-\delta)c_Q},\quad b_e=\sqrt{b/(n\delta)},\quad
+ E_0=\sqrt{\delta d_0},\quad F_\pm=\sqrt{(2-\delta)d_\pm}.
+\]
+These normalizations put the energy comparisons on the same scale. The quantity $A$ is the realized cumulative innovation norm and $A_-$ is its lower bound. The endpoint contribution is bounded by $b_e$. The quantities $F_-$ and $F_+$ bound the innovation norm, while $E_0$ bounds the change contributed by the centered observations. The remaining constants from the full source-envelope statement collect these terms with the two acceptance cutoffs:
+\[
+\begin{aligned}
+ J_{\rm lo}&=b_e+\sqrt{c_{\rm lo}}E_0,&
+ J_{\rm hi}&=b_e+\sqrt{c_{\rm hi}}E_0,\\
+ C_e&=\sqrt{c_{\rm lo}}(F_--E_0)-b_e,&
+ H_e&=\sqrt{c_{\rm hi}}(F_+-E_0)-b_e,\\
+ X_+&=H_e/(A_--J_{\rm hi}).
+\end{aligned}
+\]
+Assume $C_e>0$, $F_->E_0$, and $A_->J_{\rm hi}$. The transform is $\Lambda(x)=(1+x)/(1-x)$. The sharper hull factor also requires $\delta X_+<1$. These conditions ensure that the true innovation contribution exceeds the endpoint and level-energy terms needed in the exclusion bounds. The cumulative residual at a candidate is an affine combination of the true cumulative innovations and the endpoint-detrended path. Its innovation norm changes through the centered level vector. The exact identities
+\begin{equation}\label{src16:si-affine}
+ K_BPe_\psi=xK_BPe_\phi+(1-x)K_BPe_1,
+ \qquad Pe_\psi=Pe_\phi+(\phi-\psi)P Y_-,
+\end{equation}
+use $Y_-=(Y_0,\ldots,Y_{n-1})^{\mathsf T}$. For $0\le x\le1$, triangle inequalities give
+\begin{align*}
+ \sqrt{Q(\psi)/(v\delta n^2)}&\le xA+(1-x)b_e,\\
+ \sqrt{D(\psi)/(v\delta n)}&\ge F_--(1-x)E_0.
+\end{align*}
+The second right side is positive under $F_->E_0$. Lower-tail acceptance implies
+\[
+ x\ge\frac{\sqrt{c_{\rm lo}}(F_--E_0)-b_e}
+ {A-b_e-\sqrt{c_{\rm lo}}E_0}.
+\]
+For $x\ge1$, reverse and direct triangle inequalities instead give
+\[
+ \sqrt{Q(\psi)/(v\delta n^2)}\ge xA-(x-1)b_e,
+ \qquad \sqrt{D(\psi)/(v\delta n)}\le F_++(x-1)E_0.
+\]
+The first right side is positive because $A\ge A_->J_{\rm hi}>b_e$. Upper-tail acceptance gives $x\le H_e/(A-J_{\rm hi})$.
+
+On source coverage, $\sqrt{c_{\rm lo}}F_-\le A\le\sqrt{c_{\rm hi}}F_+$. Thus the lower gap bound is at most one and the upper gap bound is at least one. Each bound therefore also covers the candidates on the other side of $x=1$, where its separate derivation was not needed. Both bounds apply to the whole accepted set. Taking their ratio while retaining the same $A$ gives
+\[
+ \frac{H_e}{C_e}\frac{A-J_{\rm lo}}{A-J_{\rm hi}}
+ \le\frac{H_e}{C_e}\frac{A_--J_{\rm lo}}{A_--J_{\rm hi}},
+\]
+because the ratio decreases with $A$. If $x_-$ and $x_+$ are the smallest and largest accepted gap ratios, then
+\[
+ \frac{\Lambda(u)}{\Lambda(\ell)}
+ =\frac{x_+}{x_-}\frac{2-\delta x_-}{2-\delta x_+}.
+\]
+Physical candidates have $\delta x_+\le1$, which gives the factor two. The absolute bound $x_+\le X_+$ gives the sharper factor. Coverage makes the hull nonempty. The same proof applies to a nonempty intersection on both coverage events.
+
+\paragraph{Explicit five-event constants.}
+Allocate $\beta/5$ to each energy event and put $t=\log(5/\beta)$. The innovation norm has a chi-square law with $n-1$ degrees of freedom, so
+\begin{equation}\label{src16:si-dconstants}
+ d_\pm=\frac{n-1\ \mathord{\pm}\ 2\sqrt{(n-1)t}
+                       +2t\,\mathbf1_{\{+\}}}{n},\qquad
+ d_0=1+2\sqrt{\Lambda(\phi)t/n}+2\Lambda(\phi)t/n.
+\end{equation}
+Require $d_->0$. The bound for $d_0$ uses covariance norm at most $v\Lambda(\phi)$ and trace at most $nv$.
+
+For $n\ge129$, Eq.~\eqref{src16:si-eigenvalues} and $\sin y\le y$ imply, on the same Gaussian-coordinate construction,
+\[
+ \frac{Q(\phi)}{v\delta(2-\delta)n^2}
+ \ge\sum_{k=1}^{128}\frac{Z_k^2}{(\pi k)^2}.
+\]
+Enclosing Eq.~\eqref{src16:si-inversion} gives probability less than $0.008084$ that the latter sum is below $0.023$. Hence $c_Q=0.023$ is valid for $\beta=0.05$ at all these lengths.
+
+At $\psi=1$, the cumulative entry is
+$Y_j-(1-j/n)Y_0-(j/n)Y_n$. Put $r_\phi=\phi^n$ and
+\begin{align}\label{src16:si-endpoint-moments}
+ h_\phi&=\sum_{j=1}^{n-1}(1-j/n)\phi^j,\notag\\
+ \tau&=\frac{n-1}{n}+\frac{(n-1)(2n-1)}{3n^2}
+       +\frac{r_\phi(n^2-1)}{3n^2}-\frac{4h_\phi}{n},\notag\\
+ g&=\left[\sqrt{\Lambda(\phi)}+\sqrt{(n-1)(1+r_\phi)/2}\right]^2.
+\end{align}
+Its covariance $\Gamma$ has trace $vn\tau$. The inner path has covariance norm at most $v\Lambda(\phi)$. The endpoint line has norm $v(n-1)(1+r_\phi)/2$. The triangle inequality for square roots of covariance norms therefore gives $\|\Gamma\|\le vg$. Using $\tr(\Gamma^2)\le\|\Gamma\|\tr\Gamma$ yields
+\begin{equation}\label{src16:si-bconstant}
+ b=\tau+2\sqrt{(g/n)\tau t}+2(g/n)t.
+\end{equation}
+A union bound combines these five events. All concentration statements precede fitting.
+
+\subsection{Uniform persistence-time order and bank coverage}\label{src16:si-uniform}
+The preceding constants can be evaluated at a specified persistence and length. For a uniform order statement, we use coarser events whose bounds depend on the product of length and the persistence gap. They first keep the upper hull endpoint below one and then bound the transformed hull span. A length-dependent bank is still needed because a bounded span can move toward persistence one beyond every node of a fixed finite bank.
+For a uniform statement, let $c_{\rm lo}>0$ be a common lower bound on all lower cutoffs and $c_{\rm hi}<\infty$ a common upper bound on all upper cutoffs over the lengths considered. Use six one-sided events with failure $\beta/6$ each. Set
+\[
+ t=\log(6/\beta),\quad m_0=\lceil9t\rceil,\quad
+ H=1+2\sqrt t+2t,\quad
+ c_{Q,0}=\frac{m_0-2\sqrt{m_0t}}{\pi^2m_0^2}>0.
+\]
+For $n\ge\max(4,128t,m_0+1)$, these events give
+\begin{align*}
+ v\delta(2-\delta)n^2c_{Q,0}&\le Q(\phi)
+                  \le v\delta(2-\delta)n^2H/6,\\
+ D(\phi)&\le v\delta(2-\delta)n(17/9),&
+ \|PY_-\|^2&\le vnH,\\
+ D(1)&\ge vn\delta,& Q(1)&\le2vnH.
+\end{align*}
+The lower numerator bound uses the first $m_0$ bridge coordinates and a chi-square lower tail. The upper numerator and level-energy bounds use Gaussian trace tails. The innovation bound is chi-square. For the endpoint innovation bound, direct difference covariances give centered trace at least $2v\delta(n-1)$, uncentered trace $2vn\delta$, and norm at most $4v\delta$. Thus the squared Frobenius norm is at most $8v^2\delta^2n$. The Gaussian lower tail gives $2v\delta(n-1-\sqrt{8nt})\ge vn\delta$. The endpoint-line trace is at most $2v(n-1)$, which gives the last bound.
+
+Choose
+\begin{align}\label{src16:si-uniform-constants}
+ \eta_0&=\min\{1/4,1/(4\sqrt H),\sqrt{3c_{\rm lo}/(32H)}\},\notag\\
+ \delta_0&=\min\{1/2,c_{Q,0}/(64c_{\rm hi}H)\},\notag\\
+ C_0&=\max\{128t,128H/c_{\rm lo},128H/c_{Q,0}\},\notag\\
+ L_0&=1+\frac{4\sqrt{34c_{\rm hi}/9}}{3\sqrt{c_{Q,0}}}.
+\end{align}
+If $n\delta>C_0$, a candidate with $x\le\eta_0$ has normalized cumulative norm at most $\eta_0\sqrt{H/3}+\sqrt{2H/(n\delta)}$. Its innovation norm is at least $1-\eta_0\sqrt H\ge3/4$, using $Pe_\psi=Pe_1+(1-\psi)PY_-$. These constants make its ratio strictly less than $c_{\rm lo}$, so it is excluded.
+
+For $\delta\le\delta_0$, the upper-tail exclusion has coefficient
+$\sqrt{(2-\delta)c_{Q,0}}-\sqrt{2H/(n\delta)}-\sqrt{c_{\rm hi}\delta H}>3\sqrt{c_{Q,0}}/4$ in front of $x$. The choice $L_0$ excludes $x\ge L_0$ when $L_0\delta\le1$. Otherwise only the physical lower endpoint $\ell\ge0$ is used. For $\delta>\delta_0$, endpoint exclusion alone gives a uniform span. Consequently
+\begin{equation}\label{src16:si-uniform-span}
+ \frac{\Lambda(u)}{\Lambda(\ell)}\le
+ C_{\rm span}:=\max\{2L_0/\eta_0,2/(\eta_0\delta_0)\}
+\end{equation}
+with probability at least $1-\alpha_B-\beta$. The constants establish the persistence-time order, not a short universal prescription.
+
+Taking logarithms of the two terms defining $\mathcal S_a$ proves the main-text filter-placement identity. For $a_j=1-2^{-j}$, $\Lambda(a_j)=2^{j+1}-1$, and adjacent ratios are at most three. A covered hull midpoint is within $(\log3)/2$ of a bank node. If $1-u\ge\eta_0\delta$ and $n\delta\ge2/\eta_0$, then $\Lambda(u)\le n$, while the last node is at least $2n-1$. Thus the midpoint is covered and $\min_j\mathcal S_{a_j}\le3C_{\rm span}$. The number of members remains $\lceil\log_2n\rceil+1$ in all testing bounds.
+
+\subsection{Recording errors and continuous inversion}\label{src16:si-rounding}
+Source inversion must cover the ideal accepted set after recording errors change the residual energies. We enlarge the acceptance inequalities before solving them. This preserves coverage, but can widen the returned hull and weaken its covariance bound. The relaxed-hull calculation below therefore checks usefulness separately from this coverage transfer.
+Suppose each recorded value differs from its ideal value by at most $\eta$. If $z$ is this error sequence, its projected innovation error has norm at most
+\begin{equation}\label{src16:si-error-norms}
+ d_r(\psi)=(1+\psi)\sqrt n\,\eta,\qquad
+ a_r(\psi)=2\sqrt{n-1}\,\eta+\tfrac n2\sqrt n\,\eta(1-\psi)
+\end{equation}
+for the cumulative error. To prove the latter, at $\psi=1$ its $j$th entry is $z_j-(1-j/n)z_0-(j/n)z_n$, of absolute value at most $2\eta$. The remaining term is $(1-\psi)K_BPz_-$, and $\|K_BP\|\le n/2$.
+
+Observed $D$ and $Q$ are convex squared norms. Their endpoint maxima $D_{\max}$ and $Q_{\max}$ bound them over $[0,1]$. Hence
+\begin{equation}\label{src16:si-relaxation}
+ \Delta_D=2\sqrt{D_{\max}}d_r+d_r^2,\qquad
+ \Delta_Q=2\sqrt{Q_{\max}}a_r+a_r^2
+\end{equation}
+bound the ideal-to-observed moment changes. Subtract $\Delta_Q+nc\Delta_D$ from the corresponding observed cumulative acceptance polynomial. For a lag polynomial $L+kD$, subtract $(1+|k|)\Delta_D$, since the symmetric lag operator has norm at most one. Every ideal accepted candidate remains accepted. Square-root constants are rounded up before the exact polynomial expansion; individual coefficients are not rounded separately. This proves the recording transfer with the original error allocation.
+
+The continuous solver isolates roots of at most four quadratic polynomials. It partitions $[0,1]$ at the root-interval endpoints and uses exact range or constant-sign tests. It retains isolated roots and unresolved intervals. After normalizing a nonzero quadratic leading coefficient to $\pm1$, a root interval has width at most $2^{-r-1}$ at root precision $r$. There are at most eight intervals. Any retained cell crossing a strictly excluded region is within their connected union, of total width at most $8\,2^{-r-1}$. Thus an outward endpoint enlargement $8\,2^{-r}$ suffices. A retained component need not contain an exact accepted point for this bound to hold. Linear, constant, repeated-root and endpoint-root cases use the same sign convention. If a declared work limit prevents completion, the calculation returns the source fallback. Without a finite certificate, the bank abstains. An unexpected execution failure stops the run and is retained.
+
+\paragraph{Bounding the relaxed hull.}
+For the unit-variance population calculation, use the five-event constants above and source coverage. Put $A_+=\sqrt{c_{\rm hi}}F_+$. Let $a_0,a_1,b_r$ be outward constants in $a_r(\psi)=a_0+a_1(1-\psi)$ and $d_r(\psi)=b_r(1+\psi)$. With square-root error $\epsilon_s=2^{-80}$, define
+\begin{align}\label{src16:si-rounded-hull}
+ u_r(x)&=(a_0+a_1\delta x)/(n\sqrt\delta),& w_r&=2b_r/\sqrt{n\delta},\notag\\
+ C_Q&=(A_++b_e)/\delta+u_r(1/\delta)+\epsilon_s/(n\sqrt\delta),\notag\\
+ C_D&=F_++\max(1,1/\delta-1)E_0+w_r+\epsilon_s/\sqrt{n\delta},\notag\\
+ d_D&=2C_Dw_r+w_r^2,&d_Q(x)&=2C_Qu_r(x)+u_r(x)^2.
+\end{align}
+These bounds include the observed endpoint maxima in Eq.~\eqref{src16:si-relaxation}. To control the returned hull, we now work from recorded acceptance back to an ideal inequality. One error allowance covers the change in moments from ideal to recorded values. The other covers the relaxation already added to retain ideal candidates. Recorded acceptance therefore implies the ideal inequalities with twice the error allowance. Define
+\begin{align}\label{src16:si-exclusion-polys}
+ p_{\rm lo}(x)&=[b_e+x(A_+-b_e)]^2
+ -c_{\rm lo}[F_--E_0+xE_0]^2+2[d_Q(x)+c_{\rm lo}d_D],\notag\\
+ p_{\rm hi}(x)&=[b_e+x(A_--b_e)]^2
+ -c_{\rm hi}[F_+-E_0+xE_0]^2-2[d_Q(x)+c_{\rm hi}d_D].
+\end{align}
+Convexity, $p_{\rm lo}(0)<0$ and $p_{\rm lo}(\eta_*)<0$ exclude $0\le x\le\eta_*\le1$. Convexity, $p_{\rm hi}(L_*)>0$ and $p'_{\rm hi}(L_*)>0$ exclude $x\ge L_*\ge1$. The numerator lower bound is positive under $A_->J_{\rm hi}$. If the upper exclusion fails, $L_*=1/\delta$ supplies only the physical endpoint zero. Enlarge the resulting $\psi$ interval by $8\,2^{-r}$ at both ends. All tests in these steps are enclosing inequalities.
+
+\subsection{Endpoint probabilities and the converse}\label{src16:si-converse}
+We now prove the endpoint comparison in the main-text discussion of endpoint exclusion. The sufficient calculation bounds the probability of a nonempty set whose upper endpoint is below one. The converse bounds that same probability over constant-shift-invariant rules with uniform coverage. Neither calculation is a detection-power bound.
+
+Normalize the first differences by innovation standard deviation. Their covariance is $A_\phi$, where
+\begin{equation}\label{src16:si-difference-cov}
+ (A_\phi)_{ii}=\frac2{1+\phi},\qquad
+ (A_\phi)_{ij}=-\frac{1-\phi}{1+\phi}\phi^{|i-j|-1}\quad(i\ne j).
+\end{equation}
+It tends to $I_n$ as $\phi\uparrow1$. Let $H_c=PK_B^{\mathsf T}K_BP-ncP$. Then $R_n(1)\le c$ is the event that a quadratic form with eigenvalues of $A_\phi^{1/2}H_cA_\phi^{1/2}/n^2$ is nonpositive. Eigenvalue enclosures can be computed from the similar matrix $A_\phi H_c/n^2$. The exact zero direction is removed only when the other eigenvalue intervals exclude zero. Equations~\eqref{src16:si-cf}--\eqref{src16:si-inversion} then give a finite-dimensional probability enclosure.
+
+A shift-invariant upper confidence rule is a fixed function of the differences. Define its value as one if its underlying set is empty. Assume coverage is uniform over all constant means, positive marginal variances, and persistence values. Fix an innovation standard deviation $\sigma>0$. At persistence $\theta<1$, choose marginal variance $v_\theta=\sigma^2/(1-\theta^2)$, so the difference law is $N(0,\sigma^2A_\theta)$. For each $b<1$ and $\theta>b$, coverage gives $\Pr_{\theta,\sigma}(U\le b)\le\alpha$. These laws converge in total variation to $N(0,\sigma^2I_n)$ as $\theta\uparrow1$. Passing to this limit, then letting $b\uparrow1$, gives $\Pr_{1,\sigma}(U<1)\le\alpha$. Divide both comparison experiments by the same fixed $\sigma$ and apply the original rule to $\sigma$ times the normalized data. The rule itself is unchanged: normalized differences are multiplied back by the fixed $\sigma$ before the rule is applied. Thus this comparison does not assume scale invariance. For any target alternative, choose $\sigma^2=v(1-\phi^2)$.
+
+The Neyman--Pearson test between these two fixed-scale Gaussian laws therefore bounds every such endpoint rule. In normalized coordinates the laws are $N(0,I_n)$ and $N(0,A_\phi)$. If $a_i$ are the positive eigenvalues of $A_\phi$, its log-likelihood ratio, apart from a constant, is $\tfrac12\sum_i(1-a_i^{-1})Z_i^2$ under the endpoint null. Under the alternative it has the same distribution as $\tfrac12\sum_i(a_i-1)Z_i^2$, apart from that constant. Enclose the $(1-\alpha)$ null quantile and evaluate the alternative upper tail in the conservative direction. Giving the comparison test the innovation scale enlarges the admissible class. Thus this is an upper bound for unknown-scale invariant rules, not a claim of an attained envelope within that class~\cite{dufourking1991,elliott1996}.
+
+At $\phi=0.8$, the cutoffs $0.019$ and $1.1$ at $n=256$ have tails at most $0.0025$ each. The probability of $R_n(1)<0.019$ is at least $0.7767783157$. Subtracting source noncoverage gives $0.7717783157$ for a nonempty finite endpoint. At $n=64$, the simple-law upper bound is below $0.297738472$ for error $0.005$. Every shorter difference vector is a marginal of this experiment, so a target probability $0.75$ requires $n\ge65$. The sufficient-to-necessary bracket is at most $256/65$, or $257/66$ in observation counts. This calculation has fixed $\phi$, size and target probability; it is separate from detection power.
+
+
+\subsection{Source hulls and the bank error allocation}\label{src16:si-bank-size}
+Reference coverage is a marginal result. Using it to bound both testing channels requires their common persistence and the stated response model. Under those assumptions, each common filter has a source spectral ratio that can be bounded over the entire returned hull. Simultaneous testing events then cover every declared member, including a member selected through its observed rejection margin.
+The source-confidence argument uses only the noiseless scalar reference marginal. The detection model additionally assumes two jointly stationary Gaussian channels with the same autoregressive marginal persistence. The cross-spectrum can be arbitrary subject to positive semidefiniteness. Under the null it is real and even before the detector responses. The first detector is a nonzero scalar. The second has a nonzero finite impulse response, unchanged between the independent calibration and the test record. Testing errors are zero apart from a recorder with the stated deterministic error bound.
+
+For a bank coefficient $a$, filtering the source spectrum gives a frequency-dependent factor proportional to
+\[
+ f_{a,\phi}(\omega)=
+ \frac{1+a^2-2a\cos\omega}{1+\phi^2-2\phi\cos\omega}.
+\]
+This ratio of affine functions of $\cos\omega$ is monotone or constant. Its extreme values occur at $\omega=0,\pi$. Their ratio is
+$\max\{[\Lambda(\phi)/\Lambda(a)]^2,[\Lambda(a)/\Lambda(\phi)]^2\}$.
+Taking the supremum over a hull $[\ell,u]$ gives the expression for $\mathcal S_a$ in the main text. A response-shape certificate $P_2$ therefore gives the standardized covariance envelope $q_a=2\mathcal S_a\max(1,P_2)$. The source and response gains cancel from this normalized bound.
+
+A closed outer hull preserves source coverage. An empty hull, a hull reaching one, or a failed required numerical bound gives no finite source certificate. The bank then abstains. On the shared source and calibration coverage events, apply the variance and quadratic-tail inequalities simultaneously to every declared member. Source error $0.005$, calibration error $0.01$, variance error $0.01$, and null contrast error $0.025$ sum to $0.05$. The last two allocations are divided over all $M$ members. No independence across members or between fitting and the test statistic is used. The deterministic recording relaxations preserve the same event inclusion. This is why a fitted source set can be used in the complete threshold without a conditional Gaussian claim.
+
+\subsection{From a source envelope to a power condition}\label{src16:si-power}
+For size control, a fitted variance ceiling must not be below the true variance. For power, we also need an upper bound on the fitted threshold. We therefore use a variance upper event in addition to the source and calibration events. The resulting sufficient condition contains separate terms for the null threshold, the alternative fluctuation, and centering bias.
+Fix a member $a$ of a bank declared before observation. Suppose the source and calibration events give $\mathcal S_a\le\mathcal S_0$, response shape at most $P_0$, and phase tolerance at most $r_0$. Set $q_0=2\mathcal S_0\max(1,P_0)$. Let $m$ be the retained length, $r=m-1$, and let $V_i$ be the two true filtered variances. Put $V_\star=\max(V_1,V_2)$. The full filtered covariance has norm at most $q_0V_\star$ and trace at most $2mV_\star$.
+
+With $t_v=\log(2/\beta_v)$, a common Gaussian upper event gives both empirical centered variances at most
+\[
+ V_+=V_\star\{1+2\sqrt{q_0t_v/m}+2q_0t_v/m\}.
+\]
+Its failure probability is at most $\beta_v$. The centered norm is bounded by the norm centered at the population mean, so unknown constant means add no term. Require $c_m(q_0)>0$ and put $D_+=V_+/c_m(q_0)$. The sharp two-time radius is
+\begin{equation}\label{src16:si-radius}
+ R(q,D,m,t)=D\left[
+ 2\min\left\{qF_r,\frac{\sqrt{2qm}}r\right\}\sqrt t
+ +\frac{2qt}r\right],\qquad
+ F_r^2=\frac{r+1}{r^2}-\frac2{r^3}-\frac2{r^4}.
+\end{equation}
+It follows from the operator bound $1/r$, the exact Frobenius norm, and the trace bound. The geometric variance ceiling is no larger than the common ceiling $D_+$.
+
+Let $\kappa_a$ be the true signed filtered contrast and $M$ the bank size. Its centering bias is at most
+$b_0=q_0V_\star\sqrt{2(4r-2)}/r^2$. Therefore a sufficient ideal contrast condition is
+\begin{equation}\label{src16:si-margin}
+ |\kappa_a|>
+ 2r_0D_++R(q_0,D_+,m,\log(80M))
+ +R(q_0,V_\star,m,\log(2/\beta_s))+b_0.
+\end{equation}
+The power loss is bounded by the source-event failures, calibration-event failures, $\beta_v$, and $\beta_s$. These events are intersected by inclusion; the argument does not assume a Gaussian distribution conditional on fitted quantities. Bank placement, the filtered contrast, and variance-denominator positivity remain in Eq.~\eqref{src16:si-margin}.
+
+\paragraph{Calibration upper and lower events.}
+For the implemented-power example, the response is $(1,0)$, $m_c=256$, $X_c^{\mathsf T}X_c=256I_2$, and independent mean-zero Gaussian calibration errors have standard deviation $\sigma_c=0.01$. Put $\nu=254$, $t_c=\log200$, and
+\[
+ C_c=2+2\sqrt{2t_c}+2t_c,\qquad
+ V_{c,+}=\nu+2\sqrt{\nu t_c}+2t_c,\qquad
+ V_{c,-}=\nu-2\sqrt{\nu t_c}.
+\]
+Three events each have failure at most $0.005$: coefficient error at most $\sigma_c\sqrt{C_c/256}$, residual norm at most $\sigma_c\sqrt{V_{c,+}}$, and residual norm at least $\sigma_c\sqrt{V_{c,-}}$. The last event keeps the recorded residual positive.
+
+Recording error $\eta$ changes the fitted coefficient vector by at most $\eta$ and the residual norm by at most $16\eta$. The corrected radius uses the observed residual norm plus $16\eta$, followed by the usual confidence factor and the coefficient-center allowance. Its upper population bound is
+\begin{equation}\label{src16:si-cal-radius}
+ R_c\le\left(\sigma_c\sqrt{V_{c,+}}+32\eta+\epsilon_s\right)
+          \sqrt{\frac{C_c}{256V_{c,-}}}+\eta,
+\end{equation}
+with outward evaluation. Put
+$\zeta=\sigma_c\sqrt{C_c/256}+\eta+R_c+\epsilon_s$.
+The fitted coefficient ball lies in the radius-$\zeta$ ball about $(1,0)$. The response bounds are then
+\[
+ \widehat r\le\frac{\zeta}{1-2\zeta},\qquad
+ \widehat P\le\left(\frac{1+\sqrt2\zeta}{1-\zeta}\right)^2.
+\]
+At $\eta=2^{-21}$, enclosing evaluation gives
+\begin{equation}\label{src16:si-cal-quality}
+ \widehat r\le\frac{33}{5000},\qquad
+ \widehat P\le\frac{129}{125},\qquad
+ \sigma_c\sqrt{V_{c,-}}>16\eta.
+\end{equation}
+Their event probability is at least $0.985$. These upper bounds require the residual upper event as well as confidence-region coverage.
+
+\paragraph{Recording correction in the contrast condition.}
+For a filter $(-a,1)$, each transformed recording error is at most $\eta_a=(1+a)\eta$. An observed variance $\widehat V_i$ gives ideal variance at most $(\sqrt{\widehat V_i}+\eta_a)^2$. If $U_t$ is the adjacent sum in channel one and $W_t$ the adjacent difference in channel two, their centered energies are bounded by $4m\widehat V_1$ and $4m\widehat V_2$. Expanding the centered product gives the deterministic contrast error bound
+\begin{equation}\label{src16:si-contrast-error}
+ \Omega=2\eta_a\sqrt{4m\widehat V_2/r}
+       +2\eta_a\sqrt{4m\widehat V_1/r}+4\eta_a^2.
+\end{equation}
+The recording error enters the power comparison on both sides. One $\Omega$ enlarges the implemented threshold. A second $\Omega$ allows the recorded statistic to be smaller than the ideal statistic. This explains the total correction used below. No independence of recording error is used.
+
+For the specified source pair, both true filtered variances and the absolute contrast are
+\[
+ V_a=1+a^2-2a\phi,\qquad
+ |\kappa_a|=\tfrac9{10}(1-\phi^2)(1+a^2-a\phi).
+\]
+At $n=m=524288$, $a=\phi=199/200$, the standalone cutoffs are
+\begin{equation}\label{src16:si-power-cutoffs}
+ c_{\rm lo}=\frac{63669}{3276800},\qquad
+ c_{\rm hi}=\frac{130687}{131072}.
+\end{equation}
+Use $\beta=0.05$, $c_Q=0.023$, and Eqs.~\eqref{src16:si-dconstants}--\eqref{src16:si-exclusion-polys}. The rounded hull and root enlargement give $\mathcal S_a<335.920$. Its corresponding $q_0$ is less than $694$. Take $\beta_v=\beta_s=0.01$. For each variance, first bound the recorded value by $(\sqrt{V_+}+\eta_a)^2$, then apply its outward variance correction again. Evaluate the null threshold at these upper inputs and at Eq.~\eqref{src16:si-cal-quality}. Subtract the alternative radius, centering bias, and $2\Omega$ from $|\kappa_a|=3591/400000$. The enclosing result is strictly greater than $0.0023006294$. The calculation includes 80-bit outward square roots and 48-term logarithm enclosures. Monotonicity in $q$, phase, and both variance ceilings makes this an upper-threshold comparison for every record on the stated events.
+
+\begin{table}[t]
+\centering\small
+\caption{Population sufficient conditions for $\phi=0.995$ and coupling $0.9$, with the standalone finite-$n$ cutoffs and bounded recording correction. Every length has $N=n+1$ observations. A failed sufficient condition does not determine empirical power.}\label{src16:si-markers}
+\begin{tabular}{@{}rl@{}}\toprule
+Innovations $n$ & First failed condition or resulting margin\\\midrule
+$2048,4096,8192,16384,32768,65536$ & Source-envelope inequality\\
+$131072$ & Positive variance denominator\\
+$262144$ & Contrast margin $<-0.0157610$\\
+$524288$ & Contrast margin $>0.0023006$\\\bottomrule
+\end{tabular}
+\end{table}
+The same source-envelope sufficient inequalities fail for all six pairs $\phi\in\{0.8,0.97,0.995\}$ and $n\in\{16384,65536\}$. Table~\ref{src16:si-markers} gives the complete declared length grid at $\phi=0.995$. Only its largest length is linked here to a complete numerical power theorem.
+
+\subsection{Numerical completion and the probability bound}\label{src16:si-completion}
+The positive contrast margin proves rejection only if the calculation reaches the comparison with enclosing inputs. Gaussian records are unbounded, whereas the implementation has finite input, work, and precision limits. We add bounded-magnitude events and show that the source solver, calibration, and selected member complete on their intersection with the statistical events. Their complement probabilities then enter the final rejection bound.
+The numerical rule uses 48 root bits, 80 square-root bits, and 48 terms for each reduced logarithm series. It allows $600000$ observations, $5\times10^8$ charged arithmetic operations per phase, and $262144$ bits per rational value. Input, regression-column, and bank limits are $4096$ bits, $32$ columns, and $64$ members. Every source or calibration value is an integer divided by $2^{20}$.
+
+Add the event that all $2N$ population-demeaned source values have magnitude at most $16$. Its complement has probability at most $4Ne^{-128}$. Add the event that all 256 standardized calibration errors have magnitude at most $16$, with complement at most $512e^{-128}$. These union bounds require no independence between source observations. The specified means are $2$ and $-1$, so source input integers have magnitude below $2^{25}$.
+
+\paragraph{Source arithmetic.}
+An exact dyadic compiler forms each moment at $\psi=-1,0,1$ and interpolates its quadratic coefficients. Prefix integers have magnitude below $2^{45}$. A dot product is evaluated in checked integer chunks with exact integer totals. If a product is too large, one split into base-$2^{26}$ limbs suffices; all four child products fit the direct integer range. A direct dot product charges twice its length, and a split dot product at most ten times its length. For each candidate value, residual construction, sums and norms charge $12n$ operations. Lag and reflection products and sums charge $8(n-1)$, and the two prefix products charge at most $20(n-1)$. Including input conversion gives at most
+\[
+ 2N+3\{40(N-1)-28\}=122N-204=63963054
+\]
+charged operations. Exact cumulative numerators have fewer than 151 bits before reduction; the common denominators and interpolation remain below the conservative 282-bit bound for compiled coefficients.
+
+Define the height of a rational as the larger bit length of its reduced numerator and denominator. Products and quotients add heights; sums add heights and one bit. In the rounded source inequalities, coefficient heights are below $4096$. Normalization gives $8192$, discriminants $32769$, and raw root endpoints $20000$. Clipped roots lie in $[0,1]$ and have denominator height at most $8192+49+2=8243$. Cell midpoints therefore have height below $16500$. Horner evaluation has height below $3(4096)+2(16500)+3<45300$. Vertex and raw-root evaluations stay below $60000$. The root calculation has at most four quadratics, eight root intervals, 18 endpoints, and 17 open cells. Including the recording relaxation, fewer than 5000 arithmetic calls suffice. Repeated or overlapping roots are retained and cause no refinement loop.
+
+The rounded population event gives a nonempty source set with upper endpoint below one. The solver returns hull endpoints of height below 8243. These satisfy the calibrated arithmetic condition in Proposition~\ref{cc16:completion}. In particular, calibration and its recording correction each use fewer than $10000$ operations and $10000$ bits, while each member uses fewer than $4000$ operations and $140000$ bits. The selected member has an outward denominator lower endpoint greater than $4/5$, so it reaches the strict rejection comparison. Other members can return unavailable results without preventing its rejection.
+
+Finally, the statistical event failures sum to
+\[
+ 0.005+0.05+0.015+0.01+0.01=0.09,
+\]
+for source coverage, the source envelope, calibration, the two variance events, and the alternative tail. The two bounded-input events add at most $(4N+512)e^{-128}$. The positive margin and the completion bounds therefore prove
+\[
+ \Pr(\mathrm{reject})\ge0.91-(4N+512)e^{-128}>0.90.
+\]
+This statement concerns the ideal Gaussian model followed by a recorder with the specified deterministic error bound. It does not identify the law of a finite-precision random generator with the ideal law, nor assert completion for every unbounded Gaussian input.

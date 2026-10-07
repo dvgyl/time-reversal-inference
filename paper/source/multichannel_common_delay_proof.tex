@@ -1,0 +1,474 @@
+% Requires amsmath, amssymb, and amsthm.
+\section{Channel-specific delays for finite Gaussian records}\label{sec:universal}
+\newcommand{\MC}{\mathcal C}
+\newcommand{\MD}{\mathcal D}
+\newcommand{\MT}{\mathbb T}
+\newcommand{\MR}{\mathbb R}
+\newcommand{\MS}{\mathbb S}
+
+A finite Gaussian law is determined by its retained means and covariances. The construction below matches those quantities exactly with a reversible source and channel-specific delays. The source and its unobserved extension can depend on the target law.
+
+The difficulty is to satisfy reversibility and exact covariance matching at the same time. A real source spectrum has no complex channel phases of its own. Separated delays can approximate the phases of each rank-one spectral mass, but an approximation does not give the same finite law. We therefore apply the approximation to nearby valid covariance arrays that surround the target. Small changes preserve this containment, so a positive mixture of their outputs matches the target exactly. This also permits smoothing the masses into a strictly positive density before taking the final mixture. The notation below specifies the finite set of moments that must be preserved.
+
+Let $m,N\ge1$ be integers. A retained covariance array consists of real
+numbers $C_{ij}(k)$, $1\le i,j\le m$, $|k|\le N-1$, with
+$C_{ji}(-k)=C_{ij}(k)$. Its block Toeplitz matrix is
+$\Gamma_N(C)=(C_{ij}(t-u))_{(t,i),(u,j)}$, $0\le t,u<N$.
+The cone $\MC_{m,N}$ contains the arrays for which $\Gamma_N(C)\succeq0$.
+Use the independent coordinates $C_{ii}(k)$, $0\le k<N$, and
+$C_{ij}(k)$, $i<j$, $|k|<N$. Their real dimension is
+\begin{equation}\label{eq:mc-dimension}
+ d_{\mathrm{mom}}=mN+\binom m2(2N-1)=m^2N-\frac{m(m-1)}2.
+\end{equation}
+Throughout, $\|C\|_{\mathrm{coord}}$ is the maximum absolute value of
+these independent coordinates. Each entry of $\Gamma_N(C)$ is one
+coordinate, possibly repeated. In particular
+\begin{equation}\label{eq:mc-entry-norm}
+ \|\Gamma_N(C)\|_{\mathrm{op}}\le mN\|C\|_{\mathrm{coord}}.
+\end{equation}
+Spectral densities are with respect to $\nu(d\omega)=d\omega/(2\pi)$
+on $\MT=\MR/(2\pi\mathbb Z)$, with moment convention
+$C_{ij}(k)=\int e^{ik\omega}\mu_{ij}(d\omega)$.
+For integer channel delays $d=(d_1,\ldots,d_m)$ put
+\[
+ D_d(\omega)=\operatorname{diag}(e^{-id_1\omega},\ldots,e^{-id_m\omega}).
+\]
+Thus $Y_i(t)=X_i(t-d_i)$ has spectral measure $D_d\mu D_d^*$ and
+\begin{equation}\label{eq:mc-delay-sign}
+ C^Y_{ij}(k)=C^X_{ij}(k-d_i+d_j).
+\end{equation}
+
+\begin{theorem}[Common hierarchical delays]\label{thm:mc-main}
+Let $C^{(1)},\ldots,C^{(s)}\in\MC_{m,N}$ be a nonempty finite collection
+with $\Gamma_N(C^{(c)})\succ0$. Write
+$\lambda_c=\lambda_{\min}(\Gamma_N(C^{(c)}))$ and
+$v_c=\max_i C^{(c)}_{ii}(0)$.
+If $m\ge2$, every integer $M\ge2$ satisfying
+\begin{equation}\label{eq:mc-threshold}
+ M-1>\pi(N+1)(2d_{\mathrm{mom}}-1)
+       \max_{1\le c\le s}\left(\frac{2mN v_c}{\lambda_c}+1\right)
+\end{equation}
+admits the following simultaneous realizations with the shared delay vector
+\begin{equation}\label{eq:mc-delays}
+ (d_1,\ldots,d_m)=(M,M^2,\ldots,M^{m-1},0).
+\end{equation}
+For each $c$ there is a real stationary reversible Gaussian process
+$X^{(c)}$, whose spectral density $S_c$ is a real, even, symmetric matrix
+trigonometric polynomial, such that $S_c(\omega)\succeq\epsilon I_m$ for
+all $\omega$ and a common $\epsilon>0$. The delayed process
+$Y^{(c)}_i(t)=X^{(c)}_i(t-d_i)$ has retained covariance exactly $C^{(c)}$.
+The density degrees have a common finite upper bound $L$, and each
+source is $L$-dependent. For every coordinate,
+\begin{equation}\label{eq:mc-variance}
+ \operatorname{Var}(X^{(c)}_i(t))=C^{(c)}_{ii}(0).
+\end{equation}
+Consequently these are exact realizations of the retained Gaussian laws,
+with zero added errors. Arbitrary constant mean vectors are preserved by
+assigning the same mean vectors to the sources. Each delay response has
+unit coefficient norm.
+
+For $m=1$ the same conclusion holds with $d_1=0$, without a restriction
+on $M$. For $N=1$ it holds for every prescribed vector of nonnegative
+integer delays, without condition~\eqref{eq:mc-threshold}.
+\end{theorem}
+
+\begin{proof}
+We first reduce the retained law to finitely many rank-one spectral masses. We then move their frequencies so the prescribed delays approximate their phases. Finally, convex mixtures correct the retained moments without a signed spectral perturbation that could destroy positivity.
+
+\emph{Finite spectral representation.}
+Every $C\in\MC_{m,N}$ has a finite positive semidefinite matrix spectral
+measure obeying $\mu(-A)=\overline{\mu(A)}$ and the prescribed retained
+moments. To see this, take a real Gram representation
+$C_{ij}(t-u)=\langle v_{t,i},v_{u,j}\rangle$ in a real space $E$ of
+dimension $\operatorname{rank}\Gamma_N(C)$. The map
+$v_{t,i}\mapsto v_{t+1,i}$ on the span with $0\le t<N-1$ is well defined
+and isometric: Toeplitz equality preserves the squared norm of every
+linear combination, including a zero combination. The domain and range have equal dimension. Thus extend this map to a
+real orthogonal map $U:E\to E$. When $N=1$, one may simply take $U=I_E$. Then
+$v_{t,i}=U^t v_{0,i}$ for the retained times. The spectral decomposition
+of the complexification of $U$ supplies the measure. More explicitly,
+with a complex inner product linear in its first argument, let
+$P_\omega$ be the eigenspace projection for $e^{i\omega}$ and set
+$W_{\omega,ij}=\langle P_\omega v_{0,i},P_\omega v_{0,j}\rangle$.
+These are Hermitian positive semidefinite matrices and
+$C_{ij}(k)=\sum_\omega e^{ik\omega}W_{\omega,ij}$.
+Realness of $U$ pairs conjugate eigenspaces. The endpoint matrices at
+$0$ and $\pi$ are real. There are at most $\dim E\le mN$ distinct nodes.
+
+Equivalently, write the real moments as a finite sum
+\begin{equation}\label{eq:mc-paired-atoms}
+ C_{ij}(k)=\sum_\ell\operatorname{Re}
+                (e^{ik\omega_\ell}v_{\ell,i}\overline{v_{\ell,j}}).
+\end{equation}
+Here a conjugate pair of matrix masses has first been combined into its
+half-circle mass and then split into rank-one matrices; endpoint masses
+can be split into real rank-one matrices. Each term in
+\eqref{eq:mc-paired-atoms} represents the full-circle measure
+$(vv^*\delta_\omega+\overline v v^{\mathsf T}\delta_{-\omega})/2$.
+In particular,
+\begin{equation}\label{eq:mc-rankone-budget}
+ \sum_\ell |v_{\ell,i}|^2=C_{ii}(0),\qquad
+ \sum_\ell |v_{\ell,i}||v_{\ell,j}|
+ \le\sqrt{C_{ii}(0)C_{jj}(0)}.
+\end{equation}
+
+\emph{Simultaneous phase approximation.}
+The retained moments change little under a small frequency displacement. The hierarchical delays make such a displacement sufficient to set one channel phase at a time, with decreasing effects on phases already set.
+Fix $m\ge2$, $M\ge2$, an arbitrary real representative $\omega$ of a
+frequency, and phases $p_1,\ldots,p_{m-1}$ on the unit circle. Starting
+with $\theta_0=\omega$, choose $\theta_j$ nearest to $\theta_{j-1}$ among
+the real solutions of $e^{-iM^j\theta_j}=p_j$. Their spacing is
+$2\pi/M^j$, so $|\theta_j-\theta_{j-1}|\le\pi/M^j$. Put
+$\theta=\theta_{m-1}$. Then
+\begin{align}
+ |\theta-\omega|&\le\sum_{j=1}^{m-1}\frac\pi{M^j}
+                         \le\frac\pi{M-1},\label{eq:mc-grid-freq}\\
+ |e^{-iM^i\theta}-p_i|
+ &\le M^i|\theta-\theta_i|
+ \le\pi\sum_{r=1}^{m-1-i}M^{-r}
+ \le\frac\pi{M-1},\quad 1\le i<m.\label{eq:mc-grid-phase}
+\end{align}
+The sum in the last line is empty for $i=m-1$, whose phase is exact.
+Frequencies are reduced modulo $2\pi$ only after this construction;
+no restriction to a half-circle is imposed on $\theta$.
+
+Apply this construction separately to each vector $v$ in
+\eqref{eq:mc-paired-atoms}. Multiplying $v$ by a global unit complex
+number does not change $vv^*$. If $v_m\ne0$, use this freedom to make
+$v_m$ real nonnegative. If $v_m=0$, use any global phase. Set
+$a_i=|v_i|$ and write $v_i=p_i a_i$, taking $p_m=1$ and assigning any
+unit phase to a zero coordinate. Thus $v=\operatorname{diag}(p)a$ with
+$a\in[0,\infty)^m$ even when some coordinates vanish. Give the source
+the real-even measure
+\[
+ \frac12 aa^{\mathsf T}\delta_\theta+
+ \frac12 aa^{\mathsf T}\delta_{-\theta}.
+\]
+Its delayed moment contribution is
+$\operatorname{Re}(e^{ik\theta}q_i\overline q_j)a_i a_j$, where
+$q_i=e^{-id_i\theta}$ and $q_m=1$. At a coincident reflected pair
+($\theta=0$ or $\pi$ modulo $2\pi$), the two half masses add to one
+mass, and every $q_i$ is real because $d_i$ is integral. The output mass
+there is therefore real and admissible. At every other frequency the
+reflected output mass is the conjugate of the first one. These
+observations also cover a frequency displaced across an endpoint.
+
+For $|k|\le N-1$, equations~\eqref{eq:mc-grid-freq}--\eqref{eq:mc-grid-phase}
+give
+\begin{align*}
+ |e^{ik\theta}q_i\overline q_j-e^{ik\omega}p_i\overline p_j|
+ &\le |k||\theta-\omega|+|q_i-p_i|+|q_j-p_j|\\
+ &\le\frac{\pi(N+1)}{M-1}.
+\end{align*}
+Combining all the real source atoms gives an output $\widetilde C$ with
+\begin{equation}\label{eq:mc-approx}
+ \|\widetilde C-C\|_{\mathrm{coord}}
+ \le\frac{\pi(N+1)V}{M-1},\qquad
+ \widetilde C_{ii}(0)=C_{ii}(0),\quad
+ V=\max_i C_{ii}(0),
+\end{equation}
+by~\eqref{eq:mc-rankone-budget}. The same delay vector works for every
+such array. Splitting into rank-one terms before moving frequencies is
+essential; no simultaneous diagonal dephasing of a general matrix mass
+has been assumed.
+
+\emph{A simplex with an explicit perturbation margin.}
+The approximate output need not equal the target. To correct this error while retaining positive source measures, we approximate several arrays around the target. A simplex is their convex hull. The margin below ensures that the target stays inside that hull after the approximation.
+For a target $C^{(c)}$, use the natural coordinate basis $E_1,\ldots,E_{d_{\mathrm{mom}}}$
+and write
+\[
+ a_c=\frac{\lambda_c}{2mN},\quad
+ B_c=v_c+a_c,\quad
+ V_{c,0}=C^{(c)}-a_c\sum_{j=1}^{d_{\mathrm{mom}}} E_j,\quad
+ V_{c,j}=C^{(c)}+a_cE_j\quad(1\le j\le d_{\mathrm{mom}}).
+\]
+Every matrix perturbation has operator norm at most $mNa_c=\lambda_c/2$
+by~\eqref{eq:mc-entry-norm}; hence all vertices are positive definite.
+Their maximal coordinate variances are at most $B_c$.
+This simplex contains the coordinate cube with center $C^{(c)}$ and
+radius
+\begin{equation}\label{eq:mc-radius}
+ \rho_c=\frac{a_c}{2d_{\mathrm{mom}}-1}.
+\end{equation}
+Indeed the barycentric coordinates of displacement $x$ are
+\[
+ \alpha_0=\frac{1-\sum_j x_j/a_c}{d_{\mathrm{mom}}+1},\qquad
+ \alpha_j=\alpha_0+x_j/a_c.
+\]
+For $\|x\|_\infty\le\rho_c$, the numerator of $\alpha_0$ is at least
+$1-d_{\mathrm{mom}}/(2d_{\mathrm{mom}}-1)\ge0$, and the numerator of $\alpha_j$ is at least
+$1-(2d_{\mathrm{mom}}-1)/(2d_{\mathrm{mom}}-1)=0$. These inequalities also hold for $d_{\mathrm{mom}}=1$.
+
+If each vertex of this simplex moves by at most $\eta<\rho_c$ in
+coordinate norm, its new convex hull contains the cube of radius
+$\rho_c-\eta$ about $C^{(c)}$. For each linear functional $u$, the hull's support function drops by at most
+$\eta\|u\|_1$. The original cube provides support
+$u\cdot C^{(c)}+\rho_c\|u\|_1$. The
+support-function characterization of containment proves the claim.
+In particular the perturbed hull is full dimensional. Since it has
+$d_{\mathrm{mom}}+1$ vertices, they are affinely independent and $C^{(c)}$ has strictly
+positive barycentric coordinates.
+
+Apply~\eqref{eq:mc-approx} to the vertices. The coordinate errors are at
+most $\eta_c=\pi(N+1)B_c/(M-1)$. Condition~\eqref{eq:mc-threshold} is
+exactly $\eta_c<\rho_c$ for each $c$. Thus every target belongs to the
+strict interior of a simplex of outputs of finite reversible source
+measures under the prescribed delay vector. The strict inequality leaves a positive margin for the next step. Without that margin, smoothing could move the output vertices so that their convex hull no longer contains the target.
+
+\emph{Positive polynomial source densities at fixed delays.}
+The convex hull currently contains outputs of atomic source measures. Smoothing gives polynomial densities and adding white power makes them strictly positive. Both operations change the moments, so they must fit inside the remaining containment margin before the exact mixture is chosen.
+Now hold $M$ and the delay vector fixed. Denote the source measure at a
+perturbed vertex by $\mu_{c,j}$. For $L\ge0$ let
+\[
+ F_L(\omega)=\frac1{L+1}\left|\sum_{r=0}^L e^{ir\omega}\right|^2
+   =\sum_{|r|\le L}\left(1-\frac{|r|}{L+1}\right)e^{ir\omega}.
+\]
+This is a real, even, nonnegative trigonometric polynomial of integral
+one against $\nu$. For $\epsilon>0$ define
+\begin{equation}\label{eq:mc-smooth}
+ S_{c,j}^{L,\epsilon}(\omega)
+   =\int F_L(\omega-\theta)\mu_{c,j}(d\theta)+\epsilon I_m.
+\end{equation}
+These are real-even symmetric polynomial densities bounded below by
+$\epsilon I_m$. For each fixed integer $r$, convolution multiplies the
+$r$th source moment by $1-|r|/(L+1)$ when $L\ge|r|$. Added white power
+changes only the zero-lag diagonal moments. By~\eqref{eq:mc-delay-sign},
+only source lags of absolute value at most
+\begin{equation}\label{eq:mc-Q}
+ Q=N-1+M^{m-1}
+\end{equation}
+enter the retained output moments. Thus the smoothed output vertices
+converge to their unsmoothed counterparts as $L\to\infty$ and
+$\epsilon\to0$. There are finitely many vertices, so finite common
+$L$ and positive common $\epsilon$ preserve all strict simplex
+containments. With their resulting positive barycentric coefficients
+$\beta_{c,j}$, put $S_c=\sum_{j=0}^{d_{\mathrm{mom}}}\beta_{c,j}S_{c,j}^{L,\epsilon}$.
+The coefficients sum to one, so $S_c\succeq\epsilon I_m$, and linearity
+of the output moment map gives exactly $C^{(c)}$.
+
+These matrix densities define stationary real Gaussian processes.
+Their source covariance matrices are real symmetric and even in the
+lag, which makes their Gaussian finite-dimensional distributions
+invariant under time reversal. Polynomial degree at most $L$ makes
+all source covariances at $|k|>L$ vanish. Joint Gaussianity then gives
+independence for any finite sets of source variables separated in time
+by more than $L$; a monotone-class argument gives independence of the
+corresponding generated sigma fields. Thus the sources are $L$-dependent.
+At every frequency, $D_d$ is diagonal unitary and hence leaves the
+diagonal spectral measures unchanged. Exact matching of the retained
+zero-lag diagonal moments therefore proves~\eqref{eq:mc-variance}.
+
+\emph{Scalar records and records of length one.}
+For $m=1$, the finite spectral representation has an even scalar
+measure and already gives a reversible source at every
+simplex vertex without a phase approximation or delay. The same
+smoothing and simplex correction complete the argument.
+For $N=1$ and any fixed prescribed integer delay vector, represent each
+positive definite simplex vertex by its matrix mass at frequency zero.
+All delay factors are one there, so the vertex is already represented
+exactly by a real-even source measure. Holding the delays fixed,
+smoothing and simplex correction again give the claimed conclusion.
+For zero delays alone, white sources suffice directly.
+\end{proof}
+
+\begin{proposition}[Uniform bounds at a fixed chosen delay]\label{prop:mc-uniform}
+Fix $m\ge2$, $N\ge1$, $\lambda_*>0$ and $v_*<\infty$. The preceding
+conclusion applies to every target satisfying
+$\Gamma_N(C)\succeq\lambda_*I_{mN}$ and $\max_iC_{ii}(0)\le v_*$,
+using a common delay parameter $M$ whenever
+\[
+ M\ge2,\qquad M-1>\pi(N+1)(2d_{\mathrm{mom}}-1)
+                          \left(\frac{2mN v_*}{\lambda_*}+1\right).
+\]
+The targets may be an infinite family; their sources may differ. In
+particular this applies uniformly to every compact subset of the
+positive definite moment cone. For each fixed such $M$, the sources
+can also have common finite polynomial degree and a common positive
+spectral lower bound. One sufficient explicit choice is as follows:
+\begin{gather*}
+ a=\frac{\lambda_*}{2mN},\quad B=v_*+a,\quad
+ \rho=\frac a{2d_{\mathrm{mom}}-1},\quad
+ \eta=\frac{\pi(N+1)B}{M-1},\quad b=\rho-\eta>0,\\
+ Q=N-1+M^{m-1},\qquad \epsilon=\frac b3,\qquad
+ L\ge Q,\qquad L+1>\frac{3QB}{b}.
+\end{gather*}
+Every source obtained by the construction then obeys
+$S_C(\omega)\succeq\epsilon I_m$ and has degree at most $L$.
+These are sufficient bounds, not minimum resource requirements; they
+depend on the fixed chosen $M$.
+\end{proposition}
+\begin{proof}
+Use the same $a,B,\rho$ for the simplex about every target. The atomic
+approximation preserves each source diagonal mass, so the source
+measure at every vertex has coordinate variances at most $B$. For any
+integer $r$, its matrix moment satisfies
+\[
+ |\widehat\mu_{ij}(r)|\le
+   \sqrt{\widehat\mu_{ii}(0)\widehat\mu_{jj}(0)}\le B.
+\]
+For the finite real source measures constructed above, this follows
+directly by summing the absolute values of their rank-one contributions
+and applying Cauchy--Schwarz. At a required source lag $|r|\le Q$,
+Fej\'er smoothing therefore changes a moment by at most $QB/(L+1)$.
+The added white density changes each output coordinate by at most
+$\epsilon$; for diagonal delays it affects only a zero-lag diagonal
+coordinate. The total smoothed vertex displacement from the original
+simplex is consequently at most
+\[
+ \eta+\frac{QB}{L+1}+\epsilon
+ <\eta+\frac b3+\frac b3<\rho.
+\]
+The simplex argument applies separately to every target with the same
+$M,L,\epsilon$. Compactness is not otherwise needed: a compact subset
+of the positive definite cone supplies the displayed uniform eigenvalue
+and variance bounds by continuity.
+\end{proof}
+
+\paragraph{Scope.}
+The theorem concerns exact finite Gaussian record laws. It permits the
+source law to vary with the target and with the selected delays. It does
+not assert equality to a prescribed full-process law, a smallest delay,
+a source range independent of $M$, or equality of non-Gaussian laws
+from covariance matching. Its maximal constructed delay $M^{m-1}$ is
+a sufficient choice. Polynomial source spectra make every covariance vanish beyond a finite lag.
+
+\subsection{Limits of the finite-record construction}
+The rank-one decomposition cannot in general be replaced by dephasing
+a whole matrix mass. For example, with $r=2/5$ the Hermitian matrix
+\[
+ W=\begin{pmatrix}1&r&-ir\\r&1&r\\ir&r&1\end{pmatrix}
+\]
+has least eigenvalue at least $1-2r=1/5$. Its cycle product
+$W_{12}W_{23}W_{31}=ir^3$ is invariant under diagonal unitary
+congruence. A real symmetric matrix has a real cycle product, so no
+such congruence makes $W$ real. Moving its rank-one pieces separately
+avoids this obstruction.
+
+Strict positive definiteness of the retained target is necessary for
+the asserted positive source floor. If $S_X\succeq\epsilon I_m$, then
+$D_dS_XD_d^*\succeq\epsilon I_m$. For any block vector $u$, integration
+of its Fourier polynomial and Parseval's identity give
+$u^{\mathsf T}\Gamma_N(C^Y)u\ge\epsilon\|u\|_2^2$.
+A singular retained covariance therefore cannot have this type of
+realization. This does not exclude realizations with singular spectra.
+
+A prescribed full-process spectrum imposes further restrictions.
+Consider a bivariate spectrum with unit diagonal and cross entry
+\[
+ f(\omega)=\frac14\left(1+\frac i2\sin\omega\right).
+\]
+It has the real-process conjugation symmetry and is uniformly positive,
+since $|f(\omega)|\le\sqrt5/8<1$. A reversible-source explanation by
+integer delays would require $e^{i\Delta\omega}f(\omega)$ to be real,
+where $\Delta=d_1-d_2\in\mathbb Z$. The derivative of its imaginary
+part at zero is $(\Delta+1/2)/4$, which never vanishes for integer
+$\Delta$. Hence this full-process law has no such explanation, although
+every finite retained covariance is positive definite and satisfies
+Theorem~\ref{thm:mc-main}. The source and the unobserved output extension
+may depend on the chosen finite record.
+
+The source-degree bound in Proposition~\ref{prop:mc-uniform} also must
+depend on the selected delay. For $m\ge2$, fix a temporally white
+positive definite target whose contemporaneous covariance is the identity except for
+$C_{1m}(0)=C_{m1}(0)=r$, with $0<|r|<1$. Under the hierarchical delays,
+exactness requires $C^X_{1m}(-M)=r$. A polynomial source spectrum of
+degree $L$ has zero moments at all lags of magnitude greater than $L$,
+so necessarily $L\ge M$. Thus no bound independent of $M$ is possible,
+even for a singleton compact family of targets. The bounds uniform over
+targets in Proposition~\ref{prop:mc-uniform} hold at each fixed $M$.
+
+\subsection{A linear-delay construction under an observable covariance margin}\label{sec:linear-delay}
+A stronger condition on the retained covariances permits an explicit construction with linearly spaced delays. The comparison matrix below combines lower bounds for the auto spectra with absolute bounds for the cross spectra. Its positive definiteness is sufficient to keep the constructed source spectrum positive. This gives a direct construction for a smaller covariance class than the universal theorem.
+
+For each condition $c$, put $H=N-1$, $v_{ci}=C^{(c)}_{ii}(0)$ and define
+\[
+a_{ci}=v_{ci}-2\sum_{k=1}^{H}|C^{(c)}_{ii}(k)|,\qquad
+(B_c)_{ij}=2\sum_{k=-H}^{H}|C^{(c)}_{ij}(k)|\quad(i\ne j),
+\]
+with $(B_c)_{ii}=0$. Let
+\[
+Q_c=\operatorname{diag}(a_{c1},\ldots,a_{cm})-B_c.
+\]
+Assume $N,m\ge2$ and $Q_c\succ0$ in every condition. This sufficient condition uses only retained covariances. Positive definiteness of the observed record alone does not imply this condition. The simpler inequalities $a_{ci}>\sum_{j\ne i}(B_c)_{ij}$ imply $Q_c\succ0$ by strict diagonal dominance.
+
+\begin{theorem}[Direct positive spectra with linearly spaced delays]\label{thm:linear-delay}
+For any nonempty finite family satisfying the displayed condition, the common
+channel delays
+\[
+ d_i=(m-i)(N-1),\qquad 1\le i\le m,
+\]
+realize all retained laws exactly with zero errors and reversible
+Gaussian sources whose real symmetric even trigonometric polynomial spectral
+densities have degree at most $m(N-1)$ and are bounded below by
+$\gamma I_m$, where $\gamma=\min_c\lambda_{\min}(Q_c)>0$.
+Source coordinate variances equal the observed variances. In particular
+the maximum delay is $(m-1)(N-1)$, linear in the retained horizon at
+fixed channel count.
+\end{theorem}
+\begin{proof}
+It suffices to construct one condition; omit its superscript. Put
+$H=N-1$ and $\Delta_{ij}=d_i-d_j=(j-i)H$ for $i<j$.
+Define
+\[
+ S_{ii}(\omega)=v_i+2\sum_{k=1}^{H}C_{ii}(k)\cos(k\omega).
+\]
+For $i<j$, the numbers $n_k=\Delta_{ij}-k$, $-H\le k\le H$,
+are distinct nonnegative integers. Define
+\[
+ S_{ij}(\omega)=S_{ji}(\omega)
+ =\sum_{k=-H}^{H}(2-\mathbf1_{n_k=0})C_{ij}(k)\cos(n_k\omega).
+\]
+Fourier orthogonality against $d\omega/(2\pi)$ gives source moment
+$R_{ij}(k-\Delta_{ij})=C_{ij}(k)$ for each retained $k$.
+The coefficient one at frequency zero is required because its integral
+is one, whereas $\cos^2(n\omega)$ integrates to $1/2$ for $n>0$.
+The diagonal source moments also match the observed auto moments, which
+pure delays preserve. Symmetry and stationarity give the corresponding
+$j,i$ output entries.
+
+Pointwise, $S_{ii}(\omega)\ge a_i$ and $|S_{ij}(\omega)|\le B_{ij}$. For every real vector $u$, write $|u|$ for its componentwise absolute value. Then
+\[
+u^{\mathsf T}S(\omega)u
+\ge\sum_i a_i u_i^2-\sum_{i\ne j}B_{ij}|u_i||u_j|
+=|u|^{\mathsf T}Q|u|
+\ge\lambda_{\min}(Q)\|u\|_2^2.
+\]
+This positive real-even density defines a stationary reversible Gaussian
+source. Its degree is at most
+$\max_{i<j}(\Delta_{ij}+H)=mH$. Thus its covariances vanish beyond
+$mH$, and its Gaussian process is $mH$-dependent. All zero-lag diagonal
+moments equal $v_i$. Apply this construction independently to each
+condition, preserving the same delays and taking the minimum floor.
+\end{proof}
+The comparison-matrix condition is unchanged by nonzero rescaling of individual channels. If $D$ is the diagonal scaling matrix, the transformed comparison matrix is $|D|Q_c|D|$, so positive definiteness is equivalent. This condition can hold when a row-dominance inequality fails. For example, white auto-covariances with variances $(1,9)$ and cross lags $(C_{12}(-1),C_{12}(0),C_{12}(1))=(0.02,1,0.01)$ give $Q=\left(\begin{smallmatrix}1&-2.06\\-2.06&9\end{smallmatrix}\right)\succ0$, but its first row is not diagonally dominant. The explicit construction then also proves validity of this retained covariance law. The result concerns this specified sufficient class; the universal theorem also covers targets outside it.
+
+
+\begin{corollary}[Exact minimum delay span under the comparison-matrix condition]\label{cor:generic-span}
+In addition to $Q_c\succ0$ in every condition, suppose that for
+ every channel pair $i<j$ and every integer $|\Delta|\le N-2$, some
+condition $c$ has
+\[
+ C^{(c)}_{ij}(\Delta-1)\ne C^{(c)}_{ij}(\Delta+1).
+\]
+Then the minimum span $\max_i d_i-\min_i d_i$ among pure-delay explanations that use one vector across conditions is exactly $(m-1)(N-1)$. The same minimum is attained by
+zero-error strictly positive polynomial sources. For $m=2$, the minimum
+absolute relative delay is exactly $N-1$.
+The additional inequalities hold outside a finite union of proper
+linear subspaces of the retained-moment coordinate space; thus they
+hold for Lebesgue-almost-every tuple in this open comparison-matrix class.
+\end{corollary}
+\begin{proof}
+A compatible vector cannot have $|d_i-d_j|\le N-2$, since the specified
+condition would violate its retained reflection equation. Hence every
+pair of delay values is separated by at least $N-1$. Sort the $m$
+delays and add the $m-1$ adjacent gaps to obtain span at least
+$(m-1)(N-1)$. The explicit linearly spaced construction attains it.
+Each exceptional case fixes a channel pair and relative delay and
+requires the same nontrivial linear equality in all conditions. There
+are finitely many such cases. Their union has Lebesgue measure zero in
+the independent retained coordinates. The positive-definiteness conditions define
+an open set, so restricting to it preserves this almost-everywhere
+statement. This is a statement about this specified covariance class
+and coordinate measure, not a frequency claim about vector autoregressive (VAR) models,
+physical processes, or the supplied numerical sample.
+\end{proof}

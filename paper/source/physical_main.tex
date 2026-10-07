@@ -1,0 +1,15 @@
+\section{What sampling hides}\label{sec:sampling}
+Detector control leaves motion between samples unresolved. This missing motion can change dissipation without changing the sampled law. A rotating object can complete a whole turn between frames and appear stationary under a stroboscope. Sampling therefore cannot distinguish frequencies that differ by whole turns between observations. The rotational Gaussian model gives an exact random-process version of this effect.
+
+Set $\nu=2\pi/\sqrt3$ in the model of Sec.~\ref{sec:main-cycle}. Rotation then completes a full turn per sample, and the transition is $I/4$. The sampled Gaussian source is reversible although its continuous-time probability current is nonzero. The detector-phase cancellation remains valid, but it cannot restore time order absent from the source samples.
+
+Entropy production measures thermodynamic irreversibility in the system and its surroundings. The continuous-time model, including the motion between samples, is needed to calculate its rate. For overdamped coordinates with even reversal parity, the stationary entropy-production rate is~\cite{seifert2012}
+\begin{equation}
+ \sigma=\operatorname{tr}\{(A-D\Sigma^{-1})^{\mathsf T}
+ D^{-1}(A-D\Sigma^{-1})\Sigma\}.
+\end{equation}
+It measures irreversibility in units of $k_B$ per unit time and vanishes at detailed balance for these models. The rotational rate is $6\nu^2/\lambda$. More generally,
+\begin{equation}
+ \nu_k=(2\pi/3+2\pi k)/\sqrt3,\qquad k\in\mathbb Z,
+\end{equation}
+gives the same sampled transition and innovation covariance for every integer $k$, while $6\nu_k^2/\lambda$ grows without bound. SM Sec.~S7.4 derives both the aliasing identity and the entropy rates. Thus even complete knowledge of the sampled law cannot determine continuous-time entropy production without additional dynamical or bandwidth information.

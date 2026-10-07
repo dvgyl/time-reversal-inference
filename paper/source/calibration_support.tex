@@ -1,0 +1,233 @@
+\section{Calibrated channel-specific linear filters}\label{sec:filterextension}
+
+The delay constructions leave source phase and detector phase indistinguishable at the retained times. Calibration restricts the detector part. After removing the anchor delays, we take the real part of the filtered spectrum. This operation gives a reversible source spectrum and preserves the observed auto covariances. The removed imaginary part is the quantity that response calibration must bound. The comparator record can still contain unequal anchor delays; reversibility belongs to its source.
+
+This comparator gives a population tolerance. Response confidence regions must then supply a phase allowance for that tolerance and response-shape information for a separate covariance envelope. These are different requirements. No source bandwidth bound is needed when calibration covers all possible source frequencies. When singular spectra are allowed, that coverage must include spectral atoms.
+
+\subsection{Model and phase calibration}
+
+Let $X$ be a real stationary reversible Gaussian source with $m$ channels
+and common reversal parity. Its matrix spectral measure $\mu$ is real,
+symmetric, even, and positive semidefinite. The frequency domain is either
+$\mathbb R$ or the discrete-time torus. On the torus, all delays below are
+integers. Channel $i$ has a measurable transfer function $H_i$ such that
+$H_i(-\omega)=\overline{H_i(\omega)}$. Assume that its mean-square output
+exists, with variance
+\[
+ A_i=\int |H_i(\omega)|^2\mu_{ii}(d\omega)<\infty.
+\]
+At integer times observe $Y_i=(H_iX_i)+E_i$. The stationary scalar errors
+have zero covariance with the source and with each other at every lag.
+Their scalar auto covariances can be arbitrary. The finite-sample tests require jointly Gaussian observed records. The population covariance
+bounds do not require Gaussian errors.
+
+Write $C_{ij}(k)=\operatorname{Cov}(Y_i(t+k),Y_j(t))$. The filtered signal
+has spectral measure
+\[
+ \nu_{ij}(d\omega)=H_i(\omega)\overline{H_j(\omega)}\mu_{ij}(d\omega).
+\]
+Orthogonality gives $A_i\le C_{ii}(0)$. Thus an observed variance ceiling
+$D_i\ge C_{ii}(0)$ bounds filtered signal variance. It need not bound the
+unfiltered source variance. No inverse gain bound is assumed.
+
+Fix an integer anchor vector $d$ and put $\Delta_{ij}=d_i-d_j$. Define
+\begin{equation}\label{eq:filterphase}
+ s_{ij}(\omega)=
+ \frac{\operatorname{Im}\{e^{i\Delta_{ij}\omega}
+ H_i(\omega)\overline{H_j(\omega)}\}}
+ {|H_i(\omega)H_j(\omega)|},\qquad
+ r_{ij}(u)=\sup_{\omega\in\mathcal F}
+ |\sin(u\omega)s_{ij}(\omega)|.
+\end{equation}
+Set $s_{ij}=0$ at transfer-product zeros. The supplied set $\mathcal F$
+must contain the source spectral support. Use $\mathcal F=\mathbb R$
+when no support restriction is available. The supremum can also cover a
+calibrated family of filters. Bounds must hold at spectral atoms. A bound
+that holds only Lebesgue-almost-everywhere is insufficient when singular
+source spectra are allowed.
+
+The quantity $s_{ij}$ is the sine of relative phase after anchor delay
+removal. A phase difference of $\pi$ has zero error. This convention is
+necessary because a reversible cross spectrum can have either sign.
+
+\subsection{An exact comparator}
+
+Taking the real part must preserve a valid matrix spectrum, not only remove the imaginary entries. Positive semidefiniteness supplies this property and gives a comparator for all channel pairs at once. The reflected-average identity below then expresses its covariances directly in terms of the recorded covariances.
+
+\begin{theorem}[Filter comparator]\label{thm:filtercomparator}
+There is a reversible stationary Gaussian source which, under the anchor
+delays and the same scalar-error auto covariances, gives a comparator
+$\widetilde C$ satisfying
+\begin{align}
+ \widetilde C_{ii}(k)&=C_{ii}(k),\nonumber\\
+ \widetilde C_{ij}(k)&=
+ \frac{C_{ij}(k)+C_{ij}(2\Delta_{ij}-k)}2,\quad i\ne j.
+ \label{eq:filtercomparatoridentity}
+\end{align}
+For every cross entry,
+\begin{equation}\label{eq:filterentrybound}
+ |C_{ij}(k)-\widetilde C_{ij}(k)|
+ \le r_{ij}(k-\Delta_{ij})\sqrt{A_iA_j}
+ \le r_{ij}(k-\Delta_{ij})\sqrt{D_iD_j}.
+\end{equation}
+In particular, the cross covariance at $k=\Delta_{ij}$ is unchanged.
+\end{theorem}
+
+\begin{proof}
+Dominate $\mu$ by its even trace measure $\theta$. Its Radon--Nikodym
+matrix $M=d\mu/d\theta$ is real, symmetric, even, and positive semidefinite
+almost everywhere. Put
+\[
+ K(\omega)=\operatorname{diag}(e^{id_i\omega}H_i(\omega)),\qquad
+ Q(\omega)=K(\omega)M(\omega)K(\omega)^*.
+\]
+The matrix $Q$ is Hermitian positive semidefinite and satisfies
+$Q(-\omega)=\overline{Q(\omega)}$. Its entrywise real part is real
+symmetric and positive semidefinite. Indeed, for each real vector $v$,
+\[
+ v^{\mathsf T}\operatorname{Re}Qv=\operatorname{Re}(v^*Qv)\ge0.
+\]
+Its diagonal equals the diagonal of $Q$. Therefore
+\[
+ \widetilde\mu(d\omega)=\operatorname{Re}Q(\omega)\theta(d\omega)
+\]
+is a real-even positive-semidefinite matrix measure. Each diagonal is
+finite by the assumption $A_i<\infty$. The cross measures are finite by
+the positive-semidefinite inequality and Cauchy--Schwarz. This measure
+defines a reversible stationary Gaussian source. Apply the anchor delays
+and retain the scalar-error auto covariances. Independent stationary
+Gaussian errors with those scalar covariances give a Gaussian comparator.
+
+The cross difference measure is
+$i e^{-i\Delta_{ij}\omega}\operatorname{Im}Q_{ij}\,d\theta$.
+Its covariance at lag $k$ equals
+\begin{equation}\label{eq:filtererrorintegral}
+ C_{ij}(k)-\widetilde C_{ij}(k)=
+ -\int\sin((k-\Delta_{ij})\omega)
+       \operatorname{Im}Q_{ij}(\omega)\,\theta(d\omega).
+\end{equation}
+The imaginary cosine integral vanishes by oddness. The identity
+$\operatorname{Re}Q=(Q+\overline Q)/2$ also gives
+equation~\eqref{eq:filtercomparatoridentity}.
+
+Since $M$ is real,
+\[
+ \operatorname{Im}Q_{ij}=|H_iH_j|s_{ij}M_{ij}.
+\]
+The pointwise inequality $|M_{ij}|\le\sqrt{M_{ii}M_{jj}}$ implies
+\[
+ \int |H_iH_jM_{ij}|\,d\theta
+ \le\sqrt{\int |H_i|^2M_{ii}\,d\theta
+                \int |H_j|^2M_{jj}\,d\theta}
+ =\sqrt{A_iA_j}.
+\]
+This proves equation~\eqref{eq:filterentrybound}. The comparator leaves
+every signal auto spectrum unchanged. The scalar errors add the same auto
+covariances and no cross covariances.
+\end{proof}
+
+The reflected-average construction itself applies to any stationary
+matrix spectral measure. Source reversibility is needed to bound its
+imaginary part by the calibrated transfer phase. The comparator preserves
+channel auto spectra. It can reduce cross-spectrum magnitudes and need
+not belong to the calibrated filter family. It is not an inverse filter.
+
+\subsection{Reflection with a sharp population constant}
+
+For one pair put $\Delta=\Delta_{ij}$. Choose an integer $h\ge1$ with
+$|\Delta|+h\le T-1$. Let $a=\max(\Delta,0)$, $e=\max(-\Delta,0)$ and
+\[
+ U=Y_i(a+h)+Y_i(a),\qquad W=Y_j(e)-Y_j(e+h).
+\]
+Covariance expansion and equation~\eqref{eq:filtererrorintegral} give
+\begin{align*}
+ \kappa:=\operatorname{Cov}(U,W)
+ &=C_{ij}(\Delta+h)-C_{ij}(\Delta-h)\\
+ &=-2\int\sin(h\omega)|H_iH_j|s_{ij}M_{ij}\,d\theta.
+\end{align*}
+Consequently,
+\begin{equation}\label{eq:filterreflection-bound}
+ |\kappa|\le b:=2r_{ij}(h)\sqrt{D_iD_j}.
+\end{equation}
+
+The constant is sharp in the spectral-measure class when only the filters and filtered signal variances are fixed. This class permits line spectra. Suppose $\omega_*$ attains the supremum and both gains are nonzero
+there. Put a real rank-one source measure at $\pm\omega_*$. Assign total
+diagonal masses $D_i/|H_i(\omega_*)|^2$ and
+$D_j/|H_j(\omega_*)|^2$ across the pair. Split each mass equally between
+the two distinct frequencies. Choose either sign for the total cross mass and use zero errors.
+The observed variances are $D_i,D_j$, and equality holds in
+equation~\eqref{eq:filterreflection-bound}. A sequence of atoms approaches
+the constant if the supremum is not attained. Each source in the sequence
+has finite variance. A zero bound is trivial, so endpoint cases with zero
+sine do not require a distinct atom pair.
+
+
+\subsection{Coefficient confidence and recording error}\label{cal16:coefficients}
+The population tolerance depends on the true response. A fitted response alone is insufficient because coefficient error can change the relative phase. The coefficient ball below covers that error before any frequency bound is computed. A recording correction enlarges the same ball when the calibration response is rounded.
+Known-input calibration has model $y=Xh+e$, where $X$ is a deterministic full-rank matrix with $m$ rows and $p$ columns. The coefficient positions are distinct fixed integers. Assume $e\sim N(0,\sigma^2I_m)$, $\sigma>0$, and $\nu=m-p>0$. The response remains unchanged between calibration and testing. If an unknown constant offset is fitted, project $X$ and $y$ onto the orthogonal complement of the constant vector. Require the projected design to have full column rank and use $\nu=m-p-1>0$.
+
+Let $G=X^{\mathsf T}X$, $\widehat h=G^{-1}X^{\mathsf T}y$, and $\mathrm{RSS}=\|y-X\widehat h\|^2$. Choose a positive lower bound $\ell_G\le\lambda_{\min}(G)$. For example, $\ell_G=1/\|G^{-1}\|_\infty$ is valid because $G^{-1}$ is symmetric. At $t=\log(2/\alpha_H)$, Gaussian projection and chi-square bounds give
+\begin{equation}
+ e_H^2=\frac{\mathrm{RSS}\,[p+2\sqrt{pt}+2t]}
+ {\ell_G[\nu-2\sqrt{\nu t}]}\label{cal16:radius}
+\end{equation}
+as a coefficient-radius square with failure probability at most $\alpha_H$, provided the denominator is positive. Indeed, the fitted-error squared norm divided by $\sigma^2$ has a chi-square law with $p$ degrees of freedom. The residual squared norm divided by $\sigma^2$ has a chi-square law with $\nu$ degrees of freedom. Their upper and lower events each fail with probability at most $e^{-t}$. On their intersection, $\|\widehat h-h\|_2\le e_H$. A union bound suffices. The implementation encloses every numerical quantity in the indicated direction.
+
+For a perturbed calibration response $z$ with $|z_j-y_j|\le\eta_H$, the design remains exact. Orthogonal projection gives
+\[
+ \sqrt{\mathrm{RSS}(y)}\le\sqrt{\mathrm{RSS}(z)}+\sqrt m\eta_H,
+ \qquad
+ \|\widehat h(y)-\widehat h(z)\|_2\le\frac{\sqrt m\eta_H}{\sqrt{\ell_G}}.
+\]
+Thus a valid radius about the recorded fit is
+\begin{equation}
+ e_H^+=\sqrt{\frac{(\sqrt{\mathrm{RSS}(z)}+\sqrt m\eta_H)^2
+ [p+2\sqrt{pt}+2t]}{\ell_G[\nu-2\sqrt{\nu t}]}}
+ +\frac{\sqrt m\eta_H}{\sqrt{\ell_G}}.\label{cal16:rounded-radius}
+\end{equation}
+On the ideal calibration coverage event, the enlarged ball about the recorded fit still contains the true coefficients. This implication requires no stochastic model for the perturbation. Finite impulse-response confidence sets and their use for frequency bounds are established methods~\cite{weyerfir,csajisps,bomboisfrequency}.
+
+\subsection{Phase and response-shape bounds}\label{cal16:phase-shape}
+Phase controls the null contrast, whereas response shape controls how strongly filtering can concentrate the source spectrum. Both bounds must hold over the entire covered coefficient ball. The simple scalar-reference construction bounds them directly. The grid construction below extends phase coverage between tested frequencies.
+The study has a real scalar reference response and an estimated second response. On a coefficient ball of radius $e_H^+$, let $b_+$ bound the sum of absolute coefficients away from position zero. Let $h_-$ bound the absolute position-zero coefficient from below. If $h_->b_+$, then
+\[
+ |\operatorname{Im}H_2(\omega)|\le b_+,\qquad
+ |H_2(\omega)|\ge h_--b_+.
+\]
+Consequently $\widehat r=\min\{1,b_+/(h_--b_+)\}$ is valid at every frequency. If the denominator is nonpositive, use the universal bound one. The unknown sign of the scalar reference does not change the absolute phase ratio.
+
+A response with $p$ coefficients satisfies
+$1\le C_H:=\sup_\omega|H(\omega)|^2/\|h\|_2^2\le p$ when $h\ne0$. Let
+\[
+ u_H=\|\widehat h\|_1+\sqrt p\,e_H^+,\qquad
+ v_H=\|\widehat h\|_2-e_H^+.
+\]
+When $v_H>0$, use $\widehat C_H=\min\{p,\max\{1,(u_H/v_H)^2\}\}$. Otherwise use $p$. Triangle inequalities prove $C_H\le\widehat C_H$ on the same coefficient event. A zero response uses the universal branch.
+
+For more general response pairs, a frequency grid with a derivative margin provides a direct relative-phase construction. Write the aligned response as $H_i(\omega)=\sum_a h_{ia}e^{-ik_{ia}\omega}$. If $\|h_i-\widehat h_i\|_1\le E_i$ and the grid's maximum nearest-point distance is $d_\omega$, define
+\[
+ u_i=E_i+d_\omega\sum_a|k_{ia}\widehat h_{ia}|.
+\]
+At grid point $\omega_j$, let $p_j=\widehat H_1(\omega_j)\overline{\widehat H_2(\omega_j)}$ and
+$\tau_j=u_1|\widehat H_2|+u_2|\widehat H_1|+u_1u_2$.
+The true product in that grid cell is within $\tau_j$ of $p_j$. Use
+\[
+ a_j=\begin{cases}
+ \min\{1,(|\operatorname{Im}p_j|+\tau_j)/(|p_j|-\tau_j)\},&|p_j|>\tau_j,\\
+ 1,&|p_j|\le\tau_j.
+ \end{cases}
+\]
+Then $\max_j a_j\min\{1,|\sin\omega_j|+d_\omega\}$ is an all-frequency phase bound for the lag-one contrast. The derivative bound and product expansion prove coverage throughout each cell. All cells use one coefficient event, so no further frequency allocation is needed. Transfer zeros use the universal branch or the zero-integrand convention. This construction need not converge at arbitrary common zeros.
+
+\subsection{From spectral information to a full covariance bound}\label{cal16:covariance}
+Phase calibration places no bound on temporal dependence. To obtain one, the source spectral floor compares filtered variance with filter energy, and the ceiling bounds the filtered spectral peak. Positive semidefiniteness then controls cross-channel dependence. The error spectrum needs its own ceiling because it is not constrained by the source ratio.
+Let the normalized source marginal densities satisfy $m_0\le g_i\le M_0$, with $\mathcal S=M_0/m_0$. The positive-semidefinite two-channel source spectral matrix is at most twice its diagonal. If $v_{XH,i}$ is the filtered source variance, its marginal spectral peak is at most $\mathcal S C_{H,i}v_{XH,i}$. Let mutually orthogonal source-independent errors have variances $\tau_i^2$ and density bounds $f_{E,i}\le J_i\tau_i^2$, with $J_i\ge1$. Define
+\[
+ q_0=\max\{2\mathcal S\max_i C_{H,i},\max_iJ_i\}.
+\]
+The full observed density is at most $q_0\operatorname{diag}(v_1,v_2)$ because its diagonal envelope in channel $i$ is
+\[
+ 2\mathcal S C_{H,i}v_{XH,i}+J_i\tau_i^2
+ \le q_0(v_{XH,i}+\tau_i^2)=q_0v_i.
+\]
+Fourier integration gives the full recording covariance bound. Replacing each shape factor by its coefficient-event upper bound preserves coverage. A nonzero error spectral atom cannot satisfy this density assumption. White marginal source spectra alone do not imply independent multichannel samples.

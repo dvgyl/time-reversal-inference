@@ -1,0 +1,1175 @@
+{
+  "calibration_coverage": [
+    true,
+    true
+  ],
+  "certificate": {
+    "cell_distance": 0.00019174759848570515,
+    "channels": [
+      {
+        "anchor": 0,
+        "coefficient_norm_lower": 0.9993983164606487,
+        "derivative_bound": 0.0,
+        "norm_floor_fallback": false,
+        "shape_upper": 1.0,
+        "shifted_positions": [
+          0
+        ],
+        "transfer_cell_radius": 0.0008636445476560467,
+        "transfer_peak_upper": 1.0011256055559608
+      },
+      {
+        "anchor": 0,
+        "coefficient_norm_lower": 0.9990482774929835,
+        "derivative_bound": 0.0,
+        "norm_floor_fallback": false,
+        "shape_upper": 1.0,
+        "shifted_positions": [
+          0
+        ],
+        "transfer_cell_radius": 0.0008694790557361498,
+        "transfer_peak_upper": 1.0007872356044558
+      }
+    ],
+    "grid_points": 16384,
+    "phase_upper": 0.0017367307265318344,
+    "reflection_spacing": 1,
+    "scope": "Complete torus. One coefficient event covers every grid cell.",
+    "shape_upper": [
+      1.0,
+      1.0
+    ],
+    "universal_product_cells": 0
+  },
+  "design_id": 1,
+  "end_utc": "2026-10-03T08:06:30.656146+00:00",
+  "fits": [
+    {
+      "F_quantile": 7.887987932330065,
+      "calibration_failure_budget": 0.005,
+      "coefficient_error_l1": 0.0008636445476560467,
+      "coefficient_error_l2": 0.0008636445476560467,
+      "coefficients": [
+        1.0002619610083048
+      ],
+      "design_condition": 1.0,
+      "design_sha256": "41abc111c1c1b48e7d82416ba19e745c6b63d296b6e021a09f6362b8afd083b0",
+      "ellipse_radius_squared": 0.0030551322816348868,
+      "length": 1,
+      "minimum_gram_eigenvalue": 4095.999999999999,
+      "positions": [
+        0
+      ],
+      "residual_degrees": 4095,
+      "residual_variance": 0.00038731452277113447,
+      "response_sha256": "9ae2992735c3a9d6c6d34a68958e768845cbfbe6186a4065224b1feebbcf566d",
+      "rows": 4096
+    },
+    {
+      "F_quantile": 7.887987932330065,
+      "calibration_failure_budget": 0.005,
+      "coefficient_error_l1": 0.0008694790557361498,
+      "coefficient_error_l2": 0.0008694790557361498,
+      "coefficients": [
+        0.9999177565487197
+      ],
+      "design_condition": 1.0,
+      "design_sha256": "41abc111c1c1b48e7d82416ba19e745c6b63d296b6e021a09f6362b8afd083b0",
+      "ellipse_radius_squared": 0.003096550720978233,
+      "length": 1,
+      "minimum_gram_eigenvalue": 4095.999999999999,
+      "positions": [
+        0
+      ],
+      "residual_degrees": 4095,
+      "residual_variance": 0.0003925653471510231,
+      "response_sha256": "3be128935d768ca351e2c5d7911009888fe95ebc6443cdc363ee838524562314",
+      "rows": 4096
+    }
+  ],
+  "marginal_envelope": {
+    "broad_cap_used": false,
+    "broad_only_finite_guarantee": false,
+    "broad_rho": 18.0,
+    "channels": [
+      {
+        "applied_radius": 0.0008636445476560467,
+        "confidence_radius": 0.0008636445476560467,
+        "covariance_norm": 1.0002619610083048,
+        "eigenvalue_upper": 1.0,
+        "length": 1,
+        "lower_norm": 0.9993983164606487,
+        "numerator_upper": 3.006757434299367,
+        "positions": [
+          0
+        ],
+        "ratio_upper": 3.010378935377962,
+        "status": "finite",
+        "variance": 1.0005239906401795
+      },
+      {
+        "applied_radius": 0.0008694790557361498,
+        "confidence_radius": 0.0008694790557361498,
+        "covariance_norm": 0.9999177565487197,
+        "eigenvalue_upper": 1.0,
+        "length": 1,
+        "lower_norm": 0.9990482774929835,
+        "numerator_upper": 3.004725272846426,
+        "positions": [
+          0
+        ],
+        "ratio_upper": 3.0104527773804493,
+        "status": "finite",
+        "variance": 0.9998355198614247
+      }
+    ],
+    "error_peak_ratios": [
+      1.0,
+      1.0
+    ],
+    "marginal_available": true,
+    "marginal_rho_uncapped": 6.0209055547608985,
+    "phi": 0.5,
+    "planning": false,
+    "rho": 6.0209055547608985
+  },
+  "outcomes": [
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "79d517b345b79e10fa22b67d8dba8fe7f6e72b780a3ec59c5fbf7c39587a920d",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 2048,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          2048,
+          2048
+        ],
+        "raw_record_length": 2048,
+        "retained_record_length": 2048
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.7770155447861864,
+      "decision": "DO_NOT_REJECT",
+      "lane": "primary",
+      "null_tolerance": 0.006172394996309754,
+      "original_observed_length": 2048,
+      "recording_sha256": "79d517b345b79e10fa22b67d8dba8fe7f6e72b780a3ec59c5fbf7c39587a920d",
+      "rejection": false,
+      "rho_upper": 18.0,
+      "sample_means": [
+        2.0209851331608615,
+        -3.04734057059214
+      ],
+      "sample_variances": [
+        0.9092265545099515,
+        0.9944570777231823
+      ],
+      "sampling_radius": {
+        "F_n": 0.022107876500146603,
+        "Frobenius_branch": 0.7071487236535274,
+        "branch": "trace",
+        "linear_term": 0.2624971992660127,
+        "minimum_F_bound": 0.47143259494383216,
+        "old_radius": 3.1608426958403424,
+        "operator_norm_upper": 0.0009770395701025891,
+        "radius": 2.194727991445553,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.47143259494383216
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.5596220475622441,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.040549701223388086,
+      "statistic_absolute": 0.040549701223388086,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 2.200900386441863,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.6247153922376916,
+        1.7770155447861864
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 2047
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "79d517b345b79e10fa22b67d8dba8fe7f6e72b780a3ec59c5fbf7c39587a920d",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 2048,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          2048,
+          2048
+        ],
+        "raw_record_length": 2048,
+        "retained_record_length": 2048
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.3304691681413077,
+      "decision": "DO_NOT_REJECT",
+      "envelope_source": "Exactly supplied common AR(1) marginal spectra and coefficient event.",
+      "lane": "marginal",
+      "marginal_envelope": {
+        "broad_cap_used": false,
+        "broad_only_finite_guarantee": false,
+        "broad_rho": 18.0,
+        "channels": [
+          {
+            "applied_radius": 0.0008636445476560467,
+            "confidence_radius": 0.0008636445476560467,
+            "covariance_norm": 1.0002619610083048,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9993983164606487,
+            "numerator_upper": 3.006757434299367,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.010378935377962,
+            "status": "finite",
+            "variance": 1.0005239906401795
+          },
+          {
+            "applied_radius": 0.0008694790557361498,
+            "confidence_radius": 0.0008694790557361498,
+            "covariance_norm": 0.9999177565487197,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9990482774929835,
+            "numerator_upper": 3.004725272846426,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.0104527773804493,
+            "status": "finite",
+            "variance": 0.9998355198614247
+          }
+        ],
+        "error_peak_ratios": [
+          1.0,
+          1.0
+        ],
+        "marginal_available": true,
+        "marginal_rho_uncapped": 6.0209055547608985,
+        "phi": 0.5,
+        "planning": false,
+        "rho": 6.0209055547608985
+      },
+      "null_tolerance": 0.004621333370028517,
+      "original_observed_length": 2048,
+      "recording_sha256": "79d517b345b79e10fa22b67d8dba8fe7f6e72b780a3ec59c5fbf7c39587a920d",
+      "rejection": false,
+      "rho_upper": 6.0209055547608985,
+      "sample_means": [
+        2.0209851331608615,
+        -3.04734057059214
+      ],
+      "sample_variances": [
+        0.9092265545099515,
+        0.9944570777231823
+      ],
+      "sampling_radius": {
+        "F_n": 0.022107876500146603,
+        "Frobenius_branch": 0.17709800115039923,
+        "branch": "Frobenius",
+        "linear_term": 0.06573967786777185,
+        "minimum_F_bound": 0.17709800115039923,
+        "old_radius": 0.791599991147593,
+        "operator_norm_upper": 0.0009770395701025891,
+        "radius": 0.791599991147593,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.2041398772075374
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.7474484201031573,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.040549701223388086,
+      "statistic_absolute": 0.040549701223388086,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 0.7962213245176216,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.2164405329594072,
+        1.3304691681413077
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 2047
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "dc13834a4ea13466ee5cc78f0d2313de1c25fa9f2fc1ab1b01406d496f3a8608",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 2047,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          2047,
+          2047
+        ],
+        "raw_record_length": 2047,
+        "retained_record_length": 2047
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.1391675119228288,
+      "decision": "DO_NOT_REJECT",
+      "lane": "prefilter",
+      "null_tolerance": 0.003956854441246394,
+      "original_observed_length": 2048,
+      "recording_sha256": "dc13834a4ea13466ee5cc78f0d2313de1c25fa9f2fc1ab1b01406d496f3a8608",
+      "rejection": false,
+      "rho_upper": 2.0,
+      "sample_means": [
+        1.1669952816508087,
+        -1.7591225328700266
+      ],
+      "sample_variances": [
+        0.9489797208745133,
+        0.9741304608081254
+      ],
+      "sampling_radius": {
+        "F_n": 0.022113281180545105,
+        "Frobenius_branch": 0.050381463005782966,
+        "branch": "Frobenius",
+        "linear_term": 0.018706422617314356,
+        "minimum_F_bound": 0.050381463005782966,
+        "old_radius": 0.2252017206066836,
+        "operator_norm_upper": 0.0009775171065493646,
+        "radius": 0.2252017206066836,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.1007629500823184
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.8551248614559475,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 1.0,
+      "source_floor": 1.0,
+      "statistic": -0.0489792032689769,
+      "statistic_absolute": 0.0489792032689769,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 1.0,
+      "threshold": 0.22915857504792997,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.109755737026248,
+        1.1391675119228288
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 2046
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "25bbe5012b0f4e2c70b9baeb44a789d98fff8c027d4b8eb6eda00ba563666445",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 8192,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          8192,
+          8192
+        ],
+        "raw_record_length": 8192,
+        "retained_record_length": 8192
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.3100648083189783,
+      "decision": "DO_NOT_REJECT",
+      "lane": "primary",
+      "null_tolerance": 0.004550459612711215,
+      "original_observed_length": 8192,
+      "recording_sha256": "25bbe5012b0f4e2c70b9baeb44a789d98fff8c027d4b8eb6eda00ba563666445",
+      "rejection": false,
+      "rho_upper": 18.0,
+      "sample_means": [
+        1.9869691609429816,
+        -3.0198996750142495
+      ],
+      "sample_variances": [
+        0.9806276789966283,
+        1.0244815397646834
+      ],
+      "sampling_radius": {
+        "F_n": 0.011049892155151946,
+        "Frobenius_branch": 0.2605693472673213,
+        "branch": "trace",
+        "linear_term": 0.04836232201259046,
+        "minimum_F_bound": 0.17371290076737023,
+        "old_radius": 1.1163413325602765,
+        "operator_norm_upper": 0.00024417043096081065,
+        "radius": 0.7603483396563904,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.17371290076737023
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.782008289406122,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.02377867971516254,
+      "statistic_absolute": 0.02377867971516254,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 0.7648987992691015,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.253986296924478,
+        1.3100648083189783
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 8191
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "25bbe5012b0f4e2c70b9baeb44a789d98fff8c027d4b8eb6eda00ba563666445",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 8192,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          8192,
+          8192
+        ],
+        "raw_record_length": 8192,
+        "retained_record_length": 8192
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.171560158160667,
+      "decision": "DO_NOT_REJECT",
+      "envelope_source": "Exactly supplied common AR(1) marginal spectra and coefficient event.",
+      "lane": "marginal",
+      "marginal_envelope": {
+        "broad_cap_used": false,
+        "broad_only_finite_guarantee": false,
+        "broad_rho": 18.0,
+        "channels": [
+          {
+            "applied_radius": 0.0008636445476560467,
+            "confidence_radius": 0.0008636445476560467,
+            "covariance_norm": 1.0002619610083048,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9993983164606487,
+            "numerator_upper": 3.006757434299367,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.010378935377962,
+            "status": "finite",
+            "variance": 1.0005239906401795
+          },
+          {
+            "applied_radius": 0.0008694790557361498,
+            "confidence_radius": 0.0008694790557361498,
+            "covariance_norm": 0.9999177565487197,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9990482774929835,
+            "numerator_upper": 3.004725272846426,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.0104527773804493,
+            "status": "finite",
+            "variance": 0.9998355198614247
+          }
+        ],
+        "error_peak_ratios": [
+          1.0,
+          1.0
+        ],
+        "marginal_available": true,
+        "marginal_rho_uncapped": 6.0209055547608985,
+        "phi": 0.5,
+        "planning": false,
+        "rho": 6.0209055547608985
+      },
+      "null_tolerance": 0.004069369049316252,
+      "original_observed_length": 8192,
+      "recording_sha256": "25bbe5012b0f4e2c70b9baeb44a789d98fff8c027d4b8eb6eda00ba563666445",
+      "rejection": false,
+      "rho_upper": 6.0209055547608985,
+      "sample_means": [
+        1.9869691609429816,
+        -3.0198996750142495
+      ],
+      "sample_variances": [
+        0.9806276789966283,
+        1.0244815397646834
+      ],
+      "sampling_radius": {
+        "F_n": 0.011049892155151946,
+        "Frobenius_branch": 0.07794431563555569,
+        "branch": "Frobenius",
+        "linear_term": 0.014466659763899582,
+        "minimum_F_bound": 0.07794431563555569,
+        "old_radius": 0.3339320687357285,
+        "operator_norm_upper": 0.00024417043096081065,
+        "radius": 0.3339320687357285,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.08984595737587173
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.8744591838741812,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.02377867971516254,
+      "statistic_absolute": 0.02377867971516254,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 0.33800143778504477,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.1214104638390108,
+        1.171560158160667
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 8191
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "945809e54e892e7ced2194eac2a623e4a04342f2e646091f442d1f90b9c909d7",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 8191,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          8191,
+          8191
+        ],
+        "raw_record_length": 8191,
+        "retained_record_length": 8191
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.1022034686878754,
+      "decision": "DO_NOT_REJECT",
+      "lane": "prefilter",
+      "null_tolerance": 0.003828461261920404,
+      "original_observed_length": 8192,
+      "recording_sha256": "945809e54e892e7ced2194eac2a623e4a04342f2e646091f442d1f90b9c909d7",
+      "rejection": false,
+      "rho_upper": 2.0,
+      "sample_means": [
+        1.1471036432946515,
+        -1.7436247045608653
+      ],
+      "sample_variances": [
+        0.9997768490462434,
+        1.0226463751012798
+      ],
+      "sampling_radius": {
+        "F_n": 0.011050566813464809,
+        "Frobenius_branch": 0.02435994614553607,
+        "branch": "Frobenius",
+        "linear_term": 0.004521542861348317,
+        "minimum_F_bound": 0.02435994614553607,
+        "old_radius": 0.10436410475261516,
+        "operator_norm_upper": 0.0002442002442002442,
+        "radius": 0.10436410475261516,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.04871989301740974
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.927819957161535,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 1.0,
+      "source_floor": 1.0,
+      "statistic": -0.01755658929306135,
+      "statistic_absolute": 0.01755658929306135,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 1.0,
+      "threshold": 0.10819256601453557,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.0775548007232405,
+        1.1022034686878754
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 8190
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "316b2fffbbb37f484797162f6f73ee2e4ef232bebc504bc09edf02c57f091854",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 32768,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          32768,
+          32768
+        ],
+        "raw_record_length": 32768,
+        "retained_record_length": 32768
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.12358062099126,
+      "decision": "DO_NOT_REJECT",
+      "lane": "primary",
+      "null_tolerance": 0.0039027139764224814,
+      "original_observed_length": 32768,
+      "recording_sha256": "316b2fffbbb37f484797162f6f73ee2e4ef232bebc504bc09edf02c57f091854",
+      "rejection": false,
+      "rho_upper": 18.0,
+      "sample_means": [
+        1.992798921670613,
+        -2.994819873671786
+      ],
+      "sample_variances": [
+        0.9906639973211353,
+        1.0017321914801067
+      ],
+      "sampling_radius": {
+        "F_n": 0.005524440315413632,
+        "Frobenius_branch": 0.11172877344398882,
+        "branch": "trace",
+        "linear_term": 0.010368569635172043,
+        "minimum_F_bound": 0.07448584903203379,
+        "old_radius": 0.46830418701998217,
+        "operator_norm_upper": 6.103701895199438e-05,
+        "radius": 0.3156589815093866,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.07448584903203379
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.891553461109311,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.0064681689962096,
+      "statistic_absolute": 0.0064681689962096,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 0.3195616954858091,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.1111661168232205,
+        1.12358062099126
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 32767
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "316b2fffbbb37f484797162f6f73ee2e4ef232bebc504bc09edf02c57f091854",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 32768,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          32768,
+          32768
+        ],
+        "raw_record_length": 32768,
+        "retained_record_length": 32768
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.0686131225777988,
+      "decision": "DO_NOT_REJECT",
+      "envelope_source": "Exactly supplied common AR(1) marginal spectra and coefficient event.",
+      "lane": "marginal",
+      "marginal_envelope": {
+        "broad_cap_used": false,
+        "broad_only_finite_guarantee": false,
+        "broad_rho": 18.0,
+        "channels": [
+          {
+            "applied_radius": 0.0008636445476560467,
+            "confidence_radius": 0.0008636445476560467,
+            "covariance_norm": 1.0002619610083048,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9993983164606487,
+            "numerator_upper": 3.006757434299367,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.010378935377962,
+            "status": "finite",
+            "variance": 1.0005239906401795
+          },
+          {
+            "applied_radius": 0.0008694790557361498,
+            "confidence_radius": 0.0008694790557361498,
+            "covariance_norm": 0.9999177565487197,
+            "eigenvalue_upper": 1.0,
+            "length": 1,
+            "lower_norm": 0.9990482774929835,
+            "numerator_upper": 3.004725272846426,
+            "positions": [
+              0
+            ],
+            "ratio_upper": 3.0104527773804493,
+            "status": "finite",
+            "variance": 0.9998355198614247
+          }
+        ],
+        "error_peak_ratios": [
+          1.0,
+          1.0
+        ],
+        "marginal_available": true,
+        "marginal_rho_uncapped": 6.0209055547608985,
+        "phi": 0.5,
+        "planning": false,
+        "rho": 6.0209055547608985
+      },
+      "null_tolerance": 0.0037117864895119855,
+      "original_observed_length": 32768,
+      "recording_sha256": "316b2fffbbb37f484797162f6f73ee2e4ef232bebc504bc09edf02c57f091854",
+      "rejection": false,
+      "rho_upper": 6.0209055547608985,
+      "sample_means": [
+        1.992798921670613,
+        -2.994819873671786
+      ],
+      "sample_variances": [
+        0.9906639973211353,
+        1.0017321914801067
+      ],
+      "sampling_radius": {
+        "F_n": 0.005524440315413632,
+        "Frobenius_branch": 0.03554435221695855,
+        "branch": "Frobenius",
+        "linear_term": 0.003298560252103481,
+        "minimum_F_bound": 0.03554435221695855,
+        "old_radius": 0.1489819359420367,
+        "operator_norm_upper": 6.103701895199438e-05,
+        "radius": 0.1489819359420367,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.04097176662048595
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.9374133353927413,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 3.0,
+      "source_floor": 0.3333333333333333,
+      "statistic": -0.0064681689962096,
+      "statistic_absolute": 0.0064681689962096,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 9.0,
+      "threshold": 0.1526937224315487,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.056805957327334,
+        1.0686131225777988
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 32767
+    },
+    {
+      "abstention_reason": null,
+      "aligned_recording_sha256": "dba1d6a1ea81c598b80213ac5845e93d0c63d42e8f37dd8c17068df94666aa33",
+      "alignment": {
+        "anchors": [
+          0,
+          0
+        ],
+        "base_time_start": 0,
+        "base_time_stop_exclusive": 32767,
+        "channel_slice_starts": [
+          0,
+          0
+        ],
+        "channel_slice_stops_exclusive": [
+          32767,
+          32767
+        ],
+        "raw_record_length": 32767,
+        "retained_record_length": 32767
+      },
+      "assumptions": [
+        "Each calibration design is fixed and has full column rank. Its readout error is spherical Gaussian with positive variance.",
+        "The finite filters and their integer positions are the same in calibration and testing. Calibration offsets are zero.",
+        "The source and observation errors are jointly stationary Gaussian and have spectral densities.",
+        "The normalized marginal source spectra obey the supplied floor and ceiling.",
+        "Observation errors are mutually orthogonal and orthogonal to the source. Their supplied peak ratios hold.",
+        "Anchors, reflection spacing, certificate grid and failure budgets are fixed before observation.",
+        "Under the tested null, the source is reversible. Calibration and testing need not be independent."
+      ],
+      "budgets": {
+        "calibration": [
+          0.005,
+          0.005
+        ],
+        "calibration_total": 0.01,
+        "tail": 0.03,
+        "target_size": 0.05,
+        "total": 0.05,
+        "variance": 0.01
+      },
+      "common_variance_ceiling": 1.0395011264068954,
+      "decision": "DO_NOT_REJECT",
+      "lane": "prefilter",
+      "null_tolerance": 0.0036106670929906153,
+      "original_observed_length": 32768,
+      "recording_sha256": "dba1d6a1ea81c598b80213ac5845e93d0c63d42e8f37dd8c17068df94666aa33",
+      "rejection": false,
+      "rho_upper": 2.0,
+      "sample_means": [
+        1.1505251806934889,
+        -1.729074234935224
+      ],
+      "sample_variances": [
+        0.9953606010826735,
+        1.002050679769348
+      ],
+      "sampling_radius": {
+        "F_n": 0.005524524618757645,
+        "Frobenius_branch": 0.011485499128122393,
+        "branch": "Frobenius",
+        "linear_term": 0.0010658849194977581,
+        "minimum_F_bound": 0.011485499128122393,
+        "old_radius": 0.04814076967911741,
+        "operator_norm_upper": 6.103888176768602e-05,
+        "radius": 0.04814076967911741,
+        "tail_parameter": 4.199705077879927,
+        "trace_branch": 0.02297099827764081
+      },
+      "scale_coverage": [
+        true,
+        true
+      ],
+      "scale_denominator": 0.9639726733466877,
+      "shared_certificate": "replicate.certificate",
+      "shared_fits": "replicate.fits",
+      "source_ceiling": 1.0,
+      "source_floor": 1.0,
+      "statistic": -0.009288466339942706,
+      "statistic_absolute": 0.009288466339942706,
+      "status": "DECISION",
+      "supplied_error_peak_ratios": [
+        1.0,
+        1.0
+      ],
+      "supplied_source_ratio": 1.0,
+      "threshold": 0.05175143677210802,
+      "true_variances": [
+        1.0,
+        1.0
+      ],
+      "variance_ceilings": [
+        1.0325610140244061,
+        1.0395011264068954
+      ],
+      "variance_tail_parameter": 5.298317366548036,
+      "window_count": 32766
+    }
+  ],
+  "peak_resident_bytes": 140689408,
+  "raw_array_sha256": {
+    "calibration_response_0": "9ae2992735c3a9d6c6d34a68958e768845cbfbe6186a4065224b1feebbcf566d",
+    "calibration_response_1": "3be128935d768ca351e2c5d7911009888fe95ebc6443cdc363ee838524562314",
+    "recording": "316b2fffbbb37f484797162f6f73ee2e4ef232bebc504bc09edf02c57f091854",
+    "x_initial": "fcc9f49540320efc4cf5b998c70af2129e2390ce1f8bbee2e425b7c6e08f6a0f",
+    "x_innovations": "02ffdb1641f64ddd90ae132ce5ecb3a529f8e14f14bb6e5159b17b7a7412785d",
+    "z_initial": "756e2a673c5bbb2f82780242bac7758ab962837f1b177b85ca2402769322f3e1",
+    "z_innovations": "55913ae30bf56da74b461ba47562d0cb7fdfd2ef54c73f415852936cf236e56d"
+  },
+  "raw_file": "rep079_design01.npz",
+  "raw_file_sha256": "f2449fb74a9941fd50e4f314d4d3cf14c15ab2d7c2f48291aa1cfee36b0b890d",
+  "replicate_id": 79,
+  "start_utc": "2026-10-03T08:06:30.610712+00:00"
+}
