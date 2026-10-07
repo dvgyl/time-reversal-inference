@@ -13,6 +13,44 @@ Each cell has a pointwise two-sided $95\%$ Clopper--Pearson confidence interval~
 
 The recorded study environment uses Python 3.9.6, NumPy 2.0.2, SciPy 1.13.1, and Matplotlib 3.9.4~\cite{harris2020numpy,virtanen2020scipy,hunter2007matplotlib}. Certified probability integrals used Python 3.12.14, NumPy 2.5.3, and python-flint 0.9.0. The package retains the certificates and environment files. Empirical fractions concern the declared finite generator; the mathematical power bound concerns the ideal Gaussian law followed by bounded recording.
 
+\begin{table}[t]
+\caption{Main notation. Source and recorded covariances are distinguished by the superscript $X$.}\label{tab:notation}
+\begin{ruledtabular}\begin{tabular}{p{0.24\columnwidth}p{0.68\columnwidth}}
+Symbol & Meaning \\
+$N,n=N-1$ & Samples and adjacent pairs. \\
+$F_{ij},S_{ij}$ & Recorded and source spectral densities. \\
+$\kappa,r$ & Lag contrast and relative-phase bound. \\
+$q,K_i$ & Full-record covariance bounds, standardized or channel scaled. \\
+$L,B_{ij}$ & Retained lag cutoff and omitted-lag bias allowance. \\
+$\phi,\psi,a_j$ & True persistence, candidate persistence, common-filter coefficient. \\
+$\mathcal S_a,\Lambda(x)$ & Residual spectral ratio and $(1+x)/(1-x)$. \\
+\end{tabular}\end{ruledtabular}
+\end{table}
+
+\subsection{Constructing the covariance envelope}\label{sec:covariance-construction}
+One construction uses a source spectral floor and ceiling. If normalized source marginal densities obey $0<m_0\le g_i\le M_0$, define $\mathcal S=M_0/m_0$. If calibration bounds $\sup|H_i|^2/\|h_i\|_2^2$ by $\widehat C_i$, and the error spectra obey $f_{E,i}\le J_i\operatorname{Var}E_i$, then
+\begin{equation}
+ \widehat q=\max\{2\mathcal S\max_i\widehat C_i,\max_iJ_i\}
+ \label{eq:main-q}
+\end{equation}
+is valid when the calibration confidence regions contain the true response coefficients. Here $h_i$ is the vector of response coefficients. The source ratio and the error bounds are supplied separately. Physical dynamics can also supply the full bound directly, as in Sec.~\ref{sec:physical}.
+
+\subsection{Response calibration and error allocation}\label{sec:calibration-details}
+\begin{table}[t]
+\caption{Error allocations explain the logarithms in the thresholds. Each column totals $0.05$. The fitted-source bank has $M$ fixed filters.}\label{tab:budget}
+\begin{ruledtabular}\begin{tabular}{lcc}
+Component & Calibrated pair & Fitted-source bank\\
+Source confidence & --- & $0.005$\\
+Calibration & $0.01$ & $0.01$\\
+Both variance ceilings & $0.01$ & $0.01$\\
+Contrast & $0.03$ & $0.025$\\\hline
+Variance logarithm & $\log(200)$ & $\log(200M)$\\
+Contrast logarithm & $\log(2/0.03)$ & $\log(80M)$\\
+\end{tabular}\end{ruledtabular}
+\end{table}
+
+Calibration uses known deterministic inputs and a full-rank response design at fixed integer coefficient positions. Errors are independent Gaussian values with a common positive variance within each channel, and residual degrees of freedom are positive. Responses must stay unchanged between calibration and testing. Coefficient confidence regions and derivative bounds between grid points give an all-frequency phase allowance (SM Secs.~S3.4--S3.5). Table~\ref{tab:budget} gives the total false-rejection budget. Bounded rounding is covered by enlarging the variance ceilings and adding a deterministic contrast error (SM Sec.~S4.5, Proposition~S7).
+
 \subsection{Scientific timing}
 The supplied-source results were selected for comparison after their outcomes were known. The cycle and cumulative-innovation methods were developed after lag-ratio outcomes were known. Diagnostics of source-envelope geometry and threshold components were selected after inspection of the corresponding four-method comparison. They summarize its saved confidence sets and thresholds without changing decisions. The two-sided method and the present study design were developed with that evidence available, then fixed before their own fresh records were generated. The studies were not externally preregistered.
 
